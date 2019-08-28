@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="基本用法 GraphQL概述 GraphQL基本语法特性 GraphQL类型系统 GraphQL类型系统内置基础类型 GraphQL类型系统内置修饰符 GraphQL工作原理 GraphQL执行过程   Vue工程接入GraphQL  基本用法（如何去用）package.json &amp;quot;dependencies&amp;quot;: {     &amp;quot;apollo-server-koa&amp;qu">
+<meta name="keywords" content="GraphQL,koa,vue-apollo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="graphql初试">
+<meta property="og:url" content="http://yoursite.com/2018/06/16/graphql初试/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基本用法 GraphQL概述 GraphQL基本语法特性 GraphQL类型系统 GraphQL类型系统内置基础类型 GraphQL类型系统内置修饰符 GraphQL工作原理 GraphQL执行过程   Vue工程接入GraphQL  基本用法（如何去用）package.json &amp;quot;dependencies&amp;quot;: {     &amp;quot;apollo-server-koa&amp;qu">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T13:56:16.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="graphql初试">
+<meta name="twitter:description" content="基本用法 GraphQL概述 GraphQL基本语法特性 GraphQL类型系统 GraphQL类型系统内置基础类型 GraphQL类型系统内置修饰符 GraphQL工作原理 GraphQL执行过程   Vue工程接入GraphQL  基本用法（如何去用）package.json &amp;quot;dependencies&amp;quot;: {     &amp;quot;apollo-server-koa&amp;qu">
+  <link rel="canonical" href="http://yoursite.com/2018/06/16/graphql初试/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>graphql初试 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/graphql初试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">graphql初试
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-16 19:09:19" itemprop="dateCreated datePublished" datetime="2018-06-16T19:09:19+08:00">2018-06-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:56:16" itemprop="dateModified" datetime="2019-08-28T21:56:16+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>基本用法</li>
+<li>GraphQL概述<ul>
+<li>GraphQL基本语法特性</li>
+<li>GraphQL类型系统</li>
+<li>GraphQL类型系统内置基础类型</li>
+<li>GraphQL类型系统内置修饰符</li>
+<li>GraphQL工作原理</li>
+<li>GraphQL执行过程</li>
+</ul>
+</li>
+<li>Vue工程接入GraphQL</li>
+</ul>
+<h1 id="基本用法（如何去用）"><a href="#基本用法（如何去用）" class="headerlink" title="基本用法（如何去用）"></a>基本用法（如何去用）</h1><p>package.json</p>
+<pre><code>&quot;dependencies&quot;: {
+    &quot;apollo-server-koa&quot;: &quot;^1.3.6&quot;,
+    &quot;graphql&quot;: &quot;^0.13.2&quot;,
+    &quot;graphql-import&quot;: &quot;^0.6.0&quot;,
+    &quot;graphql-tools&quot;: &quot;^3.0.2&quot;,
+    &quot;koa&quot;: &quot;^2.5.1&quot;,
+    &quot;koa-bodyparser&quot;: &quot;^4.2.1&quot;,
+    &quot;koa-router&quot;: &quot;^7.4.0&quot;,
+    &quot;koa-websocket&quot;: &quot;^5.0.1&quot;
+},
+&quot;devDependencies&quot;: {
+    &quot;babel-cli&quot;: &quot;^6.26.0&quot;,
+    &quot;babel-preset-env&quot;: &quot;^1.7.0&quot;
+}</code></pre><p>server.js</p>
+<pre><code>import koa from &apos;koa&apos;
+import koaRouter from &apos;koa-router&apos;
+import koaBody from &apos;koa-bodyparser&apos;
+import websocketify from &apos;koa-websocket&apos;
+import { graphqlKoa, graphiqlKoa } from &apos;apollo-server-koa&apos;
+import { makeExecutableSchema } from &apos;graphql-tools&apos;
+
+const app = websocketify(new koa())
+const router = new koaRouter()
+const PORT = 3000
+
+// fake data
+const moments = [
+  {
+    user: {
+      id: 1000,
+      name: &apos;锐雯&apos;,
+      avatar: &apos;http://imgsrc.baidu.com/imgad/pic/item/42a98226cffc1e17d31927154090f603738de974.jpg&apos;
+    },
+    main: {
+      content: &apos;这是一条朋友圈&apos;,
+      pics: [
+        &apos;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1529219875063&amp;di=bc0bcc78ae800c1c21c198f52697f515&amp;imgtype=0&amp;src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4a36acaf2edda3ccd53548ea0be93901203f9223.jpg&apos;,
+        &apos;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1529219893624&amp;di=8d9e418df27e1fdb6afb1d993801a980&amp;imgtype=0&amp;src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F3801213fb80e7beca9004ec5252eb9389b506b38.jpg&apos;
+      ]
+    },
+    comments: [
+      {
+        user: {
+          id: 233122,
+          name: &apos;亚索&apos;
+        },
+        reply: &apos;面对疾风吧&apos;
+      }
+    ]
+  }
+]
+
+const typeDefs = `
+  type Query {
+    moments: [Moment]
+  }
+  type Mutation {
+    addComment(
+      entity: Add_Comment
+    ) : Comment
+  }
+  type Moment {
+    user: User
+    main: Main
+    comments: [Comment]
+  }
+  type User {
+    id: Int
+    name: String
+    avatar: String
+  }
+  type Comment {
+    user: User
+    reply: String
+  }
+  type Main {
+    content: String
+    pics: [String]
+  }
+  input Add_User {
+    id: Int
+    name: String
+  }
+  input Add_Comment {
+    user: Add_User
+    reply: String
+  }
+
+  # 定义graphqlf服务哪个是RootQuery以及RootMutation
+  schema {
+    query: Query
+    mutation: Mutation
+  }
+`
+
+const resolvers = {
+  Query: {
+    moments () {
+      return moments
+    }
+  },
+  Mutation: {
+    addComment (_, { entity }, unknown, context) {
+      console.log(entity)
+      moments[0].comments.push(entity)
+      return entity
+    }
+  }
+}
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+})
+
+// koaBody is needed just for POST.
+router.post(&apos;/graphql&apos;, koaBody(), graphqlKoa({ schema: schema }))
+// router.get(&apos;/graphql&apos;, graphqlKoa({ schema: schema }))
+
+router.get(&apos;/graphiql&apos;, graphiqlKoa({ endpointURL: &apos;/graphql&apos; }))
+
+async function responseMiddleware(ctx, next) {
+  ctx.set(&apos;Access-Control-Allow-Origin&apos;, &apos;http://localhost:8080&apos;)
+  ctx.set(&apos;Access-Control-Allow-Methods&apos;, &apos;POST,OPTIONS&apos;)
+  ctx.set(&apos;Access-Control-Allow-Headers&apos;, &apos;authorization,content-type&apos;)
+  // ctx.set(&apos;Access-Control-Allow-Credentials&apos;, &apos;true&apos;)
+  await next()
+}
+
+app.use(responseMiddleware)
+app.use(router.routes())
+app.use(router.allowedMethods())
+
+app.ws.use(responseMiddleware)
+app.ws.use(router.routes())
+app.ws.use(router.allowedMethods())
+
+app.listen(PORT)</code></pre><h1 id="GraphQL概述"><a href="#GraphQL概述" class="headerlink" title="GraphQL概述"></a>GraphQL概述</h1><h3 id="GraphQL基本语法特性"><a href="#GraphQL基本语法特性" class="headerlink" title="GraphQL基本语法特性"></a>GraphQL基本语法特性</h3><p>包括有fields,alias,arguments,fragments,variables,directives,inline fragments</p>
+<ul>
+<li>field</li>
+</ul>
+<h3 id="GraphQL类型系统"><a href="#GraphQL类型系统" class="headerlink" title="GraphQL类型系统"></a>GraphQL类型系统</h3><p>主要由RootQuery + RootMutation两种入口类型（操作）加上RootValue（resolvers）构成GraphQL Schema。（此处用graphql-tools是为了将所有的类型定义在一个字符串中，后续会移到一个.graphql文件中，然后用graphql-import导入）</p>
+<h3 id="GraphQL类型系统内置基础类型"><a href="#GraphQL类型系统内置基础类型" class="headerlink" title="GraphQL类型系统内置基础类型"></a>GraphQL类型系统内置基础类型</h3><ul>
+<li>标量类型（Scalar Types）<ul>
+<li><code>Int</code>: 有符号的32位整数</li>
+<li><code>Float</code>: 有符号双精度浮点值</li>
+<li><code>String</code>: UTF-8字符序列</li>
+<li><code>Boolean</code>: true or false</li>
+<li><code>ID</code>：ID 标量类型表示一个唯一标识符（类似一种UUID），通常用以重新获取对象或者作为缓存中的键。ID 类型使用和 String 一样的方式序列化。</li>
+</ul>
+</li>
+<li>枚举类型（Enumeration Types）</li>
+</ul>
+<p>是一种特殊的标量类型</p>
+<pre><code>enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}</code></pre><ul>
+<li>数组类型（Array Types）</li>
+</ul>
+<p>用方括号<code>[]</code>标记列表</p>
+<ul>
+<li>接口类型（Interface Types）</li>
+</ul>
+<p>是一种抽象类型，与java的interface机制类似。</p>
+<ul>
+<li><p>联合类型（Union Types）</p>
+<p>{<br>  search(text: “an”) {</p>
+<pre><code>... on Human {
+  name
+  height
+}
+... on Droid {
+  name
+  primaryFunction
+}
+... on Starship {
+  name
+  length
+}</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<ul>
+<li>输入类型（Input Types)</li>
+</ul>
+<p>与之前提到的所有Types对立，这是一种也是唯一一种输入类型，其主要用于<code>mutations</code>时传递<code>整个对象</code>的case，它没有参数。</p>
+<h3 id="内置修饰符"><a href="#内置修饰符" class="headerlink" title="内置修饰符"></a>内置修饰符</h3><ul>
+<li><p><code>!</code>: 表示非空。如下</p>
+<p>query DroidById($id: ID!) {<br>  droid(id: $id) {</p>
+<pre><code>name</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<h3 id="GraphQL工作原理"><a href="#GraphQL工作原理" class="headerlink" title="GraphQL工作原理"></a>GraphQL工作原理</h3><p>GraphQL中每个查询字段是返回子类型的父类型函数。每个类型的字段对应由一个<code>resolver</code>函数支持，当字段被执行时，响应的<code>resolver</code>被调用并return结果。 如果该字段为<code>标量类型</code>值，比如字符串或数字，则执行完成。否则<code>递归</code>执行对应解析器直至结果为<code>标量类型</code>值。</p>
+<h3 id="GraphQL基本数据流"><a href="#GraphQL基本数据流" class="headerlink" title="GraphQL基本数据流"></a>GraphQL基本数据流</h3><p>每个GraphQL服务端应用的顶层必定会有一个<code>入口点</code>，通常为Root或者Query类型，接着执行该字段预设的<code>解析器</code>（同步或异步），而每个字段被解析的结果被放置在键值映射中，字段名（或别名）作为键，解析器的值作为值，这个过程从查询字段的<code>底部叶子节点</code>开始返回，直到Query类型的<code>起始节点</code>，最后生成<code>镜像查询结果</code>返回给客户端</p>
+<h1 id="Vue工程接入GraphQL"><a href="#Vue工程接入GraphQL" class="headerlink" title="Vue工程接入GraphQL"></a>Vue工程接入GraphQL</h1><p>安装vue-cli3.x</p>
+<pre><code>npm i -g @vue/cli</code></pre><p>初始化工程</p>
+<pre><code>vue create [project-name]</code></pre><p>引入apollo插件</p>
+<pre><code>cd [project-name]
+vue add apollo</code></pre><p>FriendCircle.vue</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;div v-for=&quot;(item, index) in moments&quot; :key=&quot;index&quot;&gt;
+      { {item}}
+    &lt;/div&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;comment.reply&quot; placeholder=&quot;请输入要回复的内容&quot;&gt;
+    &lt;button @click=&quot;addComment&quot;&gt;回复&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import gql from &apos;graphql-tag&apos;
+
+const QUERY_LIST = gql`
+  query {
+    moments {
+      user {
+        id
+        name
+        avatar
+      }
+      main {
+        content
+        pics
+      }
+      comments {
+        user {
+          id
+          name
+        }
+        reply
+      }
+    }
+  }
+`
+
+export default {
+  data () {
+    return {
+      moments: [],
+      comment: {
+        user: {
+          id: (Math.random() * 10000).toFixed(0),
+          name: &apos;费德提克&apos;
+        },
+        reply: &apos;&apos;
+      }
+    }
+  },
+  apollo: {
+    moments: {
+      query: QUERY_LIST
+    }
+  },
+  methods: {
+    addComment () {
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation addComment($comment: Add_Comment) {
+            addComment(entity: $comment) {
+              user {
+                id
+                name
+              }
+              reply
+            }
+          }
+        `,
+        variables: {
+          comment: this.comment
+        },
+        update: (store, { data: { addComment } }) =&gt; {
+          // Read the data from our cache for this query.
+          const data = store.readQuery({ query: QUERY_LIST })
+          // set first moment&apos;s comment
+          data.moments[0].comments.push(addComment)
+          // Write our data back to the cache.
+          store.writeQuery({ query: QUERY_LIST, data })
+        }
+      })
+    }
+  }
+}
+&lt;/script&gt;</code></pre><p>涉及的知识点有Root_Query,Root_Mutation,variables以及store cache</p>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>其核心机制包括以下两点</p>
+<ol>
+<li>对所有（包括嵌套的）非标量类型递归进行缓存，往往通过类型id或_id以及__typename唯一组合标识，然后在一个扁平的数据结构中存储</li>
+<li>可以设置不同缓存策略：cache-and-network,no-cache,network-only</li>
+</ol>
+<h1 id="update回调"><a href="#update回调" class="headerlink" title="update回调"></a>update回调</h1><p>this.$apollo.mutate(options) options中有一个update回调，在成功响应数据后触发，并且可以直接读取并操作由<code>apollo-cache-inmemory</code>生成的store。上述例子中使用此回调同步更新缓存以及UI</p>
+<blockquote>
+<p>注：所有绑定的变量均不可直接修改，内部使用Object.freeze将对象冻结，无法直接增删。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/GraphQL/" rel="tag"># GraphQL</a>
+            
+              <a href="/tags/koa/" rel="tag"># koa</a>
+            
+              <a href="/tags/vue-apollo/" rel="tag"># vue-apollo</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/10/概述nodejs核心机制/" rel="next" title="概述nodejs核心机制">
+                  <i class="fa fa-chevron-left"></i> 概述nodejs核心机制
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/06/23/概述nodejs模块系统核心原理/" rel="prev" title="概述nodejs模块系统核心原理">
+                  概述nodejs模块系统核心原理 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本用法（如何去用）"><span class="nav-number">1.</span> <span class="nav-text">基本用法（如何去用）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GraphQL概述"><span class="nav-number">2.</span> <span class="nav-text">GraphQL概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL基本语法特性"><span class="nav-number">2.0.1.</span> <span class="nav-text">GraphQL基本语法特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL类型系统"><span class="nav-number">2.0.2.</span> <span class="nav-text">GraphQL类型系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL类型系统内置基础类型"><span class="nav-number">2.0.3.</span> <span class="nav-text">GraphQL类型系统内置基础类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置修饰符"><span class="nav-number">2.0.4.</span> <span class="nav-text">内置修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL工作原理"><span class="nav-number">2.0.5.</span> <span class="nav-text">GraphQL工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL基本数据流"><span class="nav-number">2.0.6.</span> <span class="nav-text">GraphQL基本数据流</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue工程接入GraphQL"><span class="nav-number">3.</span> <span class="nav-text">Vue工程接入GraphQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cache"><span class="nav-number">3.0.1.</span> <span class="nav-text">cache</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#update回调"><span class="nav-number">4.</span> <span class="nav-text">update回调</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

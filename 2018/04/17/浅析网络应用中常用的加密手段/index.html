@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="目的一般情况下，对数据做加密处理确保两点即可：1.有效性 2.完整性 基本概念 初始向量（initialize vector） PKCS  AES-128-CBC简单声明 AES-128-CBC是一种常用的分组对称加密算法，即用同一组key进行明文和密文的转换，以128bits为一组，也就是16Bytes，意思就是明文中的16Bytes为一组对应加密后的16Byte的密文 若明文最后不足16Byt">
+<meta name="keywords" content="aes-128-cbc,crypto,node,rsa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析网络应用中常用的加密手段">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/浅析网络应用中常用的加密手段/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="目的一般情况下，对数据做加密处理确保两点即可：1.有效性 2.完整性 基本概念 初始向量（initialize vector） PKCS  AES-128-CBC简单声明 AES-128-CBC是一种常用的分组对称加密算法，即用同一组key进行明文和密文的转换，以128bits为一组，也就是16Bytes，意思就是明文中的16Bytes为一组对应加密后的16Byte的密文 若明文最后不足16Byt">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T13:11:33.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析网络应用中常用的加密手段">
+<meta name="twitter:description" content="目的一般情况下，对数据做加密处理确保两点即可：1.有效性 2.完整性 基本概念 初始向量（initialize vector） PKCS  AES-128-CBC简单声明 AES-128-CBC是一种常用的分组对称加密算法，即用同一组key进行明文和密文的转换，以128bits为一组，也就是16Bytes，意思就是明文中的16Bytes为一组对应加密后的16Byte的密文 若明文最后不足16Byt">
+  <link rel="canonical" href="http://yoursite.com/2018/04/17/浅析网络应用中常用的加密手段/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>浅析网络应用中常用的加密手段 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/浅析网络应用中常用的加密手段/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">浅析网络应用中常用的加密手段
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-17 23:20:46" itemprop="dateCreated datePublished" datetime="2018-04-17T23:20:46+08:00">2018-04-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>一般情况下，对数据做加密处理确保两点即可：1.有效性 2.完整性</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>初始向量（initialize vector）</li>
+<li><a href="https://baike.baidu.com/item/PKCS/1042350" target="_blank" rel="noopener">PKCS</a></li>
+</ul>
+<h3 id="AES-128-CBC简单声明"><a href="#AES-128-CBC简单声明" class="headerlink" title="AES-128-CBC简单声明"></a>AES-128-CBC简单声明</h3><ul>
+<li>AES-128-CBC是一种常用的分组对称加密算法，即用同一组key进行明文和密文的转换，以128bits为一组，也就是16Bytes，意思就是明文中的16Bytes为一组对应加密后的16Byte的密文</li>
+<li>若明文最后不足16Bytes，需要进行填充，通常采用PKCS#7进行填充。比如最后缺3Bytes，则填充6个0x03；若缺11Bytes，则填充22个0x0b</li>
+<li>若明文刚好为16Bytes，则最后要再加32个0x10作为一个分组。</li>
+<li>key，IV长度均为16Bytes</li>
+<li>CBC工作模式是：给定一个初始向量iv对第一分组进行加密，生成16Bytes密文作为下一分组的偏移向量递归进行加密，直到所有明文均已转换成密文为止</li>
+</ul>
+<h3 id="RSA简单声明"><a href="#RSA简单声明" class="headerlink" title="RSA简单声明"></a>RSA简单声明</h3><ul>
+<li>对极大整数做因数分解的难度决定了RSA算法的可靠性。</li>
+<li>CA一般采用2048bits长度密钥</li>
+<li>其运算速度大约为相同安全级别的对称算法的1/1000左右</li>
+<li>RSA密钥长度随保密级别提高，增加更快（2的指数倍）</li>
+</ul>
+<h3 id="常用的加密手段"><a href="#常用的加密手段" class="headerlink" title="常用的加密手段"></a>常用的加密手段</h3><ol>
+<li>首先，peer1生成key以及iv，将明文用AES-128-CBC算法加密并用base64序列化密文，随后对key用私钥RSA算法加密，也就是数字签名，随后通过网络将密文、签名后的key以及iv传输至peer2</li>
+<li>peer2拿到密文先用base64反序列化，然后通过公钥（可以通过CA也可通过peer获取）用RSA算法解密拿到key，接着用AES-128-CBC反解得到明文。</li>
+</ol>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><ul>
+<li><p>生成私钥</p>
+<p>openssl genrsa -out rsa_private_key.pem 1024</p>
+</li>
+</ul>
+<ul>
+<li><p>转成pkcs8格式私钥</p>
+<p>openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt &gt;&gt; rsa_private_key_pkcs8.pem</p>
+</li>
+</ul>
+<ul>
+<li><p>生成公钥</p>
+<p>openssl rsa -in rsa_private_key_pkcs8.pem -pubout -out rsa_public_key.pem</p>
+</li>
+</ul>
+<ul>
+<li><p>node（8.0LTS）</p>
+<p>const crypto = require(‘crypto’)<br>const fs = require(‘fs’)<br>// aesKey<br>const aesKey = ‘abcdefghijklmnop’<br>// iv<br>const iv = ‘0000000000000000’<br>// privateKey<br>const privateKey = fs.readFileSync(‘rsa_private_key_pkcs8.pem’).toString()<br>// publicKey<br>const publicKey = fs.readFileSync(‘rsa_public_key.pem’).toString()<br>// 创建加密类实例<br>const cipheriv = crypto.createCipheriv(‘aes-128-cbc’, aesKey, iv)<br>// 结果数据结构<br>let res = {<br>  encryptedData: ‘’,<br>  publicKey,<br>  encryptedKey: ‘’,<br>  iv<br>}</p>
+<p>// aes加密过程<br>let promiseHandler = null<br>let cryptoPromise = new Promise((resolve, reject) =&gt; {<br>  promiseHandler = resolve<br>})<br>cipheriv.on(‘readable’, () =&gt; {<br>  const data = cipheriv.read()<br>  if (data) res.encryptedData += data.toString(‘hex’)<br>})</p>
+<p>cipheriv.on(‘end’, () =&gt; {<br>  res.encryptedData = res.encryptedData<br>  console.log(<code>aes加密后的密文为：${res.encryptedData}</code>)<br>  promiseHandler()<br>})</p>
+<p>cipheriv.write(‘狼牙月，伊人憔悴。忍字诀，几番轮回。’)<br>cipheriv.end()</p>
+<p>// 验证公私钥对是否匹配<br>const sign = crypto.createSign(‘SHA256’)</p>
+<p>sign.write(aesKey)<br>sign.end()<br>let signed = sign.sign(privateKey, ‘base64’)<br>const verify = crypto.createVerify(‘SHA256’)</p>
+<p>verify.write(aesKey)<br>verify.end()</p>
+<p>console.log(<code>aesKey签名结果为：${signed}</code>)<br>console.log(<code>公私钥是否匹配：${verify.verify(res.publicKey, signed, &#39;base64&#39;)}</code>)</p>
+<p>// 数字签名<br>res.encryptedKey = crypto.privateEncrypt(privateKey, Buffer.from(aesKey, ‘utf8’)).toString(‘base64’)<br>console.log(<code>私钥加密为：${res.encryptedKey}</code>)<br>// 公钥解密<br>let decryptedKey = crypto.publicDecrypt(res.publicKey, Buffer.from(res.encryptedKey, ‘base64’))<br>console.log(<code>公钥解密为：${decryptedKey}</code>)</p>
+<p>// 利用key和iv去解密res.encryptedData<br>let deCipheriv = crypto.createDecipheriv(‘aes-128-cbc’, decryptedKey, res.iv)<br>let decrypted = ‘’<br>deCipheriv.on(‘readable’, () =&gt; {<br>  const data = deCipheriv.read()<br>  if (data) decrypted += data.toString(‘utf8’)<br>})<br>deCipheriv.on(‘end’, () =&gt; {<br>  console.log(<code>aes解密后的明文为：${decrypted}</code>)<br>})</p>
+<p>cryptoPromise.then(() =&gt; {<br>  deCipheriv.write(res.encryptedData, ‘hex’)<br>  deCipheriv.end()<br>})</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/aes-128-cbc/" rel="tag"># aes-128-cbc</a>
+            
+              <a href="/tags/crypto/" rel="tag"># crypto</a>
+            
+              <a href="/tags/node/" rel="tag"># node</a>
+            
+              <a href="/tags/rsa/" rel="tag"># rsa</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/04/13/CSP/" rel="next" title="CSP">
+                  <i class="fa fa-chevron-left"></i> CSP
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/04/22/How-Http2-works-译/" rel="prev" title="How Http2 works - 译">
+                  How Http2 works - 译 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AES-128-CBC简单声明"><span class="nav-number">3.</span> <span class="nav-text">AES-128-CBC简单声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA简单声明"><span class="nav-number">4.</span> <span class="nav-text">RSA简单声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的加密手段"><span class="nav-number">5.</span> <span class="nav-text">常用的加密手段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">6.</span> <span class="nav-text">demo</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  <link rel="canonical" href="http://yoursite.com/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/05/浅析前端页面渲染机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/10/05/浅析前端页面渲染机制/" class="post-title-link" itemprop="url">浅析前端页面渲染机制</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-10-05 18:55:32" itemprop="dateCreated datePublished" datetime="2017-10-05T18:55:32+08:00">2017-10-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://mp.weixin.qq.com/s/JWtCPtTnAWASg9-iD8Y-WA" target="_blank" rel="noopener">传送门</a> for better UE，浏览器做了如下优化：</p>
+<ol>
+<li>在网络部分，一般使用多个平行进程获取资源，一般为2-6个</li>
+<li>在渲染时，渐进增量的解析和构建Render Tree，逐部分渲染网页</li>
+<li>对于执行到阻塞文档解析的脚本时，主流浏览器通常会开启另一个进程去找出文档中其余脚本文件并异步进行下载，而不影响主进程</li>
+<li>引入脏位系统(dirty bit system)，进行局部layout</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/oauth2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/09/16/oauth2/" class="post-title-link" itemprop="url">OAUTH2.0</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-09-16 00:18:57" itemprop="dateCreated datePublished" datetime="2017-09-16T00:18:57+08:00">2017-09-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:16:19" itemprop="dateModified" datetime="2019-08-28T22:16:19+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>what? OAUTH协议为用户资源的授权提供了一个安全的、开放而又简易的标准。 原理就是USER为TPA授权，有授权之后，TPA获取令牌，进而凭令牌获取部分被保护资源 <a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">阮一峰日志</a> why? 减少用户登录成本，提升UX how?</p>
+<ul>
+<li><a href="http://image.qingf.me/tech/authorization_code_schema.png" target="_blank" rel="noopener">授权码模式</a></li>
+<li><a href="http://image.qingf.me/tech/OAUTH2.0_simple_schema.png" target="_blank" rel="noopener">简化模式</a></li>
+<li>密码模式</li>
+<li>客户端模式</li>
+</ul>
+<hr>
+<h3 id="微信开放平台以授权码模式实现"><a href="#微信开放平台以授权码模式实现" class="headerlink" title="微信开放平台以授权码模式实现"></a>微信开放平台以授权码模式实现</h3><ul>
+<li>共经过三次关键交互<ol>
+<li>微信用户请求登录TPA，TPA向WeChat Open请求OAUTH2.0登录，WeChat Open返回授权临时票据(code)</li>
+<li>TPA根据appid、appsecret和code返回access_token</li>
+<li>TPA凭借接口调用凭证access_token获取用户基础信息</li>
+</ol>
+</li>
+<li>网站应用接入形式<ol>
+<li>外链式</li>
+<li>内嵌式</li>
+</ol>
+</li>
+</ul>
+<p><a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=bc40d55ba368469759d019068666293effcbb057&lang=zh_CN" target="_blank" rel="noopener">微信开放平台传送门</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/想知道你男女票拿手机都干了什么/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/09/13/想知道你男女票拿手机都干了什么/" class="post-title-link" itemprop="url">一些实用的冷知识</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-09-13 22:27:39" itemprop="dateCreated datePublished" datetime="2017-09-13T22:27:39+08:00">2017-09-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">life</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/life/冷知识/" itemprop="url" rel="index"><span itemprop="name">冷知识</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="想知道你男-女票拿手机都干了什么"><a href="#想知道你男-女票拿手机都干了什么" class="headerlink" title="想知道你男/女票拿手机都干了什么"></a>想知道你男/女票拿手机都干了什么</h3><p>拿起<a href="https://www.baidu.com/s?wd=android" target="_blank" rel="noopener">Android</a>手机打开拨号界面并输入以下字符 <code>*#*#4636#*#*</code> 跳出统计界面后点击使用情况统计数据 然后你懂得</p>
+<hr>
+<h3 id="微信查询与好友总聊天条数"><a href="#微信查询与好友总聊天条数" class="headerlink" title="微信查询与好友总聊天条数"></a>微信查询与好友总聊天条数</h3><p>打开与好友聊天界面并输入以下字符 <code>//checkcount</code> 点击发送 弹出toast</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/webpack4 + vue@2.6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/09/08/webpack4 + vue@2.6/" class="post-title-link" itemprop="url">webpack4 + vue@2.6</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-09-08 22:48:07" itemprop="dateCreated datePublished" datetime="2017-09-08T22:48:07+08:00">2017-09-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:09:35" itemprop="dateModified" datetime="2019-08-28T22:09:35+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="快速从0到1搭建vue工程（不通过cli）"><a href="#快速从0到1搭建vue工程（不通过cli）" class="headerlink" title="快速从0到1搭建vue工程（不通过cli）"></a>快速从0到1搭建vue工程（不通过cli）</h3><blockquote>
+<p>关键链路如下</p>
+</blockquote>
+<pre><code>npm i vue@2.6 -S
+npm i vue-template-compiler@2.6 vue-loader webpack@4 wepback-cli@3 webpack-dev-server@3 -D</code></pre><p>index.js</p>
+<pre><code>import Vue from &apos;vue&apos;;
+import App from &apos;./App.vue&apos;;
+
+new Vue({
+  render: h =&gt; h(App)
+}).$mount(&apos;#app&apos;);</code></pre><p>App.vue</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;计数器&lt;/h3&gt;
+    &lt;button @click=&quot;count++&quot;&gt;+&lt;/button&gt;
+    &lt;span&gt;{ {count}}&lt;/span&gt;
+    &lt;button @click=&quot;count--&quot;&gt;-&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      count: 0
+    }
+  }
+}
+&lt;/script&gt;</code></pre><p>webpack.config.js（只有critical配置）</p>
+<pre><code>rules: [
+    {
+        test: /\.vue$/,
+        use: &apos;vue-loader&apos;
+    }
+]
+
+const VueLoaderPlugin = require(&apos;vue-loader/lib/plugin&apos;);
+const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+plugins: [
+    new HtmlWebpackPlugin({
+        template: &apos;path/to/template.html&apos;,
+        filename: &apos;path/to/destination&apos;,
+        inject: true
+    })
+    new VueLoaderPlugin()
+]
+
+devServer: {
+    hot: true
+}</code></pre><p>package.json</p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;webpack-dev-server&quot;,
+    &quot;build&quot;: &quot;NODE_ENV=production webpack&quot;
+}</code></pre><blockquote>
+<p>Tip：以上就已经完成了vue的所有关键的基础配置。后续建议external掉vue，然后在模板中嵌入vue runtime的scirpt以进一步减少包体积。 Tip：建议自行引入babel-loader</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/geolocation-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/29/geolocation-api/" class="post-title-link" itemprop="url">Geolocation API</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-29 02:42:49" itemprop="dateCreated datePublished" datetime="2017-08-29T02:42:49+08:00">2017-08-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>what? web地理位置API how? 判断地理位置API是否可用</p>
+<pre><code>if (&apos;geolocation&apos; in navigator) {
+
+} else {
+
+}</code></pre><p>获取当前位置</p>
+<pre><code>navigator.geolocation.getCurrentPosition(function(position) {
+    do_something(position.coords.latitude, position.coords.longitude);
+}, function(err){ handle(err) });</code></pre><p>监视位置变化或清除变化</p>
+<pre><code>var watchID = navigator.geolocation.watchPosition(function(position) {
+  do_something(position.coords.latitude, position.coords.longitude);
+}, function(err) { handle(error) });
+navigator.geolocation.clearWatch(watchID)</code></pre><p>可选选项</p>
+<pre><code>var geo_options = {
+  enableHighAccuracy  : true,
+  maximumAge            : 30000,
+  timeout                    : 27000
+};
+var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/notification-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/28/notification-api/" class="post-title-link" itemprop="url">Notification API</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-28 09:16:01" itemprop="dateCreated datePublished" datetime="2017-08-28T09:16:01+08:00">2017-08-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>what? desktop-notification API why? 原声alert交互体验差 how? 申请notification权限</p>
+<pre><code>window.addEventListener(&apos;load&apos;, function(){
+    if (window.Notification &amp;&amp; Notification.permission !== &apos;granted&apos;) {
+        Notification.requestPermission(function () {
+        if (Notification.permission !== status) {
+            Notification.perssion = status
+        }
+        })
+    }
+})</code></pre><p>触发通知</p>
+<pre><code>function notify(msg) {
+    if (window.Notification &amp;&amp; Notification.permission === &apos;granted&apos;) {
+        var n = new Notification(msg)
+    }
+     // 如果用户没有选择是否显示通知
+    // 注：因为在 Chrome 中我们无法确定 permission 属性是否有值，因此
+    // 检查该属性的值是否是 &quot;default&quot; 是不安全的。
+    else if (window.Notification &amp;&amp; Notification.permission !== &quot;denied&quot;) {
+      Notification.requestPermission(function (status) {
+        if (Notification.permission !== status) {
+          Notification.permission = status
+        }
+
+        // 如果用户同意了
+        if (status === &quot;granted&quot;) {
+          var n = new Notification(msg)
+        }
+
+        // 否则，我们可以让步的使用常规模态的 alert
+        else {
+          alert(msg)
+        }
+      });
+    }
+    // 用户拒绝通知
+    else {
+        alert(msg)
+    }
+}</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/23/MutationObserver-API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/23/MutationObserver-API/" class="post-title-link" itemprop="url">MutationObserver API</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-23 09:15:27" itemprop="dateCreated datePublished" datetime="2017-08-23T09:15:27+08:00">2017-08-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:23:40" itemprop="dateModified" datetime="2019-08-28T22:23:40+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>previously 是否想过未来HTML5新特性可能取代目前火爆的MV*框架 what 监控DOM节点的属性、子抽象节点 how</p>
+<pre><code>// Firefox和Chrome早期版本中带有前缀
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+
+// 选择目标节点
+var target = document.querySelector(&apos;#some-id&apos;);
+
+// 创建观察者对象
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    console.log(mutation.type);
+  });
+});
+
+// 配置观察选项:
+var config = { attributes: true, childList: true, characterData: true }
+
+// 传入目标节点和观察选项
+observer.observe(target, config);
+
+// 随后,你还可以停止观察
+observer.disconnect();</code></pre><p>属性</p>
+<p>描述</p>
+<p>childList</p>
+<p>如果需要观察目标节点的子节点(新增了某个子节点,或者移除了某个子节点),则设置为true.</p>
+<p>attributes</p>
+<p>如果需要观察目标节点的属性节点(新增或删除了某个属性,以及某个属性的属性值发生了变化),则设置为true.</p>
+<p>characterData</p>
+<p>如果目标节点为characterData节点(一种抽象接口,具体可以为文本节点,注释节点,以及处理指令节点)时,也要观察该节点的文本内容是否发生变化,则设置为true.</p>
+<p>subtree</p>
+<p>除了目标节点,如果还需要观察目标节点的所有后代节点(观察目标节点所包含的整棵DOM树上的上述三种节点变化),则设置为true.</p>
+<p>attributeOldValue</p>
+<p>在attributes属性已经设为true的前提下,如果需要将发生变化的属性节点之前的属性值记录下来(记录到下面MutationRecord对象的oldValue属性中),则设置为true.</p>
+<p>characterDataOldValue</p>
+<p>在characterData属性已经设为true的前提下,如果需要将发生变化的characterData节点之前的文本内容记录下来(记录到下面MutationRecord对象的oldValue属性中),则设置为true.</p>
+<p>attributeFilter</p>
+<p>一个属性名数组(不需要指定命名空间),只有该数组中包含的属性名发生变化时才会被观察到,其他名称的属性发生变化后会被忽略.</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/js-zhuangbility/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/21/js-zhuangbility/" class="post-title-link" itemprop="url">JS zhuangbility</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-21 22:40:34" itemprop="dateCreated datePublished" datetime="2017-08-21T22:40:34+08:00">2017-08-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>展示页面中所有元素</p>
+<p>[].forEach.call($$(‘<em>‘),function(dom){dom.style.outline=”1px solid #” + (~~(Math.random()</em>(1&lt;&lt;24))).toString(16)})</p>
+</li>
+</ol>
+<ol>
+<li><p>JS错误处理正确姿势</p>
+<p>try {</p>
+<pre><code>// do something</code></pre><p>} catch (e) {</p>
+<pre><code>window.location.href = &quot;https://stackoverflow.com/search?q=[js]+&quot;+ e.message;</code></pre><p>}</p>
+</li>
+</ol>
+<ol>
+<li><p>单行代码写评星组件</p>
+<p>let rate = 1<br>“★★★★★☆☆☆☆☆”.slice(5 - rate, 10 - rate)</p>
+</li>
+</ol>
+<ol>
+<li><p>如何装逼用代码骂人SB</p>
+<p>(!(<del>+[])+{})[–[</del>+””][+[]]<em>[<del>+[]] + ~</del>!+[]]+({}+[])[[~!+[]]</em>~+[]]</p>
+</li>
+</ol>
+<ol>
+<li><p>如何用代码优雅的证明自己NB</p>
+<p>([][[]]+[])[+!![]]+([]+{})[!+[]+!![]]</p>
+</li>
+</ol>
+<ol>
+<li><p>如何优雅的取随机数</p>
+<p>Math.random().toString(16).substring(2) // 13位<br>Math.random().toString(36).substring(2) // 11位</p>
+</li>
+</ol>
+<ol>
+<li><p>如何优雅的取整</p>
+<p>var a = ~~2.332<br>var b= 2.33 | 0<br>var c= 2.33 &gt;&gt; 0</p>
+</li>
+</ol>
+<ol>
+<li><p>如何优雅实现金钱格式化</p>
+<p>var test1 = ‘1234567890’<br>var format = test1.replace(/\B(?=(\d{3})+(?!\d))/g, ‘,’)</p>
+<p>console.log(format) // 1,234,567,890</p>
+</li>
+</ol>
+<ol>
+<li><p>逗号运算符</p>
+<p>var a = 0;<br>var b = ( a++, 99 );<br>console.log(a);  // 1<br>console.log(b);  // 99</p>
+</li>
+</ol>
+<ol>
+<li><p>标准JSON实现深拷贝(会忽略undefined和function)</p>
+<p>var a = {</p>
+<pre><code>a: &apos;1&apos;,
+b: {
+    ss: &apos;123&apos;
+}</code></pre><p>}<br>var b = JSON.parse(JSON.stringify(a))</p>
+</li>
+</ol>
+<ol>
+<li><p>parseInt(0.0000008) === 8</p>
+</li>
+<li><p>最短的代码实现数组去重</p>
+</li>
+</ol>
+<pre><code>[...new Set([1, &quot;1&quot;, 2, 1, 1, 3])]</code></pre><ol>
+<li><p>用最短的代码实现一个长度为m(6)且值都n(8)的数组</p>
+<p>Array(6).fill(8)</p>
+</li>
+</ol>
+<ol>
+<li><p>如何优雅的实现强制参数?</p>
+<p>let mandatory = () =&gt; {return new Error(‘Missing Parameter’)}</p>
+<p>let foo = (bar = mandatory()) =&gt; {return bar}</p>
+</li>
+</ol>
+<ol>
+<li><p>如何优雅的可复用的校验模式？</p>
+<p>let schema = {</p>
+<pre><code>name: {
+    required: true
+}</code></pre><p>}</p>
+<p>let validator = (schema, values) =&gt; {</p>
+<pre><code>for(let field in schema) {
+    if (schema[field].required) {
+        if (!values[field]) {
+            return false
+        }
+    }
+}</code></pre><p>}</p>
+<p>// 使用方法<br>validator(schema, { name: ‘Cecil’ })// return true</p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/IntersectionObserver API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/21/IntersectionObserver API/" class="post-title-link" itemprop="url">IntersectionObserver API</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-21 09:35:54" itemprop="dateCreated datePublished" datetime="2017-08-21T09:35:54+08:00">2017-08-21</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:57:27" itemprop="dateModified" datetime="2019-08-28T21:57:27+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>previously 还在用监听scroll事件+getBoundingClientRect()+节流函数实现lazyload么，你已经out了 what? 是浏览器原生的构造函数，该API可以自动”观察”元素是否可见，Chrome 51+ 已经支持。由于可见（visible）的本质是，目标元素与视口产生一个交叉区，所以这个 API 叫做”交叉观察器”。 how?</p>
+<pre><code>var io = new IntersectionObserver(callback, option)
+
+// 开始观察
+io.observer(document.getElementById(&apos;#example&apos;))
+
+// 停止观察
+io.unobserver(element)
+
+// 关闭观察器
+io.disconnect()</code></pre><p>callback一般会触发两次，进入/离开视口。另外回调函数以IntersectionObserverEntry对象作为参数。</p>
+<pre><code>{
+  time: 3893.92,
+  rootBounds: ClientRect {
+    bottom: 920,
+    height: 1024,
+    left: 0,
+    right: 1024,
+    top: 0,
+    width: 920
+  },
+  boundingClientRect: ClientRect {
+     // ...
+  },
+  intersectionRect: ClientRect {
+    // ...
+  },
+  intersectionRatio: 0.54,
+  target: element
+}</code></pre><ul>
+<li>time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒</li>
+<li>target：被观察的目标元素，是一个 DOM 节点对象</li>
+<li>rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null</li>
+<li>boundingClientRect：目标元素的矩形区域的信息</li>
+<li>intersectionRect：目标元素与视口（或根元素）的交叉区域的信息</li>
+<li>intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0</li>
+</ul>
+<p>Option对象 threshold属性决定了什么时候触发回调函数。它是一个数组，每个成员都是一个门槛值，默认为[0]，即交叉比例（intersectionRatio）达到0时触发回调函数。 另外在容器内滚动也会影响目标元素的可见性。root属性决定目标容器所在的容器节点。容器元素必须为目标元素的容器节点。 （不清楚此属性的用法）rootMargin用来定义根元素的margin，用来扩展或缩小rootBounds这个矩形的大小，从而影响intersectionRect交叉区域的大小 notice 规格写明，IntersectionObserver的实现，应该采用requestIdleCallback()，即只有线程空闲下来，才会执行观察器。这意味着，这个观察器的优先级非常低，只在其他任务执行完，浏览器有了空闲才会执行。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/初尝docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/08/12/初尝docker/" class="post-title-link" itemprop="url">初尝docker</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-08-12 08:49:21" itemprop="dateCreated datePublished" datetime="2017-08-12T08:49:21+08:00">2017-08-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:56:10" itemprop="dateModified" datetime="2019-08-28T21:56:10+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/note/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.docker.com/docker-mac" target="_blank" rel="noopener">docker for mac</a> what? 是一种沙盒环境能够隔离运行软件的容器。 - web应用的自动化打包和发布； - 自动化测试和持续集成、发布； - 在服务型环境中部署和调整数据库或其他的后台应用； - 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。 why? 安全。环境隔离，互不干扰。 以3M的linux内核承载，相比vmware成本较低。 镜像可编辑发布到官网。 how? docker ps docker info docker images docker version docker search tutorial docker pull learn/tutorial docker run learn/tutorial apt-get install -y ping docker ps -l docker commit [CID | 3] [image] docker inspect NAME|ID</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

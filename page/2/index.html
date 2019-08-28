@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  <link rel="canonical" href="http://yoursite.com/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/graphql初试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/16/graphql初试/" class="post-title-link" itemprop="url">graphql初试</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-16 19:09:19" itemprop="dateCreated datePublished" datetime="2018-06-16T19:09:19+08:00">2018-06-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:56:16" itemprop="dateModified" datetime="2019-08-28T21:56:16+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>基本用法</li>
+<li>GraphQL概述<ul>
+<li>GraphQL基本语法特性</li>
+<li>GraphQL类型系统</li>
+<li>GraphQL类型系统内置基础类型</li>
+<li>GraphQL类型系统内置修饰符</li>
+<li>GraphQL工作原理</li>
+<li>GraphQL执行过程</li>
+</ul>
+</li>
+<li>Vue工程接入GraphQL</li>
+</ul>
+<h1 id="基本用法（如何去用）"><a href="#基本用法（如何去用）" class="headerlink" title="基本用法（如何去用）"></a>基本用法（如何去用）</h1><p>package.json</p>
+<pre><code>&quot;dependencies&quot;: {
+    &quot;apollo-server-koa&quot;: &quot;^1.3.6&quot;,
+    &quot;graphql&quot;: &quot;^0.13.2&quot;,
+    &quot;graphql-import&quot;: &quot;^0.6.0&quot;,
+    &quot;graphql-tools&quot;: &quot;^3.0.2&quot;,
+    &quot;koa&quot;: &quot;^2.5.1&quot;,
+    &quot;koa-bodyparser&quot;: &quot;^4.2.1&quot;,
+    &quot;koa-router&quot;: &quot;^7.4.0&quot;,
+    &quot;koa-websocket&quot;: &quot;^5.0.1&quot;
+},
+&quot;devDependencies&quot;: {
+    &quot;babel-cli&quot;: &quot;^6.26.0&quot;,
+    &quot;babel-preset-env&quot;: &quot;^1.7.0&quot;
+}</code></pre><p>server.js</p>
+<pre><code>import koa from &apos;koa&apos;
+import koaRouter from &apos;koa-router&apos;
+import koaBody from &apos;koa-bodyparser&apos;
+import websocketify from &apos;koa-websocket&apos;
+import { graphqlKoa, graphiqlKoa } from &apos;apollo-server-koa&apos;
+import { makeExecutableSchema } from &apos;graphql-tools&apos;
+
+const app = websocketify(new koa())
+const router = new koaRouter()
+const PORT = 3000
+
+// fake data
+const moments = [
+  {
+    user: {
+      id: 1000,
+      name: &apos;锐雯&apos;,
+      avatar: &apos;http://imgsrc.baidu.com/imgad/pic/item/42a98226cffc1e17d31927154090f603738de974.jpg&apos;
+    },
+    main: {
+      content: &apos;这是一条朋友圈&apos;,
+      pics: [
+        &apos;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1529219875063&amp;di=bc0bcc78ae800c1c21c198f52697f515&amp;imgtype=0&amp;src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4a36acaf2edda3ccd53548ea0be93901203f9223.jpg&apos;,
+        &apos;https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1529219893624&amp;di=8d9e418df27e1fdb6afb1d993801a980&amp;imgtype=0&amp;src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F3801213fb80e7beca9004ec5252eb9389b506b38.jpg&apos;
+      ]
+    },
+    comments: [
+      {
+        user: {
+          id: 233122,
+          name: &apos;亚索&apos;
+        },
+        reply: &apos;面对疾风吧&apos;
+      }
+    ]
+  }
+]
+
+const typeDefs = `
+  type Query {
+    moments: [Moment]
+  }
+  type Mutation {
+    addComment(
+      entity: Add_Comment
+    ) : Comment
+  }
+  type Moment {
+    user: User
+    main: Main
+    comments: [Comment]
+  }
+  type User {
+    id: Int
+    name: String
+    avatar: String
+  }
+  type Comment {
+    user: User
+    reply: String
+  }
+  type Main {
+    content: String
+    pics: [String]
+  }
+  input Add_User {
+    id: Int
+    name: String
+  }
+  input Add_Comment {
+    user: Add_User
+    reply: String
+  }
+
+  # 定义graphqlf服务哪个是RootQuery以及RootMutation
+  schema {
+    query: Query
+    mutation: Mutation
+  }
+`
+
+const resolvers = {
+  Query: {
+    moments () {
+      return moments
+    }
+  },
+  Mutation: {
+    addComment (_, { entity }, unknown, context) {
+      console.log(entity)
+      moments[0].comments.push(entity)
+      return entity
+    }
+  }
+}
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+})
+
+// koaBody is needed just for POST.
+router.post(&apos;/graphql&apos;, koaBody(), graphqlKoa({ schema: schema }))
+// router.get(&apos;/graphql&apos;, graphqlKoa({ schema: schema }))
+
+router.get(&apos;/graphiql&apos;, graphiqlKoa({ endpointURL: &apos;/graphql&apos; }))
+
+async function responseMiddleware(ctx, next) {
+  ctx.set(&apos;Access-Control-Allow-Origin&apos;, &apos;http://localhost:8080&apos;)
+  ctx.set(&apos;Access-Control-Allow-Methods&apos;, &apos;POST,OPTIONS&apos;)
+  ctx.set(&apos;Access-Control-Allow-Headers&apos;, &apos;authorization,content-type&apos;)
+  // ctx.set(&apos;Access-Control-Allow-Credentials&apos;, &apos;true&apos;)
+  await next()
+}
+
+app.use(responseMiddleware)
+app.use(router.routes())
+app.use(router.allowedMethods())
+
+app.ws.use(responseMiddleware)
+app.ws.use(router.routes())
+app.ws.use(router.allowedMethods())
+
+app.listen(PORT)</code></pre><h1 id="GraphQL概述"><a href="#GraphQL概述" class="headerlink" title="GraphQL概述"></a>GraphQL概述</h1><h3 id="GraphQL基本语法特性"><a href="#GraphQL基本语法特性" class="headerlink" title="GraphQL基本语法特性"></a>GraphQL基本语法特性</h3><p>包括有fields,alias,arguments,fragments,variables,directives,inline fragments</p>
+<ul>
+<li>field</li>
+</ul>
+<h3 id="GraphQL类型系统"><a href="#GraphQL类型系统" class="headerlink" title="GraphQL类型系统"></a>GraphQL类型系统</h3><p>主要由RootQuery + RootMutation两种入口类型（操作）加上RootValue（resolvers）构成GraphQL Schema。（此处用graphql-tools是为了将所有的类型定义在一个字符串中，后续会移到一个.graphql文件中，然后用graphql-import导入）</p>
+<h3 id="GraphQL类型系统内置基础类型"><a href="#GraphQL类型系统内置基础类型" class="headerlink" title="GraphQL类型系统内置基础类型"></a>GraphQL类型系统内置基础类型</h3><ul>
+<li>标量类型（Scalar Types）<ul>
+<li><code>Int</code>: 有符号的32位整数</li>
+<li><code>Float</code>: 有符号双精度浮点值</li>
+<li><code>String</code>: UTF-8字符序列</li>
+<li><code>Boolean</code>: true or false</li>
+<li><code>ID</code>：ID 标量类型表示一个唯一标识符（类似一种UUID），通常用以重新获取对象或者作为缓存中的键。ID 类型使用和 String 一样的方式序列化。</li>
+</ul>
+</li>
+<li>枚举类型（Enumeration Types）</li>
+</ul>
+<p>是一种特殊的标量类型</p>
+<pre><code>enum Episode {
+  NEWHOPE
+  EMPIRE
+  JEDI
+}</code></pre><ul>
+<li>数组类型（Array Types）</li>
+</ul>
+<p>用方括号<code>[]</code>标记列表</p>
+<ul>
+<li>接口类型（Interface Types）</li>
+</ul>
+<p>是一种抽象类型，与java的interface机制类似。</p>
+<ul>
+<li><p>联合类型（Union Types）</p>
+<p>{<br>  search(text: “an”) {</p>
+<pre><code>... on Human {
+  name
+  height
+}
+... on Droid {
+  name
+  primaryFunction
+}
+... on Starship {
+  name
+  length
+}</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<ul>
+<li>输入类型（Input Types)</li>
+</ul>
+<p>与之前提到的所有Types对立，这是一种也是唯一一种输入类型，其主要用于<code>mutations</code>时传递<code>整个对象</code>的case，它没有参数。</p>
+<h3 id="内置修饰符"><a href="#内置修饰符" class="headerlink" title="内置修饰符"></a>内置修饰符</h3><ul>
+<li><p><code>!</code>: 表示非空。如下</p>
+<p>query DroidById($id: ID!) {<br>  droid(id: $id) {</p>
+<pre><code>name</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<h3 id="GraphQL工作原理"><a href="#GraphQL工作原理" class="headerlink" title="GraphQL工作原理"></a>GraphQL工作原理</h3><p>GraphQL中每个查询字段是返回子类型的父类型函数。每个类型的字段对应由一个<code>resolver</code>函数支持，当字段被执行时，响应的<code>resolver</code>被调用并return结果。 如果该字段为<code>标量类型</code>值，比如字符串或数字，则执行完成。否则<code>递归</code>执行对应解析器直至结果为<code>标量类型</code>值。</p>
+<h3 id="GraphQL基本数据流"><a href="#GraphQL基本数据流" class="headerlink" title="GraphQL基本数据流"></a>GraphQL基本数据流</h3><p>每个GraphQL服务端应用的顶层必定会有一个<code>入口点</code>，通常为Root或者Query类型，接着执行该字段预设的<code>解析器</code>（同步或异步），而每个字段被解析的结果被放置在键值映射中，字段名（或别名）作为键，解析器的值作为值，这个过程从查询字段的<code>底部叶子节点</code>开始返回，直到Query类型的<code>起始节点</code>，最后生成<code>镜像查询结果</code>返回给客户端</p>
+<h1 id="Vue工程接入GraphQL"><a href="#Vue工程接入GraphQL" class="headerlink" title="Vue工程接入GraphQL"></a>Vue工程接入GraphQL</h1><p>安装vue-cli3.x</p>
+<pre><code>npm i -g @vue/cli</code></pre><p>初始化工程</p>
+<pre><code>vue create [project-name]</code></pre><p>引入apollo插件</p>
+<pre><code>cd [project-name]
+vue add apollo</code></pre><p>FriendCircle.vue</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;div v-for=&quot;(item, index) in moments&quot; :key=&quot;index&quot;&gt;
+      { {item}}
+    &lt;/div&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;comment.reply&quot; placeholder=&quot;请输入要回复的内容&quot;&gt;
+    &lt;button @click=&quot;addComment&quot;&gt;回复&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import gql from &apos;graphql-tag&apos;
+
+const QUERY_LIST = gql`
+  query {
+    moments {
+      user {
+        id
+        name
+        avatar
+      }
+      main {
+        content
+        pics
+      }
+      comments {
+        user {
+          id
+          name
+        }
+        reply
+      }
+    }
+  }
+`
+
+export default {
+  data () {
+    return {
+      moments: [],
+      comment: {
+        user: {
+          id: (Math.random() * 10000).toFixed(0),
+          name: &apos;费德提克&apos;
+        },
+        reply: &apos;&apos;
+      }
+    }
+  },
+  apollo: {
+    moments: {
+      query: QUERY_LIST
+    }
+  },
+  methods: {
+    addComment () {
+      this.$apollo.mutate({
+        mutation: gql`
+          mutation addComment($comment: Add_Comment) {
+            addComment(entity: $comment) {
+              user {
+                id
+                name
+              }
+              reply
+            }
+          }
+        `,
+        variables: {
+          comment: this.comment
+        },
+        update: (store, { data: { addComment } }) =&gt; {
+          // Read the data from our cache for this query.
+          const data = store.readQuery({ query: QUERY_LIST })
+          // set first moment&apos;s comment
+          data.moments[0].comments.push(addComment)
+          // Write our data back to the cache.
+          store.writeQuery({ query: QUERY_LIST, data })
+        }
+      })
+    }
+  }
+}
+&lt;/script&gt;</code></pre><p>涉及的知识点有Root_Query,Root_Mutation,variables以及store cache</p>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>其核心机制包括以下两点</p>
+<ol>
+<li>对所有（包括嵌套的）非标量类型递归进行缓存，往往通过类型id或_id以及__typename唯一组合标识，然后在一个扁平的数据结构中存储</li>
+<li>可以设置不同缓存策略：cache-and-network,no-cache,network-only</li>
+</ol>
+<h1 id="update回调"><a href="#update回调" class="headerlink" title="update回调"></a>update回调</h1><p>this.$apollo.mutate(options) options中有一个update回调，在成功响应数据后触发，并且可以直接读取并操作由<code>apollo-cache-inmemory</code>生成的store。上述例子中使用此回调同步更新缓存以及UI</p>
+<blockquote>
+<p>注：所有绑定的变量均不可直接修改，内部使用Object.freeze将对象冻结，无法直接增删。</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/概述nodejs核心机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/10/概述nodejs核心机制/" class="post-title-link" itemprop="url">概述nodejs核心机制</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-10 17:17:49" itemprop="dateCreated datePublished" datetime="2018-06-10T17:17:49+08:00">2018-06-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:58:13" itemprop="dateModified" datetime="2019-08-28T21:58:13+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险</p>
+<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking是指node.js进程中不同步等待执行<code>非javascript操作</code>（例如I/O）完成而继续执行下一块代码的特性。</p>
+<blockquote>
+<p>注：CPU密集型属于javascript操作。</p>
+</blockquote>
+<p>I/O通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞I/O模型使得nodejs支持高并发且非常适合于I/O密集型应用</p>
+<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共6个阶段</p>
+<ul>
+<li><code>timers</code> setTimeout与setInterval回调函数队列</li>
+<li><code>pending callbacks</code> 会在下一次loop中执行的系统级回调队列。如TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
+<li><code>poll</code> 接收新的I/O事件。执行I/O相关回调。在这个阶段node进程可能会阻塞</li>
+<li><code>check</code> setImmediate回调会在这个阶段执行</li>
+<li><code>close</code> 一些关闭的回调。比如<code>connect.on(&#39;close&#39;, () =&gt; {....})</code></li>
+</ul>
+<blockquote>
+<p>注：process.nextTick不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行nextTick回调</p>
+</blockquote>
+<h1 id="Event-Driven"><a href="#Event-Driven" class="headerlink" title="Event-Driven"></a>Event-Driven</h1><h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
+<li>nodejs事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
+<li>Event Loop负责编排客户端请求而后调度Worker Pool处理CPU密集型任务</li>
+</ul>
+<blockquote>
+<p>注：因此nodejs并不是纯粹的单线程语言！</p>
+</blockquote>
+<h3 id="何为阻塞"><a href="#何为阻塞" class="headerlink" title="何为阻塞"></a>何为阻塞</h3><ul>
+<li>如果Event Loop执行回调或worker执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
+<li>性能：如果某worker线程定期执行heavyweight任务，会影响服务吞吐量（请求/秒）</li>
+<li>安全性：假设某些输入会引起程序阻塞，则存在被恶意客户端利用并攻击的风险。即拒绝服务攻击。</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码执行时"><a href="#代码执行时" class="headerlink" title="代码执行时"></a>代码执行时</h3><ul>
+<li>在Event Loop中<code>同步</code>执行常规的变量、方法的定义与调用，javascript所有回调以及非阻塞异步I/O如网络I/O</li>
+<li>Worker Pool是libuv（线程池工作调度的c++库）在Worker Pool中<code>异步</code>执行“昂贵”繁重的任务。node提供非阻塞I/O（操作系统不提供）API，以及CPU密集的I/O API<ul>
+<li>I/O密集型API：</li>
+<li>DNS: dns.lookup()</li>
+<li>fs: fs.readFile()，除了那些显示说明同步的方法</li>
+<li>CPU密集型API：</li>
+<li>crypto: crypto.pbkdf2()</li>
+<li>zlib: 除了那些显示说明同步的方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="Event-Loop实质"><a href="#Event-Loop实质" class="headerlink" title="Event Loop实质"></a>Event Loop实质</h3><p>抽象来说，Event Loop维护挂起事件的队列，Worker Pool维护挂起任务的队列。 实际上，Event Loop并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及node正在监视的文件等等。当某个描述符准备好时，Event Loop会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool维护的是一个真正的队列。Worker会pop出队列的task并执行，完成后会触发Event Loop“至少一个事件已完成”的事件。</p>
+<h3 id="阻止事件循环的几个维度"><a href="#阻止事件循环的几个维度" class="headerlink" title="阻止事件循环的几个维度"></a>阻止事件循环的几个维度</h3><ol>
+<li>数据处理流程中是否包含计算复杂度高的任务，比如使用CPU密集型Node API比如crypto,fs,zlib,child-process（分区处理与offload to Worker Pool）</li>
+<li>ReDoS攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
+<li>是否在主线程中使用JSON.parse以及JSON.stringify（潜在风险，因此也建议offload给Worker Pool）</li>
+</ol>
+<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs默认的Worker Pool专门用于处理I/O任务，维护自己的线程池可以使用cluster模块以及child_process模块做自定义线程池。 Node服务器的吞吐量<code>取决于</code>WorkerPool的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
+<blockquote>
+<p>注：由于调度Worker Pool会增加额外的通信开销，因为Worker Pool无法获取主线程的命名空间从而无法直接读取Javascript对象，所以需要序列化/反序列化导致增加通信成本。</p>
+</blockquote>
+<h3 id="npm模块的风险"><a href="#npm模块的风险" class="headerlink" title="npm模块的风险"></a>npm模块的风险</h3><p>npm生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中npm包良莠不齐，因为无法较为准确的估计其使用Event Loop或者Worker Pool的成本而导致一些程序隐患。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/前端架构的思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/09/前端架构的思考/" class="post-title-link" itemprop="url">前端架构的思考</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-09 15:20:47" itemprop="dateCreated datePublished" datetime="2018-06-09T15:20:47+08:00">2018-06-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>四个维度</p>
+<ul>
+<li>系统级(尽可能提高网站的可访问性以及可用性)<ul>
+<li>服务器</li>
+<li>域名申请、备案以及解析</li>
+<li>全站HTTPS支持</li>
+<li>流量预估</li>
+<li>静态资源CDN加速</li>
+<li>web server选型（nginx,apache,node）</li>
+<li>BFF Or GraphQL</li>
+</ul>
+</li>
+<li>工程级(尽可能提高工程框架易用性以及可伸缩性)<ul>
+<li>前端框架选型(vue,react)</li>
+<li>工程中三方依赖库分析(包含UI库)</li>
+<li>工程化构建工具选型(webpack,parcel,rollup)</li>
+<li>工程复杂度分析，一般以页面数量来定义。如果足够复杂建议使用ts增强系统稳定性</li>
+<li>国际化支持</li>
+<li>图标库引入</li>
+</ul>
+</li>
+<li>业务级(通过业务梳理、系统划分、共性抽象，提高系统完整性以及可拆分性)<ul>
+<li>系统分析。根据业务拆分系统对应不同endpoint。</li>
+<li>页面分析。根据业务需求划分页面。</li>
+<li>前端路由管理，根级路由做redirect，一级路由做UI壳，二级路由做具体业务，三级路由做子业务。不超过三级。</li>
+<li>数据源管理。分析工程中依赖数据及操作，xhr工具类定义，以及数据获取方法定义。</li>
+<li>全局状态管理。先梳理业务逻辑所需数据结构，而后分析可能触发状态更改的action，然后分析可能同步到页面的getter。</li>
+<li>公共组件封装。分析工程中可重用结构，抽象后定义组件。</li>
+<li>公共样式提取。分析工程中可重用样式，抽象后定义公共样式（如mixin、原子类、基本变量）。</li>
+<li>公共行为混入。分析工程中可重用行为，抽象后定义行为。</li>
+<li>帮助类定义。分析工程中工具方法的使用场景，比如merge等等。</li>
+<li>过滤器定义。分析工程中过滤器的使用场景，比如状态、类型、时间戳等等的格式化。</li>
+</ul>
+</li>
+<li>代码级<ul>
+<li>代码规范工具选择(prettier,eslint)</li>
+<li>实现数据源</li>
+<li>实现全局状态管理</li>
+<li>实现公共组件，公共样式，公共混入，帮助类，过滤器</li>
+<li>实现页面</li>
+</ul>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/概述javascript部分核心机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/09/概述javascript部分核心机制/" class="post-title-link" itemprop="url">概述javascript部分核心机制</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-09 00:37:34" itemprop="dateCreated datePublished" datetime="2018-06-09T00:37:34+08:00">2018-06-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:58:09" itemprop="dateModified" datetime="2019-08-28T21:58:09+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>javascript - scope chain - context（this指向） - excution context</p>
+<h1 id="scope-chain"><a href="#scope-chain" class="headerlink" title="scope chain"></a>scope chain</h1><p>即执行环境（execution environment） 即一条<code>执行时</code>才会建立的<code>定义时</code>已经决定了（liao）的链。 <img src="https://blog.qingf.me/wp-content/uploads/2018/06/scopechain.png" alt></p>
+<h1 id="context（this指向）"><a href="#context（this指向）" class="headerlink" title="context（this指向）"></a>context（this指向）</h1><p>this === context</p>
+<pre><code>var name = &apos;亚索&apos;
+// 1-------------------------------------------------------
+var obj = {
+    name: &apos;锐雯&apos;,
+    readName: function() {
+        console.log(this.name)
+    }
+}
+obj.readName()
+// bind用法
+obj.readName.bind(this)  //invalid
+var otherFn = obj.readName
+otherFn.bind(this)
+otherFn()
+// call用法
+obj.readName.call(this)
+// apply用法
+obj.readName.apply(this)
+// 2--------------------------------------------------------
+function readName() {
+    (function ad() {
+        console.log(this.name)
+    })()
+}
+readName()
+// 3-------------------------------------------------------
+function Person(name) {
+    this.name = name
+}
+console.log(new Person(name).name)
+// 4-------------------------------------------------------
+var obj2 = {
+    readName: () =&gt; {
+        console.log(this.name)
+    }
+}
+obj2.readName()
+obj2.readName.call(this)</code></pre><p>结果请复制到控制台执行后查看结果</p>
+<blockquote>
+<p>注：箭头函数其实没有自己的this指针，它只是一个语法糖</p>
+</blockquote>
+<pre><code>箭头函数
+var bbb = {
+    name: &apos;锐萌萌&apos;,
+    normalFn: function b () {
+        return () =&gt; {
+            console.log(this.name)
+        }
+    },
+    arrowFn: function b () {
+        let _this = this
+        return function () {
+            console.log(_this.name)
+        }
+    }
+}</code></pre><h1 id="excution-context"><a href="#excution-context" class="headerlink" title="excution context"></a>excution context</h1><p>我们理解JS引擎时所了解的栈即为执行环境栈。比如我们用语言模拟一段脚本执行到function后发生的一系列动作。 <code>创建阶段（creation phase）</code></p>
+<ol>
+<li>创建一个变量对象（也称活动对象）常常由定义在当前执行环境中的内部变量、内部function以及参数组成，且仅能被解析器访问</li>
+<li>初始化作用域链</li>
+<li>this指针被最终确定</li>
+<li>推入堆栈并获取控制权</li>
+</ol>
+<p><code>执行阶段（execution phase）</code></p>
+<ol>
+<li>代码在当前执行环境中执行，执行完成后pop出当前执行环境，并将控制权移交给上一级执行环境</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/浏览器机制相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/08/浏览器机制相关/" class="post-title-link" itemprop="url">浏览器机制相关</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-08 18:07:09" itemprop="dateCreated datePublished" datetime="2018-06-08T18:07:09+08:00">2018-06-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>主题</p>
+<ul>
+<li>从请求头与响应头理解浏览器网络相关机制</li>
+<li>从渲染流程理解浏览器渲染相关机制</li>
+</ul>
+<h1 id="请求头与响应头"><a href="#请求头与响应头" class="headerlink" title="请求头与响应头"></a>请求头与响应头</h1><h3 id="connection与proxy-connection（即将被http2机制取缔）"><a href="#connection与proxy-connection（即将被http2机制取缔）" class="headerlink" title="connection与proxy-connection（即将被http2机制取缔）"></a>connection与proxy-connection（即将被http2机制取缔）</h3><p>常用于双端。该指令指定tcp连接行为，关闭或建立长链接。<code>connection: keep-alive</code>（由于其他值如close, upgrade场景受限，不考虑），表示此http(tcp)链接需要keep，另外也说明该客户端支持长链接。服务端接收到该http请求之后，如果支持则会建立长链接，并设置超时时间，在响应头中会增加connection: keep-alive以及keep-alive: true两个键值对。</p>
+<blockquote>
+<p>注：此超时关闭行为类似前端常用名词中的debounce行为，即仅当请求间隔超过timeout时才会close connection</p>
+</blockquote>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>常用于双端。该指令指定浏览器的存取缓存行为。cache-control指令有很多用法，这里介绍几种常用的，比如no-store, no-cache, must-revalidate, public, max-age= 常用于ajax请求（响应头）</p>
+<ul>
+<li><code>no-cache</code> 禁止get缓存，并携带验证器向原始服务器发起请求</li>
+<li><code>no-store</code>禁止set缓存</li>
+<li><code>must-revalidate</code> 强制用户在使用缓存之前验证旧资源的状态，并且不可使用过期资源</li>
+</ul>
+<p>常用于静态文件（响应头）</p>
+<ul>
+<li><code>public</code> 表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存。</li>
+<li><code>max-age=&lt;seconds&gt;</code> 设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)</li>
+</ul>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>仅用于客户端。该指令指定客户端部分身份信息。可通过withCredentials控制浏览器是否携带cookie字段。</p>
+<h3 id="content-encoding与accept-encoding"><a href="#content-encoding与accept-encoding" class="headerlink" title="content-encoding与accept-encoding"></a>content-encoding与accept-encoding</h3><p>仅用于服务端。content-encoding应用于响应头，与请求头accept-encoding配套使用。该指令指定传输内容编码方式。 常用于所有类型请求</p>
+<ul>
+<li><code>gzip</code> 使用（服务端）或支持（客户端）gzip压缩</li>
+<li><code>deflate</code> 使用（服务端）或支持（客户端）zlib压缩与deflate压缩</li>
+</ul>
+<p>用于特殊请求</p>
+<ul>
+<li><code>identity</code> 未经修改或压缩</li>
+</ul>
+<h3 id="content-length"><a href="#content-length" class="headerlink" title="content-length"></a>content-length</h3><p>常用于双端。该指令指定传输内容body长度。</p>
+<h3 id="content-type"><a href="#content-type" class="headerlink" title="content-type"></a>content-type</h3><p>常用于双端。该指令指定body <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a>。</p>
+<h3 id="accept"><a href="#accept" class="headerlink" title="accept"></a>accept</h3><p>仅用于客户端。该指令指定客户端支持的<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a>。</p>
+<h3 id="accept-language"><a href="#accept-language" class="headerlink" title="accept-language"></a>accept-language</h3><p>仅用于客户端。该指令指定客户端支持的语言。</p>
+<ul>
+<li><code>zh-CN,zh;q=0.9,en;q=0.8</code></li>
+</ul>
+<p>q表明接受语言的权重，不写默认为q=1。</p>
+<h3 id="host"><a href="#host" class="headerlink" title="host"></a>host</h3><p>仅用于客户端。该指令指定客户端主机。如：<code>www.google.com</code></p>
+<h3 id="origin"><a href="#origin" class="headerlink" title="origin"></a>origin</h3><p>仅用于客户端。该指令指定客户端源。如：<code>http://www.google.com</code></p>
+<h3 id="referer"><a href="#referer" class="headerlink" title="referer"></a>referer</h3><p>仅用于客户端。该指令指定客户端origin + path。常用于防盗链，因为浏览器不允许js修改（排除某些低级浏览器）。如：<code>http://www.google.com/document</code></p>
+<h3 id="user-agent"><a href="#user-agent" class="headerlink" title="user-agent"></a>user-agent</h3><p>仅用于客户端。该指令指定客户端代理描述符。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/AMP与PWA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/05/17/AMP与PWA/" class="post-title-link" itemprop="url">AMP与PWA</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-05-17 23:45:19" itemprop="dateCreated datePublished" datetime="2018-05-17T23:45:19+08:00">2018-05-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:54:57" itemprop="dateModified" datetime="2019-08-28T21:54:57+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h1><p>what?</p>
+<ul>
+<li>Progressive Web App</li>
+<li>匹敌Native APP的沉浸式全屏web应用，支持offline、push、硬件感知等功能</li>
+<li>Chrome团队希望用一个新的buzzword（流行词）来影响、改变用户的期待</li>
+</ul>
+<p>why?</p>
+<ul>
+<li>更方便的安装方式</li>
+<li>更小的应用体积</li>
+<li>更快的开启速度</li>
+</ul>
+<p>problem?</p>
+<ul>
+<li>国内iphone使用者多，不支持PWA</li>
+<li>国内Android被各大手机厂商定制化，支持PWA对收益关系不大</li>
+<li>移动端Chrome使用人数较少</li>
+<li>依赖GCM的通知推送</li>
+<li>须各大移动端浏览器支持</li>
+</ul>
+<p>how?</p>
+<ul>
+<li>Service Workers 配合 Cache API实现离线应用</li>
+<li>PUSH API实现推送通知</li>
+<li>Add to HomeScreen</li>
+<li>Hardware API实现硬件感知</li>
+<li>Web Manifest辅助实现离线应用</li>
+<li>HTTPS是数据安全保证</li>
+</ul>
+<p>不废话了！！来<a href="https://github.com/SangKa/PWA-Book-CN/blob/master/README.md" target="_blank" rel="noopener">干货</a></p>
+<h1 id="AMP"><a href="#AMP" class="headerlink" title="AMP"></a>AMP</h1>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/blues/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/05/17/blues/" class="post-title-link" itemprop="url">blues</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-05-17 23:38:45" itemprop="dateCreated datePublished" datetime="2018-05-17T23:38:45+08:00">2018-05-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>情感上：是蓝色的、忧伤的、哀愁的，用于抒发工作、生活、离别等等忧郁情怀的音乐</li>
+<li>伴奏上：它们的伴奏往往不那么强烈甚至只是吉他或者口琴伴奏</li>
+<li>作用上：是一种情绪的宣泄，所以它的精神就在于自由、无拘无束的</li>
+</ul>
+<h3 id="歌曲"><a href="#歌曲" class="headerlink" title="歌曲"></a>歌曲</h3>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/微服务初试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/05/06/微服务初试/" class="post-title-link" itemprop="url">nodejs微服务解决方案</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-05-06 17:02:54" itemprop="dateCreated datePublished" datetime="2018-05-06T17:02:54+08:00">2018-05-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://juejin.im/post/5b0ac94651882538b304c436" target="_blank" rel="noopener">请前往掘金查阅</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/常用压缩算法对比/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/04/23/常用压缩算法对比/" class="post-title-link" itemprop="url">常用压缩算法对比</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-23 23:41:22" itemprop="dateCreated datePublished" datetime="2018-04-23T23:41:22+08:00">2018-04-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>罗列</li>
+<li>数据对比</li>
+<li>分析总结</li>
+</ul>
+<h3 id="罗列以下5种常用算法"><a href="#罗列以下5种常用算法" class="headerlink" title="罗列以下5种常用算法"></a>罗列以下5种常用算法</h3><ul>
+<li>gzip</li>
+<li>deflate</li>
+<li>LZO</li>
+<li>Snappy</li>
+<li>HPACK（http2用于标头压缩）</li>
+</ul>
+<h3 id="测试数据对比"><a href="#测试数据对比" class="headerlink" title="测试数据对比"></a>测试数据对比</h3><ul>
+<li>对比维度分别有压缩率、压缩速率、解压速率、准确率四个维度</li>
+</ul>
+<h3 id="对结果进行分析总结"><a href="#对结果进行分析总结" class="headerlink" title="对结果进行分析总结"></a>对结果进行分析总结</h3>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/JPEG2000、JPEG XR、BPG、webP、mozJPEG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/04/22/JPEG2000、JPEG XR、BPG、webP、mozJPEG/" class="post-title-link" itemprop="url">JPEG2000、JPEG XR、BPG、webP、mozJPEG</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-22 22:56:18" itemprop="dateCreated datePublished" datetime="2018-04-22T22:56:18+08:00">2018-04-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:57:21" itemprop="dateModified" datetime="2019-08-28T21:57:21+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>常见的图片格式</p>
+<ul>
+<li>JPEG, a lossy format compression, best for photographic and complex images. But the lossy part is means it’s awful for some kinds of image,especially simple text</li>
+<li>GIF is lossless, and therefore good for text - but can only show 256 colors per image</li>
+<li>PNG is lossless format created to replace GIF. It can show more than 256 colors in an image</li>
+</ul>
+<p>那么以上图片到底有哪些优化呢？</p>
+<h1 id="JPEG2000"><a href="#JPEG2000" class="headerlink" title="JPEG2000"></a>JPEG2000</h1><p>相较于JPEG压缩率更高，但由于计算复杂度高（其中涉及了小波变换）编解码速率要相对慢10倍左右，以及设计专利费问题，所以只是在小范围领域中大规模应用，比如数字影院（DCI规范要求Motion JPEG-2000），网络地图等。 目前仅safari浏览器支持，其他Browsers需要装插件查看。</p>
+<h1 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h1><p>BGP作为HEVC（将来可能会取代目前主流的视频编码规范H.264）的 Intra-Frame，采用先进的图像压缩协议，其有损压缩率是图片编码格式中最高且质量高的。对于业界几大巨头Mozilla、微软、谷歌、苹果，由于苹果支持BGP会增加成本而且其他三家公司都自己的图像压缩技术沉淀，BGP能不能流行还不好说。</p>
+<h1 id="JPEG-XR"><a href="#JPEG-XR" class="headerlink" title="JPEG-XR"></a>JPEG-XR</h1><p>微软图像压缩技术，同样比传统JPEG压缩率高，成像质量高。仅IE支持</p>
+<h1 id="webP"><a href="#webP" class="headerlink" title="webP"></a>webP</h1><p>谷歌图像压缩技术，webM（谷歌的视频格式）的intra frame。由于谷歌有Android，相对其他公司更具竞争力，在谷歌生态中已经有90%以上的覆盖率了。</p>
+<h1 id="mozJPEG"><a href="#mozJPEG" class="headerlink" title="mozJPEG"></a>mozJPEG</h1><p>Mozilla的图像压缩技术，仅FireFox支持</p>
+<h1 id="SSIM值对比"><a href="#SSIM值对比" class="headerlink" title="SSIM值对比"></a>SSIM值对比</h1><p><img src="https://pic1.zhimg.com/80/22276c2d45117ffbe38dad51f9a20694_hd.jpg" alt></p>
+<ul>
+<li>不同压缩技术下每像素点压缩前后的SSIM值（结构相似度）多曲线图</li>
+</ul>
+<h1 id="图片对比（JPEG，webP）"><a href="#图片对比（JPEG，webP）" class="headerlink" title="图片对比（JPEG，webP）"></a>图片对比（JPEG，webP）</h1><p>一张3832 * 2554尺寸的高清大图（源自momentum），有1.3M，转换为webp后是不到1.1M。webp相对jpeg的压缩率高15%左右，且压缩前后质量的损耗人眼无感知</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>一个图片格式能否流行基于其压缩率、编解码效率、计算复杂度等，取决于专利。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

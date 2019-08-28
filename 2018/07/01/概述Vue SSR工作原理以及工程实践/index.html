@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+<meta name="keywords" content="Isomorphic,seo,ssr,vue,可扩展性,工程化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概述Vue SSR工作原理以及工程实践">
+<meta property="og:url" content="http://yoursite.com/2018/07/01/概述Vue SSR工作原理以及工程实践/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T13:58:04.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="概述Vue SSR工作原理以及工程实践">
+<meta name="twitter:description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+  <link rel="canonical" href="http://yoursite.com/2018/07/01/概述Vue SSR工作原理以及工程实践/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>概述Vue SSR工作原理以及工程实践 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/概述Vue SSR工作原理以及工程实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">概述Vue SSR工作原理以及工程实践
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-07-01 14:08:47" itemprop="dateCreated datePublished" datetime="2018-07-01T14:08:47+08:00">2018-07-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:58:04" itemprop="dateModified" datetime="2019-08-28T21:58:04+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>工作原理<ul>
+<li>SSR优劣势</li>
+<li>详细构建过程</li>
+<li>运行流程概述</li>
+</ul>
+</li>
+<li>实践<ul>
+<li>工程目录结构</li>
+<li>同构中的差异</li>
+<li>踩坑</li>
+</ul>
+</li>
+</ul>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR优劣势"><a href="#SSR优劣势" class="headerlink" title="SSR优劣势"></a>SSR优劣势</h2><ul>
+<li>优势<ul>
+<li>首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间）</li>
+<li>支持SEO</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><ul>
+<li>入口文件二：entry-server。需要依次作如下逻辑处理<ul>
+<li>新建vue、vue-router、vuex实例（注意不能复用实例）</li>
+<li>app挂载router和store插件</li>
+<li>router根据当前请求即req.url，根据路由匹配到Components，如果存在asyncData则<code>异步获取所有数据</code>后resolve app实例</li>
+<li>registerModule并存在state时，将state挂载到context.state下，并由renderer将其<code>序列化</code></li>
+<li>renderer可以在HTML中收集并内联组件css，并自动注入首屏关键css（critical css）</li>
+<li>renderer通过app实例render为HTML string，并返回给client端</li>
+</ul>
+</li>
+<li>入口文件一：entry-client。需要依次作如下逻辑处理<ul>
+<li>同样的，初始化app实例并挂载router,store插件</li>
+<li>当路由onReady后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
+<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过mixin混入beforeMount生命周期去预取数据。为了防止double-fetch数据，这里需要作出调整即在挂载app之后再混入。</li>
+</ul>
+</li>
+<li>然后webpack通过不同入口分别打包client-manifest.json以及server-bundle.json，应用于renderer</li>
+<li>其中client-manifest主要用于标记程序依赖chunk，server-bundle中则存储并映射打包后所有的bundle用于渲染。renderer具有程序的所有构建信息，因此它可以自动推断和注入资源prefetch与preload指令，以及css、javascript标签到HTML中。与此同时，为避免client瀑布式请求（waterfull request）以及达到最快的TTI（Time-To Interactive），只有应用程序首屏依赖的chunk会以preload形式注入，暂未使用的异步chunk通过prefetch形式注入。</li>
+</ul>
+<h2 id="运行流程概述"><a href="#运行流程概述" class="headerlink" title="运行流程概述"></a>运行流程概述</h2><ul>
+<li>server端负责渲染首屏的工作比如预取数据，全局state初始化（不包括actions,mutations以及getters），直出首屏完整DOM</li>
+<li>client端负责hydrate（激活）SPA，比如store replaceState，注册store模块</li>
+</ul>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="工程依赖的核心库版本概览"><a href="#工程依赖的核心库版本概览" class="headerlink" title="工程依赖的核心库版本概览"></a>工程依赖的核心库版本概览</h2><pre><code>&quot;vue&quot;: &quot;^2.5.16&quot;,
+&quot;vue-router&quot;: &quot;^3.0.1&quot;,
+&quot;vue-server-renderer&quot;: &quot;^2.5.16&quot;,
+&quot;vuex&quot;: &quot;^3.0.1&quot;
+&quot;vue-loader&quot;: &quot;^15.2.4&quot;,
+&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的github</a>查看（欢迎star）</p>
+<h2 id="可执行命令"><a href="#可执行命令" class="headerlink" title="可执行命令"></a>可执行命令</h2><ul>
+<li>npm run dev</li>
+<li>npm run serve</li>
+<li>npm run serve:watch</li>
+<li>npm run build:client-standalone</li>
+<li>npm run build:client-analyze</li>
+</ul>
+<h2 id="同构中的差异"><a href="#同构中的差异" class="headerlink" title="同构中的差异"></a>同构中的差异</h2><ul>
+<li>server端和client端渲染不同页面时在各自的生命周期中（server是beforeCreated and created，client更关注mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页title和通用头部管理等</li>
+</ul>
+<p>用全局Mixin或者Class继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
+<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
+<li>TypeError: Cannot read property ‘render’ of undefined</li>
+</ul>
+<p>最终发现在webpack.base.conf.js中output.filename后面<code>带了hash</code>导致可能在生成server-bundle.json的时候匹配不到该chunk导致<code>json文件构建失败</code>，从而导致vm为undefined，最终抛出以上错误信息。解决方案是把该配置项放在webpack.client.conf.js与webpack.server.conf.js中<code>分别</code>配置</p>
+<ul>
+<li>loader执行顺序从后到前</li>
+</ul>
+<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从stylus-loader -&gt; css-loader -&gt; style-loader</p>
+<ul>
+<li>style-loader中依赖window，导致ssr失败</li>
+</ul>
+<p>用vue-style-loader代替</p>
+<ul>
+<li><p>服务端渲染开发时做hmr有坑</p>
+</li>
+<li><p>当在ssr工程中引入standalone时需要做一些处理比如</p>
+</li>
+</ul>
+<p>如果是standalone模式则<code>挂载前</code>mixin预取数据的生命周期钩子用于client fetch asyncData，如果是ssr-client模式则采用<code>挂载后</code>再mixin此钩子的策略，为防止client hydrating出现double-fetch的情况</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Isomorphic/" rel="tag"># Isomorphic</a>
+            
+              <a href="/tags/seo/" rel="tag"># seo</a>
+            
+              <a href="/tags/ssr/" rel="tag"># ssr</a>
+            
+              <a href="/tags/vue/" rel="tag"># vue</a>
+            
+              <a href="/tags/可扩展性/" rel="tag"># 可扩展性</a>
+            
+              <a href="/tags/工程化/" rel="tag"># 工程化</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/23/概述nodejs模块系统核心原理/" rel="next" title="概述nodejs模块系统核心原理">
+                  <i class="fa fa-chevron-left"></i> 概述nodejs模块系统核心原理
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/07/25/React事件系统/" rel="prev" title="React事件系统">
+                  React事件系统 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">1.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSR优劣势"><span class="nav-number">1.1.</span> <span class="nav-text">SSR优劣势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建过程"><span class="nav-number">1.2.</span> <span class="nav-text">构建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行流程概述"><span class="nav-number">1.3.</span> <span class="nav-text">运行流程概述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工程依赖的核心库版本概览"><span class="nav-number">2.1.</span> <span class="nav-text">工程依赖的核心库版本概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">工程目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可执行命令"><span class="nav-number">2.3.</span> <span class="nav-text">可执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同构中的差异"><span class="nav-number">2.4.</span> <span class="nav-text">同构中的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">2.5.</span> <span class="nav-text">踩坑</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

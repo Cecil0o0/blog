@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概述nodejs核心机制">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/概述nodejs核心机制/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T13:58:13.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="概述nodejs核心机制">
+<meta name="twitter:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+  <link rel="canonical" href="http://yoursite.com/2018/06/10/概述nodejs核心机制/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>概述nodejs核心机制 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/概述nodejs核心机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">概述nodejs核心机制
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-10 17:17:49" itemprop="dateCreated datePublished" datetime="2018-06-10T17:17:49+08:00">2018-06-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:58:13" itemprop="dateModified" datetime="2019-08-28T21:58:13+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险</p>
+<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking是指node.js进程中不同步等待执行<code>非javascript操作</code>（例如I/O）完成而继续执行下一块代码的特性。</p>
+<blockquote>
+<p>注：CPU密集型属于javascript操作。</p>
+</blockquote>
+<p>I/O通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞I/O模型使得nodejs支持高并发且非常适合于I/O密集型应用</p>
+<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共6个阶段</p>
+<ul>
+<li><code>timers</code> setTimeout与setInterval回调函数队列</li>
+<li><code>pending callbacks</code> 会在下一次loop中执行的系统级回调队列。如TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
+<li><code>poll</code> 接收新的I/O事件。执行I/O相关回调。在这个阶段node进程可能会阻塞</li>
+<li><code>check</code> setImmediate回调会在这个阶段执行</li>
+<li><code>close</code> 一些关闭的回调。比如<code>connect.on(&#39;close&#39;, () =&gt; {....})</code></li>
+</ul>
+<blockquote>
+<p>注：process.nextTick不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行nextTick回调</p>
+</blockquote>
+<h1 id="Event-Driven"><a href="#Event-Driven" class="headerlink" title="Event-Driven"></a>Event-Driven</h1><h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
+<li>nodejs事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
+<li>Event Loop负责编排客户端请求而后调度Worker Pool处理CPU密集型任务</li>
+</ul>
+<blockquote>
+<p>注：因此nodejs并不是纯粹的单线程语言！</p>
+</blockquote>
+<h3 id="何为阻塞"><a href="#何为阻塞" class="headerlink" title="何为阻塞"></a>何为阻塞</h3><ul>
+<li>如果Event Loop执行回调或worker执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
+<li>性能：如果某worker线程定期执行heavyweight任务，会影响服务吞吐量（请求/秒）</li>
+<li>安全性：假设某些输入会引起程序阻塞，则存在被恶意客户端利用并攻击的风险。即拒绝服务攻击。</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码执行时"><a href="#代码执行时" class="headerlink" title="代码执行时"></a>代码执行时</h3><ul>
+<li>在Event Loop中<code>同步</code>执行常规的变量、方法的定义与调用，javascript所有回调以及非阻塞异步I/O如网络I/O</li>
+<li>Worker Pool是libuv（线程池工作调度的c++库）在Worker Pool中<code>异步</code>执行“昂贵”繁重的任务。node提供非阻塞I/O（操作系统不提供）API，以及CPU密集的I/O API<ul>
+<li>I/O密集型API：</li>
+<li>DNS: dns.lookup()</li>
+<li>fs: fs.readFile()，除了那些显示说明同步的方法</li>
+<li>CPU密集型API：</li>
+<li>crypto: crypto.pbkdf2()</li>
+<li>zlib: 除了那些显示说明同步的方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="Event-Loop实质"><a href="#Event-Loop实质" class="headerlink" title="Event Loop实质"></a>Event Loop实质</h3><p>抽象来说，Event Loop维护挂起事件的队列，Worker Pool维护挂起任务的队列。 实际上，Event Loop并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及node正在监视的文件等等。当某个描述符准备好时，Event Loop会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool维护的是一个真正的队列。Worker会pop出队列的task并执行，完成后会触发Event Loop“至少一个事件已完成”的事件。</p>
+<h3 id="阻止事件循环的几个维度"><a href="#阻止事件循环的几个维度" class="headerlink" title="阻止事件循环的几个维度"></a>阻止事件循环的几个维度</h3><ol>
+<li>数据处理流程中是否包含计算复杂度高的任务，比如使用CPU密集型Node API比如crypto,fs,zlib,child-process（分区处理与offload to Worker Pool）</li>
+<li>ReDoS攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
+<li>是否在主线程中使用JSON.parse以及JSON.stringify（潜在风险，因此也建议offload给Worker Pool）</li>
+</ol>
+<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs默认的Worker Pool专门用于处理I/O任务，维护自己的线程池可以使用cluster模块以及child_process模块做自定义线程池。 Node服务器的吞吐量<code>取决于</code>WorkerPool的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
+<blockquote>
+<p>注：由于调度Worker Pool会增加额外的通信开销，因为Worker Pool无法获取主线程的命名空间从而无法直接读取Javascript对象，所以需要序列化/反序列化导致增加通信成本。</p>
+</blockquote>
+<h3 id="npm模块的风险"><a href="#npm模块的风险" class="headerlink" title="npm模块的风险"></a>npm模块的风险</h3><p>npm生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中npm包良莠不齐，因为无法较为准确的估计其使用Event Loop或者Worker Pool的成本而导致一些程序隐患。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/09/前端架构的思考/" rel="next" title="前端架构的思考">
+                  <i class="fa fa-chevron-left"></i> 前端架构的思考
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/06/16/graphql初试/" rel="prev" title="graphql初试">
+                  graphql初试 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-Blocking-I-O-Model"><span class="nav-number">1.</span> <span class="nav-text">Non-Blocking I/O Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs-Event-Loop-and-Worker-Pool"><span class="nav-number">2.</span> <span class="nav-text">Nodejs Event Loop and Worker Pool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-Driven"><span class="nav-number">3.</span> <span class="nav-text">Event-Driven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本架构"><span class="nav-number">3.0.1.</span> <span class="nav-text">基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为阻塞"><span class="nav-number">3.0.2.</span> <span class="nav-text">何为阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码执行时"><span class="nav-number">3.0.3.</span> <span class="nav-text">代码执行时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop实质"><span class="nav-number">3.0.4.</span> <span class="nav-text">Event Loop实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止事件循环的几个维度"><span class="nav-number">3.0.5.</span> <span class="nav-text">阻止事件循环的几个维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker-Pool"><span class="nav-number">3.0.6.</span> <span class="nav-text">Worker Pool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm模块的风险"><span class="nav-number">3.0.7.</span> <span class="nav-text">npm模块的风险</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

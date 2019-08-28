@@ -190,7 +190,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/first-demo-post/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/MediaSource与MSE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/28/first-demo-post/" class="post-title-link" itemprop="url">first demo post</a>
+            <a href="/2019/08/24/MediaSource与MSE/" class="post-title-link" itemprop="url">MediaSource 与 MSE</a>
           
         </h1>
 
@@ -219,7 +219,32 @@
                 
               
 
-              <time title="Created: 2019-08-28 09:30:48" itemprop="dateCreated datePublished" datetime="2019-08-28T09:30:48+08:00">2019-08-28</time>
+              <time title="Created: 2019-08-24 13:57:40" itemprop="dateCreated datePublished" datetime="2019-08-24T13:57:40+08:00">2019-08-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:23:45" itemprop="dateModified" datetime="2019-08-28T22:23:45+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
             </span>
           
 
@@ -234,7 +259,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <ul>
+<li><strong>适用群体</strong></li>
+</ul>
+<blockquote>
+<p>有一定前端知识的用户群体</p>
+</blockquote>
+<ul>
+<li><strong>MSE概述</strong></li>
+</ul>
+<blockquote>
+<p>结论是MSE提供了实现无插件且基于web的流媒体的能力。可以支持比如自适应码率，精确控制时间的H5直播和点播功能。业界比较出名的有DASH以及HLS协议，这两种协议都基于http协议，有较好的防火墙穿透功能(只要防火墙不拦截80与443端口流量，而一般来说都不会拦截)，HLS对苹果设备极度友好而DASH跨平台兼容性更好，不过这两者劣势都是实时性不好通常延迟有好几秒之长，取而代之的一般是基于web技术有webRTC以及非web技术RTP。</p>
+</blockquote>
+<ul>
+<li><strong>MediaSource概述/含义</strong></li>
+</ul>
+<blockquote>
+<p>属于Media Source Extensions(MSE)标准中的一个接口，每一个MediaSource实例代表了一个媒体源数据应用于HTML媒体元素比如<code>&lt;video/&gt;</code>或<code>&lt;audio/&gt;</code>，通常附着于HTML媒体元素在用户代理中播放。</p>
+</blockquote>
+<ul>
+<li><strong>本质</strong></li>
+</ul>
+<blockquote>
+<p>MediaSource = EventTarget + SourceBuffer + 其他属性比如说duration和readyState + 其他方法比如说isTypeSupported</p>
+</blockquote>
+<ul>
+<li><strong>用处</strong></li>
+</ul>
+<blockquote>
+<p>高级的音视频媒体流播放方式代替传统URL类型</p>
+</blockquote>
+<ul>
+<li><p><strong>用法</strong></p>
+<p>import React, { Component } from “react”;<br>import webmUrl from ‘./3.webm’;</p>
+<p>class VideoPlayer extends Component {<br>  videoDom;<br>  getUserMedia() {</p>
+<pre><code>return navigator.mediaDevices.getUserMedia({ video: true, audio: true });</code></pre><p>  }<br>  play = (url, mimeType = “webm”) =&gt; {</p>
+<pre><code>let mimeCodec, mediaSource;
+if (mimeType === &quot;webm&quot;) {
+  mimeCodec = &apos;video/webm; codecs=&quot;vorbis, vp8&quot;&apos;;
+}
+
+const sourceOpen = () =&gt; {
+  // 新增mediaSource对象
+  let sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+  fetch(url, {
+    responseType: &apos;arraybuffer&apos;
+  }).then(data =&gt; data.arrayBuffer()).then(buffer =&gt; {
+    sourceBuffer.addEventListener(&quot;updateend&quot;, () =&gt; {
+      if (mediaSource.readyState === &quot;open&quot;) {
+        mediaSource.endOfStream();
+      }
+      this.videoDom.play();
+    });
+    sourceBuffer.appendBuffer(buffer);
+  });
+};
+
+// 检查可用性
+if (&quot;MediaSource&quot; in window &amp;&amp; MediaSource.isTypeSupported(mimeCodec)) {
+  mediaSource = new MediaSource();
+  this.videoDom.src = URL.createObjectURL(mediaSource);
+  mediaSource.addEventListener(&quot;sourceopen&quot;, sourceOpen);
+} else {
+  console.error(&quot;Unsupported MIME type or codec: &quot;, mimeCodec);
+}</code></pre><p>  };<br>  componentDidMount = () =&gt; {</p>
+<pre><code>this.play(webmUrl);</code></pre><p>  };<br>  render() {</p>
+<pre><code>return (
+  &lt;div className=&quot;recorder-wrapper&quot;&gt;
+    &lt;canvas style={ { width: 0, height: 0 }} /&gt;
+    &lt;video
+      ref={dom =&gt; (this.videoDom = dom)}
+      style={ { width: 400, height: 400 }}
+    /&gt;
+  &lt;/div&gt;
+);</code></pre><p>  }<br>}</p>
+<p>export default VideoPlayer;</p>
+</li>
+</ul>
+<ul>
+<li><p>坑</p>
+<p>index.js:1509 Uncaught Error: The error you provided does not contain a stack trace.</p>
+<pre><code>at B (index.js:1509)
+at G (index.js:1816)
+at index.js:1831
+at index.js:1850
+at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anonymous) @ index.js:1831<br>(anonymous) @ index.js:1850<br>(anonymous) @ index.js:1343<br>stream-media.js:25 Uncaught (in promise) DOMException</p>
+</li>
+</ul>
+<blockquote>
+<p>根因是该媒体文件不兼容MSE标准（可能原因是容器格式不兼容也有可能是音视频编码器不兼容），请check mimeCodec和真实视频完全一致，要查看视频容器的源信息需要借助ffmpeg等三方工具。</p>
+</blockquote>
+<ul>
+<li>Tips</li>
+</ul>
+<blockquote>
+<p>ffmpeg -i test.webm</p>
+</blockquote>
+
         
       
     </div>
@@ -258,7 +379,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/WebGL踩坑日记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -272,7 +393,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/08/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/2019/07/27/WebGL踩坑日记/" class="post-title-link" itemprop="url">WebGL踩坑日记</a>
           
         </h1>
 
@@ -287,7 +408,32 @@
                 
               
 
-              <time title="Created: 2019-08-28 08:54:42" itemprop="dateCreated datePublished" datetime="2019-08-28T08:54:42+08:00">2019-08-28</time>
+              <time title="Created: 2019-07-27 20:56:47" itemprop="dateCreated datePublished" datetime="2019-07-27T20:56:47+08:00">2019-07-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:21:05" itemprop="dateModified" datetime="2019-08-28T22:21:05+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
             </span>
           
 
@@ -302,19 +448,1192 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+          <h1 id="记录学习webgl踩坑"><a href="#记录学习webgl踩坑" class="headerlink" title="记录学习webgl踩坑"></a>记录学习webgl踩坑</h1><h2 id="当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决"><a href="#当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决" class="headerlink" title="当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决"></a>当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决</h2><ul>
+<li>索引数组中的最大值 * 每个顶点所占浮点数个数（包含图元所需顶点数和Color）&gt; 顶点数组长度</li>
+</ul>
+<h2 id="当gl-drawArrays报警告时，请check未出现以下情况，如出现请先解决"><a href="#当gl-drawArrays报警告时，请check未出现以下情况，如出现请先解决" class="headerlink" title="当gl.drawArrays报警告时，请check未出现以下情况，如出现请先解决"></a>当gl.drawArrays报警告时，请check未出现以下情况，如出现请先解决</h2><ul>
+<li>第二个参数Count数 * 每个顶点所占浮点数个数（包含图元所需顶点数和Color） &gt; 顶点数组长度</li>
+</ul>
+<h2 id="当gl-drawElements和gl-drawArrays都没报错，但仍没有画面时，请check"><a href="#当gl-drawElements和gl-drawArrays都没报错，但仍没有画面时，请check" class="headerlink" title="当gl.drawElements和gl.drawArrays都没报错，但仍没有画面时，请check"></a>当gl.drawElements和gl.drawArrays都没报错，但仍没有画面时，请check</h2><ul>
+<li>Color值从生成直到FragmentShader使用到该Color值前有没有做归一化或？换句话说就是可能被裁剪了。顶点值也是如此。</li>
+<li>如果是用gl.TRIANGLE画几何体，注意是否画的是正面（FRONT_FACE）即逆时针绘制。换句话说可能是gl.CULL_FACE。</li>
+</ul>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/前端动画性能调优指南/">
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/07/24/前端动画性能调优指南/" class="post-title-link" itemprop="url">前端动画性能调优指南</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-07-24 14:32:31" itemprop="dateCreated datePublished" datetime="2019-07-24T14:32:31+08:00">2019-07-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板。每个layer渲染一帧耗时？确保所有layer加起来小于15ms。 - 在做动画时，有多少个layer重新绘制？考虑减少不必要的layer重新绘制或者复杂的layer拆解。 Performance Targets - 每个layer力争4 - 5毫秒的时间（尤其针对于可能要做的Admin移动端来说尤为重要）。 - 每个稍大（绘制时间超过1ms）layer都具有必要性，否则销毁。 - 动画过程中，通过观察Layers和Animation面板确定每个layers重绘都是必要的。 - 如果Layers面板中的layer绘制时间求和的结果在15ms以内，上述就都不必check了。 - 在Performance面板中一定一定不要存在forced layout，如果有请消灭它。 Other Actions - 坚持仅合成器的属性和管理层计数，否则使用FLIP原则使得从开销更大的属性重新映射为变形和透明度的更改。 Refs - Layers面板使用方式查漏补缺 - FLIP Principle - Inspect Your Animation - 降低绘制复杂度、减小绘制区域 - 坚持仅合成器的属性和管理层计数 菜单栏收缩动画性能瓶颈分析案例 - 动画属性不符合预期</p>
+<ul>
+<li><p>重绘制layers完全超乎预期</p>
+</li>
+<li><p>Antd Loading提升一个Layer而且占用内存超预期很多</p>
+</li>
+<li><p>没必要的layer开销超预期很多</p>
+</li>
+<li><p>同一个DOM却提升两个layer</p>
+</li>
+<li><p>动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）</p>
+</li>
+<li><p>降低绘制复杂度</p>
+</li>
+<li><p>减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/build-a-chromium-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/03/02/build-a-chromium-app/" class="post-title-link" itemprop="url">Build A Chromium App</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-03-02 12:45:22" itemprop="dateCreated datePublished" datetime="2019-03-02T12:45:22+08:00">2019-03-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="prepare"><a href="#prepare" class="headerlink" title="prepare"></a>prepare</h3><ol>
+<li>Shadowsocks家族vpn软件，亲测RocketVPN不可用。因为命令行连接谷歌域名必须要建立https连接，并且会失败。解决方案是命令行翻墙。至少git和curl需要翻墙。<ul>
+<li>git config –global https.proxy localhost:1087</li>
+<li>在<del>/.bashrc或者</del>/.zshrc中设置curl全局代理。即尾行键入export https_proxy=<a href="http://localhost:1087" target="_blank" rel="noopener">http://localhost:1087</a></li>
+</ul>
+</li>
+<li>充足的时间。因为chromium在Google Git上有12G+，clone非常慢，fetch –tags比较慢，另外sync非常慢。</li>
+<li>足够的HD空间。因为需要Xcode（解压后12G+），Chromium源码（12G+）。</li>
+<li>需要保证（不知道怎么保证但就是要）。如果macOS版本和Xcode版本存在兼容性问题，会卡在gn gen out/Default（第8步）。</li>
+<li>Install Xcode, launch it, accept the license agreement, and run <code>sudo xcode-select -s /path/to/Xcode.app</code> to continue.</li>
+</ol>
+<h3 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h3><blockquote>
+<p>官方教程不全，应该是编译最新版本且环境比较理想的情况下。因此整理一条在mac下编译M68版本且能跑通的操作序列。</p>
+</blockquote>
+<p>*** 请务必确认终端已经科学上网。</p>
+<ol>
+<li>mkdir chromium &amp;&amp; cd chromium</li>
+<li>fetch –nohooks chromium（后续再执行hooks）</li>
+<li>git fetch –tags</li>
+<li>git checkout -b release/68 68.0.3440.92</li>
+<li>cd ..</li>
+<li>gclient sync –with_branch_heads –jobs 16</li>
+<li>gclient runhooks （如果第6步提示Running hooks: 100% (64/64), done.则可省略此步骤）</li>
+<li>gn gen out/Default</li>
+<li>autoninja -C out/Default chrome</li>
+</ol>
+<blockquote>
+<p>须确保每一条命令无Error。Warning可忽略。</p>
+</blockquote>
+<p><a href="https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md" target="_blank" rel="noopener">Chromium Build教程传送门</a> <a href="https://testerhome.com/topics/16226" target="_blank" rel="noopener">前人踩坑，后人乘凉</a></p>
+<h1 id="我卡在macOS-SDK（10-14-3）和Xcode（10-2-Beta3）版本不兼容，夭折。"><a href="#我卡在macOS-SDK（10-14-3）和Xcode（10-2-Beta3）版本不兼容，夭折。" class="headerlink" title="我卡在macOS SDK（10.14.3）和Xcode（10.2 Beta3）版本不兼容，夭折。"></a>我卡在macOS SDK（10.14.3）和Xcode（10.2 Beta3）版本不兼容，夭折。</h1>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/贝塞尔曲线详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/10/29/贝塞尔曲线详解/" class="post-title-link" itemprop="url">贝塞尔曲线浅析</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-29 00:20:11" itemprop="dateCreated datePublished" datetime="2018-10-29T00:20:11+08:00">2018-10-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="what"><a href="#what" class="headerlink" title="what?"></a>what?</h3><p>贝塞尔曲线（bezier curve），由线段和节点组成，节点是可拖动的支点，线段像可伸缩的皮筋。是计算机图形学中相当重要的参数曲线。</p>
+<h3 id="cubic-bezier-curve公式"><a href="#cubic-bezier-curve公式" class="headerlink" title="cubic-bezier curve公式"></a>cubic-bezier curve公式</h3><p>$$B(t)=P_0(1-t)^3+3P_1t(1-t)^2+3P_2t^2(1-t)+P_3t^3, 0 \leq t \leq 1$$</p>
+<h3 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h3><ol>
+<li>起始于P0结束于Pn的曲线，即所谓的端点插值法</li>
+<li>曲线的起始点（结束点）相切于贝塞尔多边形的第一节（最后一节）</li>
+<li>一条曲线可在任意点切割成两条或任意多条子曲线，每一条子曲线仍是贝塞尔曲线</li>
+</ol>
+<h3 id="升阶"><a href="#升阶" class="headerlink" title="升阶"></a>升阶</h3><p>n次贝塞尔曲线可以转换成完全相同的n+1次贝塞尔曲线。</p>
+<h3 id="cubic-bezier曲线在浏览器timing-function中的应用"><a href="#cubic-bezier曲线在浏览器timing-function中的应用" class="headerlink" title="cubic-bezier曲线在浏览器timing-function中的应用"></a>cubic-bezier曲线在浏览器timing-function中的应用</h3>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/web-components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/10/24/web-components/" class="post-title-link" itemprop="url">Web Components</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-24 13:38:21" itemprop="dateCreated datePublished" datetime="2018-10-24T13:38:21+08:00">2018-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Compatibility"><a href="#Compatibility" class="headerlink" title="Compatibility"></a>Compatibility</h1><p>Web Components are now implemented natively on Safari and Chrome (~70% of installed browsers), and run well on Firefox, Edge, and IE11 using <a href="https://github.com/webcomponents/webcomponentsjs" target="_blank" rel="noopener">polyfills</a></p>
+<h1 id="Best-Practices"><a href="#Best-Practices" class="headerlink" title="Best Practices"></a>Best Practices</h1><p><a href="https://github.com/Polymer/polymer" target="_blank" rel="noopener">Google Polymer</a></p>
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p>原生级web组件，是一种现代化web开发模式</p>
+<h1 id="Features（vs-React、Vue）"><a href="#Features（vs-React、Vue）" class="headerlink" title="Features（vs React、Vue）"></a>Features（vs React、Vue）</h1><ol>
+<li>提供原生级的作用域隔离（包括js与css），实现真正意义上的组件化</li>
+</ol>
+<h1 id="Short-Boards"><a href="#Short-Boards" class="headerlink" title="Short Boards"></a>Short Boards</h1><ol>
+<li>社区暂不活跃，导致优质组件不多等等</li>
+<li>最低仅支持IE11，而且需要polyfills，兼容差一些</li>
+<li>是否支持reactive components</li>
+<li>API不稳定</li>
+</ol>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><p>Web Components特性主要由四项技术构成Custom Elements、Shadow DOM、HTML Templates、HTML Imports</p>
+<blockquote>
+<p>Custom Elements V0 API、Shadow DOM V0 API、HTML Imports将在2019年4月于M73被移除，并配套迁移至Custom Elements V1、Shadow DOM V1 API、ES Module API</p>
+</blockquote>
+<p>Timer Demo</p>
+<pre><code>window.customElements.define(&apos;c-timer&apos;, class extends HTMLElement {
+  constructor() {
+    super()
+    const shadowRoot = this.attachShadow({
+      mode: &apos;open&apos;
+    })
+
+    console.log(shadowRoot)
+
+    const text = document.createElement(&apos;span&apos;)
+    text.classList.add(&apos;testCls&apos;)
+    text.textContent = this.getAttribute(&apos;start&apos;)
+
+    shadowRoot.appendChild(text)
+
+    const style = document.createElement(&apos;style&apos;)
+    style.textContent = `
+      .test {
+        font-size: 3vw;
+      }
+    `
+    shadowRoot.appendChild(style)
+
+    setInterval(() =&gt; {
+      text.textContent = Number(text.textContent) + 1
+    }, 999)
+  }
+})</code></pre><p>使用</p>
+<pre><code>&lt;c-input start=&quot;111&quot; /&gt;</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/04/H5单页生成工具平台设计概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/08/04/H5单页生成工具平台设计概述/" class="post-title-link" itemprop="url">H5单页生成工具平台设计概述</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-08-04 16:37:22" itemprop="dateCreated datePublished" datetime="2018-08-04T16:37:22+08:00">2018-08-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:21:18" itemprop="dateModified" datetime="2019-08-28T22:21:18+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.processon.com/view/link/5bfcd3b9e4b0ef094cbe8654" target="_blank" rel="noopener">架构图</a></p>
+<ul>
+<li>Introduction</li>
+<li>Core Thinking<ul>
+<li>Data-Driven</li>
+<li>Pub and Sub</li>
+</ul>
+</li>
+<li>Architecture Design<ul>
+<li>Config</li>
+<li>Base Layout<ul>
+<li>Header (Toolbar)</li>
+<li>Left Sidebar(Set of widgets)</li>
+<li>Right Siderbar(Area of widgets controllers)</li>
+<li>Body(Area of central scene)</li>
+<li>Popup(Area of system popup)</li>
+</ul>
+</li>
+<li>Core Abstract<ul>
+<li>Item</li>
+<li>Widget</li>
+<li>Editor</li>
+</ul>
+</li>
+<li>Widget System（Why not named component ?）<ul>
+<li>Item</li>
+<li>Widget</li>
+<li>Editor</li>
+<li>Attrs</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Core FEATURES<ul>
+<li>Flexiably Draggable</li>
+<li>Joyful UI</li>
+<li>Excellent Performance(Not that exactly)</li>
+<li>Less Code For Developers</li>
+<li>Abundant Opeations &amp; Interactions<ul>
+<li>Dpr Support</li>
+<li>Layer Support</li>
+<li>Delete Widget</li>
+<li>Indicator</li>
+<li>Magnetic Attraction</li>
+<li>Undo And Redo</li>
+<li>Rotate And Resize</li>
+<li>Realtime Interactions</li>
+</ul>
+</li>
+<li>Easy-to-use Data Structure</li>
+</ul>
+</li>
+<li>ROADMAP<ul>
+<li>Pull Away Engine</li>
+<li>Make A GitBook</li>
+<li>Add More Features<ul>
+<li>Ruler</li>
+<li>Popover</li>
+<li>Grid Lines</li>
+<li>Zoom</li>
+<li>Lock Layer</li>
+<li>Alignment</li>
+<li>Copy And Paste</li>
+<li>Group And Break-up</li>
+<li>Keyboard Hot Key</li>
+<li>Page Guideline</li>
+<li>Customizable Themes</li>
+<li>i18n</li>
+<li>Mobile Simulation</li>
+<li>Portrait And Landscape</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Core Libraries<ul>
+<li>react</li>
+<li>react-dom</li>
+<li>mobx</li>
+<li>mobx-react</li>
+<li>react-dnd</li>
+<li>react-dnd-html5-backend</li>
+<li>antd</li>
+<li>react-color</li>
+<li>lodash</li>
+</ul>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/React事件系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/07/25/React事件系统/" class="post-title-link" itemprop="url">React事件系统</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-07-25 00:09:18" itemprop="dateCreated datePublished" datetime="2018-07-25T00:09:18+08:00">2018-07-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:18:57" itemprop="dateModified" datetime="2019-08-28T22:18:57+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>基本用法</li>
+<li>基本原理<ul>
+<li>概述</li>
+<li>绑定与注册</li>
+<li>触发与dispatch</li>
+</ul>
+</li>
+<li>合成事件（SyntheticEvent）<ul>
+<li>概念</li>
+<li>优势</li>
+</ul>
+</li>
+<li>事件池概念</li>
+</ul>
+<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><pre><code>class DemoCom extends React.Component {
+    handleClick(e) {
+        alert(&apos;click&apos;)
+    }
+    render() {
+        return &lt;div onClick={this.handleClick}&gt;&lt;/div&gt;
+    }
+}</code></pre><p>注意点</p>
+<ul>
+<li>驼峰格式属性名</li>
+<li>值为事件处理器而非字符串</li>
+<li>v14以后版本必须使用e.preventDefault()显示阻止浏览器默认事件而非return false</li>
+</ul>
+<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过<code>事件委托</code>与<code>合成事件</code>配合<code>事件池</code>与<code>批处理队列</code>机制实现Event System</p>
+<h3 id="绑定与注册"><a href="#绑定与注册" class="headerlink" title="绑定与注册"></a>绑定与注册</h3><p>所谓绑定，即建立事件处理器与实际Dom的关联。 所谓注册，即push事件处理器到关联Event Type的执行（callback）队列中等待派发。 而在React中，绑定与注册过程需要经过如下步骤，分别为：</p>
+<ol>
+<li>React Component在mountComponent以及updateComponent阶段都需要执行<code>_updateDOMProperties</code>处理JSX属性，然后遍历其属性并识别出事件属性</li>
+<li>（由于<code>所有事件绑定在document</code>上）通过ReactEventListener类的enqueuePutListener原型方法将事件进行注册，由Event Type与React对象进行了<code>二维划分</code></li>
+<li>通过EventPluginHub类的putListener原型方法<code>储存事件</code>等待派发</li>
+</ol>
+<h3 id="触发与dispatch"><a href="#触发与dispatch" class="headerlink" title="触发与dispatch"></a>触发与dispatch</h3><p>所谓dispatch，即依次执行对应Event Type相关的回调方法 而React自身实现一套捕获/冒泡机制并使用批处理的方式进行事件dispatch，关键步骤如下：</p>
+<ol>
+<li>用户触发绑定在document上的TopLevel Event，执行ReactEventListener类dispatchEvent原型方法，将“bookKeeping”（可以理解为申请执处理）方法push到React内置的批处理队列中等待执行</li>
+<li>当批处理tick到达，执行ReactBrowserEventEmitter.handleTopLevelImpl原型方法，该方法获取Dom与React对象，并且找到该React对象的祖先对象生成数组，从当前React对象向祖先遍历从而实现<code>冒泡</code>，并执行相同事件类型callback（也就是事件处理器）</li>
+<li>执行ReactBrowserEventEmitter.handleTopLevel，通过合成事件构造器构造或者被析构后的事件对象重用两种方式生成<code>合成事件</code>（不同事件类型合成事件不一样），然后进入批处理队列等待执行</li>
+<li>当批处理tick到达，遍历events，顺序执行event，然后遍历event相关的listeners，for循环依次执行，如果遇到stopPropagation则break，否则<code>执行事件处理函数</code></li>
+</ol>
+<h1 id="SyntheticEvent"><a href="#SyntheticEvent" class="headerlink" title="SyntheticEvent"></a>SyntheticEvent</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>对浏览器原生事件作一层封装的增强型事件对象，称为合成事件。 注意</p>
+<ul>
+<li>合成事件被<code>Proxy</code>封装</li>
+<li>原则上<code>不建议</code>和原生事件混用</li>
+</ul>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>兼容性。抹除IE与W3C标准差异，并提供与原生相同的API</li>
+<li>便捷性。提供onCopy等组合后事件，另外提供onClickCapture在捕获阶段执行事件处理器</li>
+<li>效率性。事件载体复用。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>Event System通过事件池与批处理机制对事件执行进行了性能优化，但并不见得比原生Event System性能好</p>
+<h1 id="事件池"><a href="#事件池" class="headerlink" title="事件池"></a>事件池</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>用于存放被<code>析构</code>的event栈。</p>
+<h2 id="如何形成"><a href="#如何形成" class="headerlink" title="如何形成"></a>如何形成</h2><p>每次event对象使用完毕后（未使用event.persist()情况下）在release阶段生成并push至event栈。</p>
+<h2 id="如何利用"><a href="#如何利用" class="headerlink" title="如何利用"></a>如何利用</h2><p>React内部在处理事件返回值时，分两种情况。</p>
+<ol>
+<li>使用event.persist()，强制使用nativeEvent，此时不会使用事件池来优化。</li>
+<li>不调用时，React返回一个合成事件。先判断事件池中是否存在可用的event实例对象，如果有则重用该实例并通过EventConstructor构造出新的合成事件后返回给事件处理器，反之则使用new EventConstructor()构造全新合成事件，并在使用完毕即进入release阶段，该阶段React将析构该合成事件后把event壳的引用push到事件池中等待复用。</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/概述Vue SSR工作原理以及工程实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/07/01/概述Vue SSR工作原理以及工程实践/" class="post-title-link" itemprop="url">概述Vue SSR工作原理以及工程实践</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-07-01 14:08:47" itemprop="dateCreated datePublished" datetime="2018-07-01T14:08:47+08:00">2018-07-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:58:04" itemprop="dateModified" datetime="2019-08-28T21:58:04+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>工作原理<ul>
+<li>SSR优劣势</li>
+<li>详细构建过程</li>
+<li>运行流程概述</li>
+</ul>
+</li>
+<li>实践<ul>
+<li>工程目录结构</li>
+<li>同构中的差异</li>
+<li>踩坑</li>
+</ul>
+</li>
+</ul>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR优劣势"><a href="#SSR优劣势" class="headerlink" title="SSR优劣势"></a>SSR优劣势</h2><ul>
+<li>优势<ul>
+<li>首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间）</li>
+<li>支持SEO</li>
+</ul>
+</li>
+</ul>
+<h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><ul>
+<li>入口文件二：entry-server。需要依次作如下逻辑处理<ul>
+<li>新建vue、vue-router、vuex实例（注意不能复用实例）</li>
+<li>app挂载router和store插件</li>
+<li>router根据当前请求即req.url，根据路由匹配到Components，如果存在asyncData则<code>异步获取所有数据</code>后resolve app实例</li>
+<li>registerModule并存在state时，将state挂载到context.state下，并由renderer将其<code>序列化</code></li>
+<li>renderer可以在HTML中收集并内联组件css，并自动注入首屏关键css（critical css）</li>
+<li>renderer通过app实例render为HTML string，并返回给client端</li>
+</ul>
+</li>
+<li>入口文件一：entry-client。需要依次作如下逻辑处理<ul>
+<li>同样的，初始化app实例并挂载router,store插件</li>
+<li>当路由onReady后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
+<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过mixin混入beforeMount生命周期去预取数据。为了防止double-fetch数据，这里需要作出调整即在挂载app之后再混入。</li>
+</ul>
+</li>
+<li>然后webpack通过不同入口分别打包client-manifest.json以及server-bundle.json，应用于renderer</li>
+<li>其中client-manifest主要用于标记程序依赖chunk，server-bundle中则存储并映射打包后所有的bundle用于渲染。renderer具有程序的所有构建信息，因此它可以自动推断和注入资源prefetch与preload指令，以及css、javascript标签到HTML中。与此同时，为避免client瀑布式请求（waterfull request）以及达到最快的TTI（Time-To Interactive），只有应用程序首屏依赖的chunk会以preload形式注入，暂未使用的异步chunk通过prefetch形式注入。</li>
+</ul>
+<h2 id="运行流程概述"><a href="#运行流程概述" class="headerlink" title="运行流程概述"></a>运行流程概述</h2><ul>
+<li>server端负责渲染首屏的工作比如预取数据，全局state初始化（不包括actions,mutations以及getters），直出首屏完整DOM</li>
+<li>client端负责hydrate（激活）SPA，比如store replaceState，注册store模块</li>
+</ul>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="工程依赖的核心库版本概览"><a href="#工程依赖的核心库版本概览" class="headerlink" title="工程依赖的核心库版本概览"></a>工程依赖的核心库版本概览</h2><pre><code>&quot;vue&quot;: &quot;^2.5.16&quot;,
+&quot;vue-router&quot;: &quot;^3.0.1&quot;,
+&quot;vue-server-renderer&quot;: &quot;^2.5.16&quot;,
+&quot;vuex&quot;: &quot;^3.0.1&quot;
+&quot;vue-loader&quot;: &quot;^15.2.4&quot;,
+&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的github</a>查看（欢迎star）</p>
+<h2 id="可执行命令"><a href="#可执行命令" class="headerlink" title="可执行命令"></a>可执行命令</h2><ul>
+<li>npm run dev</li>
+<li>npm run serve</li>
+<li>npm run serve:watch</li>
+<li>npm run build:client-standalone</li>
+<li>npm run build:client-analyze</li>
+</ul>
+<h2 id="同构中的差异"><a href="#同构中的差异" class="headerlink" title="同构中的差异"></a>同构中的差异</h2><ul>
+<li>server端和client端渲染不同页面时在各自的生命周期中（server是beforeCreated and created，client更关注mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页title和通用头部管理等</li>
+</ul>
+<p>用全局Mixin或者Class继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
+<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
+<li>TypeError: Cannot read property ‘render’ of undefined</li>
+</ul>
+<p>最终发现在webpack.base.conf.js中output.filename后面<code>带了hash</code>导致可能在生成server-bundle.json的时候匹配不到该chunk导致<code>json文件构建失败</code>，从而导致vm为undefined，最终抛出以上错误信息。解决方案是把该配置项放在webpack.client.conf.js与webpack.server.conf.js中<code>分别</code>配置</p>
+<ul>
+<li>loader执行顺序从后到前</li>
+</ul>
+<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从stylus-loader -&gt; css-loader -&gt; style-loader</p>
+<ul>
+<li>style-loader中依赖window，导致ssr失败</li>
+</ul>
+<p>用vue-style-loader代替</p>
+<ul>
+<li><p>服务端渲染开发时做hmr有坑</p>
+</li>
+<li><p>当在ssr工程中引入standalone时需要做一些处理比如</p>
+</li>
+</ul>
+<p>如果是standalone模式则<code>挂载前</code>mixin预取数据的生命周期钩子用于client fetch asyncData，如果是ssr-client模式则采用<code>挂载后</code>再mixin此钩子的策略，为防止client hydrating出现double-fetch的情况</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/概述nodejs模块系统核心原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/06/23/概述nodejs模块系统核心原理/" class="post-title-link" itemprop="url">概述nodejs模块系统核心原理</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-23 16:25:07" itemprop="dateCreated datePublished" datetime="2018-06-23T16:25:07+08:00">2018-06-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:57:09" itemprop="dateModified" datetime="2019-08-28T21:57:09+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>核心工作原理<ul>
+<li>模块解析过程（Module Resolve）</li>
+<li>模块对象（Module Object）</li>
+<li>模块包装（Module Wrapper）</li>
+<li>缓存（Cache）</li>
+<li>循环引用（Cycle）</li>
+</ul>
+</li>
+</ul>
+<h1 id="核心工作原理"><a href="#核心工作原理" class="headerlink" title="核心工作原理"></a>核心工作原理</h1><h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><p>test.js</p>
+<pre><code>require(&apos;x&apos;)</code></pre><ol>
+<li>x是node核心模块（如http,zlib等）则返回，否则继续</li>
+<li>根据Module对象的paths属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出Error(‘MODULE_NOT_FOUND’)</li>
+<li>x是路径（如/path/to/file）<ul>
+<li>尝试LOAD_AS_FILE（如.js,.json,.node），没有则继续</li>
+<li>尝试LOAD_AS_DIR（如文件夹下package.json），没有则抛出Error(‘MODULE_NOT_FOUND’)</li>
+</ul>
+</li>
+</ol>
+<p>LOAD_AS_FILE:</p>
+<ol>
+<li><code>.js</code></li>
+<li><code>.json</code></li>
+<li><code>.node</code>文件（编译好的二进制node插件）</li>
+</ol>
+<p>LOAD_AS_DIR:</p>
+<ol>
+<li><code>X/package.json</code>中的main字段作为模块入口文件</li>
+<li><code>index.js</code></li>
+<li><code>index.json</code></li>
+<li><code>index.node</code></li>
+</ol>
+<h2 id="模块对象"><a href="#模块对象" class="headerlink" title="模块对象"></a>模块对象</h2><pre><code>Module {
+  id: &apos;.&apos;,
+  exports: {},
+  parent: null,
+  filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/index.js&apos;,
+  loaded: false,
+  children:
+   [
+       Module
+       {
+           id: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,
+           exports: [Object],
+           parent: [Circular],
+           filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,
+           loaded: true,
+           children: [Array],
+           paths: [Array]
+        }
+    ],
+  paths:
+   [
+        &apos;/Users/wl/Sites/myapp/node-learning/src/module/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node-learning/src/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node-learning/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node_modules&apos;,
+         &apos;/Users/wl/Sites/node_modules&apos;,
+         &apos;/Users/wl/node_modules&apos;,
+         &apos;/Users/node_modules&apos;,
+         &apos;/node_modules&apos;
+   ]
+}</code></pre><ul>
+<li><code>id</code> 模块id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
+<li><code>exports</code> 模块导出对象。这里的exports指的是module.exports</li>
+<li><code>parent</code> 父模块。即被依赖模块</li>
+<li><code>filename</code> 模块文件名。通常与<code>id</code>相同</li>
+<li><code>loaded</code> 模块加载状态。是否已执行完成</li>
+<li><code>children</code> 子模块。即依赖模块</li>
+<li><code>paths</code> 模块查找路径数组。</li>
+</ul>
+<h2 id="模块包装（Module-Wrapper）"><a href="#模块包装（Module-Wrapper）" class="headerlink" title="模块包装（Module Wrapper）"></a>模块包装（Module Wrapper）</h2><p>主要由以下两点考虑</p>
+<ul>
+<li>使模块内定义的顶层变量限制在方法（也就是wrapper或者说模块内部）级作用域中，防止污染global环境</li>
+</ul>
+<blockquote>
+<p>注：建议启用’use strict’模式，防止定义全局变量</p>
+</blockquote>
+<ul>
+<li><p>传入<code>module</code>, <code>require</code>有利于实现node模块化机制</p>
+<p>(function(exports, require, module, __filename, __dirname) {</p>
+<pre><code>// Module code</code></pre><p>});</p>
+</li>
+</ul>
+<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个node上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
+<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于node包相互依赖，则较大可能会形成<code>循环引用</code>，node利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
+<pre><code>const prefix = &apos;主模块：&apos;
+const a = require(&apos;./a.js&apos;)
+
+console.log(prefix, a)  // {a:2}
+console.log(prefix, require.main === module)
+console.log(module)</code></pre><p><code>a.js</code></p>
+<pre><code>&apos;use strict&apos;
+const prefix = &apos;A模块：&apos;
+module.exports = {a:1}
+const b = require(&apos;./b.js&apos;)
+console.log(prefix, b)  // {b:1}
+module.exports = {a:2}
+console.log(prefix, require.main === module)</code></pre><p><code>b.js</code></p>
+<pre><code>const prefix = &apos;b模块：&apos;
+module.exports = {b:1}
+const a = require(&apos;./a.js&apos;)
+console.log(prefix, a) // {a:1}
+console.log(prefix, require.main === module)</code></pre><p>如上。当b.js引用a.js时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被b.js引用</p>
 
         
       
@@ -337,6 +1656,9 @@
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
           </div>
@@ -380,9 +1702,257 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
       </div>
     
   </nav>

@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  <link rel="canonical" href="http://yoursite.com/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/22/How-Http2-works-译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/04/22/How-Http2-works-译/" class="post-title-link" itemprop="url">How Http2 works - 译</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-22 18:07:56" itemprop="dateCreated datePublished" datetime="2018-04-22T18:07:56+08:00">2018-04-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:23:29" itemprop="dateModified" datetime="2019-08-28T22:23:29+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>主要内容有以下几点</p>
+<ul>
+<li>http1.0与http1.1中存在的主要缺陷</li>
+<li>SPDY<ul>
+<li>SPDY基础功能</li>
+<li>SPDY高级功能</li>
+</ul>
+</li>
+<li>http2<ul>
+<li>概述</li>
+<li>二进制分帧层</li>
+<li>数据流、消息和帧</li>
+<li>请求与响应复用</li>
+<li>数据流优先级</li>
+<li>每个来源一个连接</li>
+<li>流控制</li>
+<li>标头压缩</li>
+</ul>
+</li>
+<li>如何使用Node搭建http2的web服务</li>
+</ul>
+<h1 id="http1-0与http1-1中存在的主要缺陷"><a href="#http1-0与http1-1中存在的主要缺陷" class="headerlink" title="http1.0与http1.1中存在的主要缺陷"></a>http1.0与http1.1中存在的主要缺陷</h1><p>在http1.0中存在的最主要的两个问题分别是链路无法复用以及HOLB(列头阻塞)。 <strong>链路无法复用</strong>直接导致了每一次请求都需要重新经历三次握手建立TCP连接与慢启动，三次握手无疑会增加大量延迟时间，这在高延迟的场景以及移动端叫为明显。http1.1中部分resolve了这个问题。 <strong>Head Of Line Blocking</strong>在第一个请求未得到响应前，后续请求只能排队等待，导致网络带宽无法被充分利用。http1.1部分resolve了这个问题。 能够将多个http请求借用一条TCP链路发出，也就是pipelining。然而没有根治，比如只有HEAD，GET，OPTIONS请求才可复用链路，<strong>POST请求依旧无法使用</strong>，因为可能存在请求间存在依赖关系；亦或是服务端遵循FIFO原则依次响应，或其它缺陷。 无服务端推送</p>
+<h1 id="SPDY"><a href="#SPDY" class="headerlink" title="SPDY"></a>SPDY</h1><p>http1.x依然存在两个痛点，即延迟与安全性，直到2012年google提出了SPDY方案，通过多路复用、请求优先级、header压缩等功能来解决http1.x的遗留问题，但是google决定在2016年不再继续支持SPDY的开发。就在这个SPDY催化剂的作用下，http2应运而生，其实http2就是以SPDY为原型进行讨论和制定的 为降低延迟，C端的单连接单请求，server端的FIFO响应队列都是延迟的大头 http最初设计就是C端发请求，server端响应，server无法主动push内容到C端 压缩http header，由于业务需求膨胀导致cookie与UA体积增大，很容易达到1kb大小，由于http是无状态特性，header必须每次request都需要重复携带，较为耗费流量。 SPDY设计的层级关系为 <img src="http://files.jb51.net/file_images/article/201609/2016912102547244.png?2016812102610" alt></p>
+<h3 id="SPDY基础功能"><a href="#SPDY基础功能" class="headerlink" title="SPDY基础功能"></a>SPDY基础功能</h3><p><strong>多路复用（multiplexing）</strong>。多路复用通过多个请求stream并标识唯一id共享一个tcp连接的方式，解决了http1.x holb的问题，降低了延迟同时提高了带宽利用率 <strong>请求优先级（request prioritization）</strong>。多路复用会带来一个新的问题是，在连接共享的基础之上有可能会导致关键请求被阻塞。SPDY允许给每个request设置优先级，这样重要的请求就会有限得到响应。比如浏览器加载首页，首页的html内容应该优先展示，之后才是各种静态资源文件，脚本文件等加载，这样可以保证用户能第一时间看到网页内容 <strong>header压缩</strong>。SPDY对header的压缩率可以达到80%以上，低带宽环境下效果较大。通常丢包率越大，影响越大</p>
+<h3 id="SPDY高级功能"><a href="#SPDY高级功能" class="headerlink" title="SPDY高级功能"></a>SPDY高级功能</h3><p><strong>server推送（server push）</strong>。开启server push之后，server通过X-Associated-Content header告知C端会有新的内容推送过来。 <strong>server暗示（server hint）</strong>。sever hint不会主动push内容，只是告诉有心的内容产生，内容的下载还是需要C端主动发起请求。server hint通过X-Subresources header来通知，可用于服务端导出的场景。</p>
+<h1 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h1><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>HTTP/2 可以让我们的应用更快、更简单、更稳定 - 这几词凑到一块是很罕见的！HTTP/2 将很多以前我们在应用中针对 HTTP/1.1 想出来的“歪招儿”一笔勾销，把解决那些问题的方案内置在了传输层中。不仅如此，它还为我们进一步优化应用和提升性能提供了全新的机会！ HTTP/2 的目的是通过支持完整的请求与响应复用来减少延迟，通过有效压缩 HTTP 标头字段将协议开销降至最低，同时增加对请求优先级和服务器推送的支持。为达成这些目标，HTTP/2 还给我们带来了大量其他协议层面的辅助实现，例如新的流控制、错误处理和升级机制。上述几种机制虽然不是全部，但却是最重要的，每一位网络开发者都应该理解并在自己的应用中加以利用。 HTTP/2 没有改动 HTTP 的应用语义。HTTP 方法、状态代码、URI 和标头字段等核心概念一如往常。不过，HTTP/2 修改了数据格式化（分帧）以及在客户端与服务器间传输的方式。这两点统帅全局，通过新的分帧层向我们的应用隐藏了所有复杂性。因此，所有现有的应用都可以不必修改而在新协议下运行。</p>
+<h3 id="二进制分帧层"><a href="#二进制分帧层" class="headerlink" title="二进制分帧层"></a>二进制分帧层</h3><p>http2所有性能增强的核心在于新的二进制分帧层，它定义了如何封装http消息并在客户端与服务器之间传输。 这里所谓的层不是在网络协议协议栈中又新增了一层，而是指一种新的编码机制：http的语义都不受影响，不同的是传输期间对他们的编码方式改变了。http1.x采用换行符分割的文本编码，而http2将所传输信息分割成更小的消息和帧，并用二进制编码。 这一切的改变对应用层透明。 <img src="https://developers.google.com/web/fundamentals/performance/http2/images/binary_framing_layer01.svg?hl=zh-cn" alt></p>
+<h3 id="数据流、消息和帧"><a href="#数据流、消息和帧" class="headerlink" title="数据流、消息和帧"></a>数据流、消息和帧</h3><p>新的二进制分帧层机制改变了客户端与服务器之间交换数据的方式。其中引入了三个概念用于理解：</p>
+<ul>
+<li>数据流(data stream): 已建立的连接内的双向字节流，用于承载一条或多条消息</li>
+<li>消息(message)：与逻辑请求和响应相对应的完整的一系列帧</li>
+<li>帧(frame): http2通信的最小单位，每个帧都包含帧头，因为至少会标识出所属数据流</li>
+</ul>
+<p>这些概念的关系如下：</p>
+<ul>
+<li>所有通信都在一个TCP连接上完成，此连接可以承载任意数量的双向数据流（可以断定网页仅需一个TCP连接）</li>
+<li>每个数据流都有一个唯一标识符和可选的优先级信息，用于承载双向消息（前端也许可以通过webAPI指定某次HTTP请求的优先级）</li>
+<li>每条消息都是一条逻辑HTTP消息，包含一个或多个帧（推断可能是利用TCP的分片传输机制）</li>
+<li>帧是最小的通信单位，承载着特定类型的数据，例如HTTP标头、消息负载等等。来自不同数据流的帧可以交错发送，然后再根据每个帧头的数据流标识符重新组装。（类似TCP分片传输机制）</li>
+</ul>
+<p>简而言之，http2将http协议通信分解为二进制编码帧的交换，这些帧对应着特定数据流中的消息。所有这些都在一个TCP连接内复用。这是http2协议所有其他功能和性能优化的基础。</p>
+<h3 id="请求与响应复用"><a href="#请求与响应复用" class="headerlink" title="请求与响应复用"></a>请求与响应复用</h3><p>在HTTP/1.x中，如果客户端想要发起多个并行请求以提升性能，则必须使用多个TCP连接。这是http/1.x的交付模型，该模型可以保证每个连接每次只交付一个响应（响应排队）。更糟糕的是，这种模型也会导致队首阻塞（HoLB），从而导致底层TCP连接利用率底下。 http2中的新的二进制分帧层突破了这些限制，实现了完整的请求和响应复用：client和server可以将http消息分解为互不依赖的帧，然后交错发送，最后再另一端重组。 <img src="https://developers.google.com/web/fundamentals/performance/http2/images/multiplexing01.svg?hl=zh-cn" alt> 快照捕捉了同一个连接内多个并行的数据流。客户端正在向服务器传输一个DATA帧（数据流5），与此同时，服务器正在向客户端交错发送数据流1和数据流3的一系列帧。因此，一个连接上同时有三个并行数据流。 将http消息分解为独立的帧，交错发送，然后在另一端重组是http2的最重要的一项增强。Actually，这个机制会在整个网络技术栈中引发一系列连锁反应，从而带来巨大的性能提升，让我们可以：</p>
+<ul>
+<li>并行交错的发送多个请求，请求之间互不影响</li>
+<li>并行交错的发送多个响应，响应之间互不干扰</li>
+<li>公用一个连接发送多个请求以及响应</li>
+<li>不必再为绕过http1.x限制而做很多工作（例如级联文件、image sprites、域名分片）</li>
+<li>消除不必要的延迟和提高现有网络容量的利用率，从而减少页面加载时间</li>
+</ul>
+<p>http2中的新二进制分帧层解决了http1.x中存在的队首阻塞问题，也消除了并行处理和发送请求及响应时对多个连接的依赖。结果，应用速度更快、开发更简单、部署成本更低。</p>
+<h3 id="数据流优先级"><a href="#数据流优先级" class="headerlink" title="数据流优先级"></a>数据流优先级</h3><p>将http消息分解为多个独立的帧之后，我们就可以复用多个数据流中的帧，客户端和服务器交错发送和传输这些帧的顺序就成为关键的性能决定因素。为了做到这一点，http2标准允许每个数据流都有一个关联的权重和依赖关系：</p>
+<ul>
+<li>可以向每个数据流分配一个介于1至256之间的整数</li>
+<li>每个数据流与其他数据流之间可以存在显式依赖关系</li>
+</ul>
+<p>数据流依赖关系和权重的组合让客户端可以构建和传递“优先级树”，表明它倾向于如何接收响应。反过来，服务器可以使用此信息通过控制CPU、内存和其他资源的分配设定数据流处理的priority，在资源数据可用之后，带宽分配可以确保将高priority响应以最优方式传输至客户端。 <img src="https://developers.google.com/web/fundamentals/performance/http2/images/stream_prioritization01.svg?hl=zh-cn" alt> http2内部的数据流依赖关系通过将另一个数据流的唯一标识符作为父项引用进行声明；如果忽略标识符，相应数据流将依赖于“根数据流”。声明数据流依赖关系指出，应尽可能先向父数据流分配资源，然后再向其依赖项分配资源。（此处示例图片非常清晰，不赘述了） 如上图所示，数据流依赖关系与权重的组合明确表达了资源优先级，这是一种用于提升浏览器性能的关键功能，网络中拥有多种资源类型，它们的依赖关系和权重各不相同。不仅如此，http2协议还允许客户端随时更新这些priority，进一步优化浏览器性能。换句话说，我们可以根据用户互动和其他信号更改依赖关系和重新分配权重。</p>
+<blockquote>
+<p>注：数据流依赖关系和权重的组合表示传输优先级，而不是要求，因此不能保证特定的处理或传输顺序。即，客户端无法强制服务器通过数据流优先级以特定顺序处理数据流。尽管这看起来违反直觉，但却是一种不必要行为。我们不希望在优先级较高的资源受阻时，还阻止服务器处理优先级较低的资源。</p>
+</blockquote>
+<h3 id="每个来源一个链接"><a href="#每个来源一个链接" class="headerlink" title="每个来源一个链接"></a>每个来源一个链接</h3><p>有了新的分帧机制后，http2不再依赖多个TCP连接去并行复用数据流；每个数据都拆分成很多帧，而这些帧可以交错，还可以分别设定优先级。因此，所有http2连接都是永久的，而且仅需要每个来源一个连接，随之带来诸多性能优势。 大多数http传输是短暂而急促的，而TCP则针对长时间的批量数据传输进行了优化。通过重用相同的连接，http2既可以有效的利用每个TCP连接，也可以整体降低协议开销。不仅如此，使用更少的连接还可以减少占用的内存和处理空间，也可以缩短完整连接路径（即客户端、可信中介和源服务器的路径），这降低了整体运行成本并提高了网络利用率和容量。因此，迁移到http2不仅可以减少网络延迟，还有助于提高通量和降低运行成本。</p>
+<blockquote>
+<p>注：连接数量减少对提升https部署的性能来说是一项特别重要的功能：可以减少开销较大的TLS连接数、提升会话重用率，以及整体上减少所需的客户端和服务器资源</p>
+</blockquote>
+<h3 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h3><p>流控制是一种阻止发送方向接收方发送大量数据报文的机制，以免超出后者的需求或者处理能力：发送方可能非常繁忙、处于较高负载之下，也可能仅仅希望为特定数据流分配固定量的资源。例如，客户端可能请求了一个具有较高优先级的大型视频流，但是用户已经暂定视频，客户端现在希望暂停或限制从服务器传输，以免提取与缓冲不必要的数据。再比如，一个代理服务器可能具有较快的下游连接和较慢的上游连接，并且也希望调节下游连接传输数据的速度以及匹配上游连接的速度来控制其资源利用率 这跟TCP流控制原理基本相同。不过，由于http2数据流在一个TCP连接内复用，TCP流控制既不够精细，也无法提供必要的应用级API来调节各个数据流的传输。为了解决这一问题，http2提供了一组简单的构建块，这些构建块允许客户端和服务器实现其自己的数据流控制和连接级流控制：</p>
+<ul>
+<li>流控制具有方向性。每个接收方都可以根据自身需要选择为每个数据流和整个连接设置任意的窗口大小。</li>
+<li>流控制基于信用。每个接收方都可以公布其初始连接和数据流流控制窗口（以字节为单位），每当发送方发出DATA帧时都会减小，在接收方发出WINDOW_UPDATE帧时增大</li>
+<li>流控制无法停用。建立http2连接后，客户端将与服务器交换SETTINGS帧，这会在两个方向上设置流控制窗口。流控制窗口的默认值为65535字节，但是接收方可以设置一个较大的最大窗口大小（最大为2^31 - 1字节），并在接收到任意数据时通过发送WINDOW_UPDATE帧来维持这一大小</li>
+<li>流控制为逐跃点控制，而非端到端控制。即，可信中介可以使用它来控制资源使用，以及基于自身条件和启发式算法实现资源分配机制。</li>
+</ul>
+<p>http2未指定任何特定算法来实现流控制。不过，它提供了简单的构建块并推迟了客户端和服务器实现，可以实现自定义策略来调节资源使用和分配，以及实现新传输能力，同时提升网络应用的实际性能和感知性能 例如，它允许浏览器提取图像预览或首次扫描结果，进行显示并允许其他高优先级提取继续，然后在更关键的资源完成加载后恢复提取</p>
+<h3 id="服务器推送"><a href="#服务器推送" class="headerlink" title="服务器推送"></a>服务器推送</h3><p>http2在应用层输出的最令人振奋的功能是，服务器可以对一个客户端请求发送多个响应。换句话说，除了对最初请求的响应外，服务器还可以向客户端推送额外资源，而无需客户端明确的请求。 <img src="https://developers.google.com/web/fundamentals/performance/http2/images/push01.svg?hl=zh-cn" alt></p>
+<blockquote>
+<p>注：http2打破了严格的请求-响应语义，支持一对多和服务器发起的推送工作流，在浏览器内外开启了全新的互动可能性。这是一项使能功能，对我们思考协议、协议用途和使用方式具有重要的长期影响。</p>
+</blockquote>
+<p>为什么在浏览器中需要此类机制呢？一个典型的网络应用包含多种资源，客户端需要检查服务器提供的文档才能逐个找到他们。那为什么不让服务器提前推送这些资源，从而减少额外的延迟时间呢？服务器已经知道客户端下一步要请求什么资源，这时候服务器推送可派上用场。 事实上，如果您在网页中内联过CSS、Javascript，或者通过data URLs内联过其他资源，那么您就已经亲身体验过server push了。对于将资源手动内联到文档中的过程，我们实际上是在将资源推送给客户端，而不是等待客户端请求。使用http2，我们不仅可以实现相同结果，还会获得其他性能优势。推送资源可以进行如下处理：</p>
+<ul>
+<li>由客户端缓存</li>
+<li>在不同页面之间重用</li>
+<li>与其他资源一起复用</li>
+<li>由服务器设定优先级</li>
+<li>被客户端拒绝</li>
+</ul>
+<p>PUSH_PROMISE 101 所有服务器推送数据流都由PUSH_PROMISE帧发起，表明了服务器向客户端推送所述资源的意图，并且需要先于请求推送资源的响应数据传输。这种传输顺序非常重要：客户端需要了解服务器打算推送哪些资源，以免这些资源创建重复请求。满足此要求的最简单策略是先于父响应（即，DATA帧）发送所有PUSH_PROMISE帧，其中包含所承诺资源的http标头。 在客户端接收到PUSH_PROMISE帧后，它可以根据自身情况选择拒绝数据流（通过RES_STREAM帧）。（如果资源已经位于缓存中，可能会发生这种情况。）这是一个相对于http/1.x是必要的提升。相比之下，使用资源内联等同于“强制推送”：客户端无法选择拒绝、取消或单独处理内联的资源。 使用http2，客户端仍然完全掌控服务器推送的使用方式。客户端可以限制并行推送的数据流数量；调整初始流控制窗口以控制在数据流首次打开时推送的数据量；或完全停用服务器推送。这些优先级在http2连接开始时通过SETTINGS帧传输，可能随时更新。 推送的每个资源都是一个数据流，与内嵌资源部不同，客户端可以对推送的资源逐一复用、设定优先级和处理。浏览器强制执行的唯一安全限制是，推送的资源必须符合原点相同这一策略：服务器对所推内容必须具有权威性。</p>
+<h3 id="标头压缩"><a href="#标头压缩" class="headerlink" title="标头压缩"></a>标头压缩</h3><p>每个http传输都承载了一组标头，这些标头说明了传输的资源及其元属性。在http1.x中，此元数据始终以纯文本形式，通常会给每个传输增加500-800字节的开销。如果使用http Cookie，增加的开销有时候会达到上千字节。为了减少此功能开销和提升性能，http2使用HPACK压缩格式压缩请求和响应标头元数据，这种格式采用两种简单但是强大的技术：</p>
+<ul>
+<li>这种格式支持通过静态Huffman代码对传输的标头进行编码，从而减少了各个传输的大小。</li>
+<li>这种格式要求客户端和服务端同时维护和更新一个包含之前见过的标头字段的索引列表（换句话说，他可以建立一个共享的压缩上下文），此列表随后会用作参考，对之前传输的值进行有效编码</li>
+</ul>
+<p>利用Huffman编码，可以在传输时对各个值进行压缩，而利用之前传输值的索引列表，我们可以通过对传输索引值的方式对重复值进行编码，索引值可用于有效查询和重构完整的标头键值对。 <img src="https://developers.google.com/web/fundamentals/performance/http2/images/header_compression01.svg?hl=zh-cn" alt> 作为一种进一步优化方式，HPACK压缩上下文包含一个静态列表和动态列表：静态表在规范中定义，并提供了一个包含所有连接都可能使用的常用http标头字段的列表；动态表最初为空，将根据在特定连接内交换的值进行更新。因此，为之前未见过的值采用静态Huffman编码，并替换每一侧静态表或动态表中已存在的索引，可以减少每个请求的大小。</p>
+<blockquote>
+<p>注：在http中，请求和响应标头字段的定义保持不变，仅有一些微小的差异：所有标头端名称均为小写，请求行现在拆分成各个:method、:scheme、:authority和:path伪标头字段。</p>
+</blockquote>
+<p>HPACK的安全性和性能 早起版本的http和SPDY使用zlib（带有一个自定义字典）压缩有所http标头。这种方式可以将所传输标头数据的大小减小85% - 88%，显著减少了页面加载时间延迟。 然而2012年夏天，出现了针对TLS和SPDY压缩算法的“犯罪”安全攻击，此攻击会导致会话被劫持。于是，zlib压缩算法被HPACK替代，后者经过专门设计，可以解决发现的安全问题、实现起来也更搞笑和简单，当然，可以对http标头元数据进行良好压缩。</p>
+<h1 id="如何使用Node搭建http2的web服务"><a href="#如何使用Node搭建http2的web服务" class="headerlink" title="如何使用Node搭建http2的web服务"></a>如何使用Node搭建http2的web服务</h1><p>这里使用node v9+版本built-in的http2模块</p>
+<pre><code>openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj &apos;/CN=localhost&apos; \
+  -keyout localhost-privkey.pem -out localhost-cert.pem
+
+
+const http2 = require(&apos;http2&apos;)
+const fs = require(&apos;fs&apos;)
+
+const server = http2.createSecureServer({
+  key: fs.readFileSync(__dirname + &apos;/../localhost-privkey.pem&apos;),
+  cert: fs.readFileSync(__dirname + &apos;/../localhost-cert.pem&apos;)
+})
+
+server.on(&apos;error&apos;, err =&gt; console.errr(err))
+server.on(&apos;socketError&apos;, err =&gt; console.error(err))
+
+server.on(&apos;stream&apos;, (stream, headers) =&gt; {
+  // 流是双工的
+  stream.respond({
+    &apos;content-type&apos;: &apos;application/json&apos;,
+    &apos;:status&apos;: 200
+  })
+  for (const name in headers) {
+    console.log(`${name} : ${headers[name]}`)
+  }
+  stream.end(&apos;{&quot;name&quot;: &quot;Cecil&quot;}&apos;)
+})
+
+server.listen(8443)</code></pre><p>然后使用node编写http2client或者在Chrome中输入<a href="https://localhost:8443访问服务" target="_blank" rel="noopener">https://localhost:8443访问服务</a> 了解http2模块，请至node http2模块 使用http2开发业务，请至<a href="https://lavyun.gitbooks.io/fastify/content/Getting-Started.html" target="_blank" rel="noopener">Fastify</a></p>
+<blockquote>
+<p>本文节选自google web</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/浅析网络应用中常用的加密手段/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/04/17/浅析网络应用中常用的加密手段/" class="post-title-link" itemprop="url">浅析网络应用中常用的加密手段</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-17 23:20:46" itemprop="dateCreated datePublished" datetime="2018-04-17T23:20:46+08:00">2018-04-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>一般情况下，对数据做加密处理确保两点即可：1.有效性 2.完整性</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>初始向量（initialize vector）</li>
+<li><a href="https://baike.baidu.com/item/PKCS/1042350" target="_blank" rel="noopener">PKCS</a></li>
+</ul>
+<h3 id="AES-128-CBC简单声明"><a href="#AES-128-CBC简单声明" class="headerlink" title="AES-128-CBC简单声明"></a>AES-128-CBC简单声明</h3><ul>
+<li>AES-128-CBC是一种常用的分组对称加密算法，即用同一组key进行明文和密文的转换，以128bits为一组，也就是16Bytes，意思就是明文中的16Bytes为一组对应加密后的16Byte的密文</li>
+<li>若明文最后不足16Bytes，需要进行填充，通常采用PKCS#7进行填充。比如最后缺3Bytes，则填充6个0x03；若缺11Bytes，则填充22个0x0b</li>
+<li>若明文刚好为16Bytes，则最后要再加32个0x10作为一个分组。</li>
+<li>key，IV长度均为16Bytes</li>
+<li>CBC工作模式是：给定一个初始向量iv对第一分组进行加密，生成16Bytes密文作为下一分组的偏移向量递归进行加密，直到所有明文均已转换成密文为止</li>
+</ul>
+<h3 id="RSA简单声明"><a href="#RSA简单声明" class="headerlink" title="RSA简单声明"></a>RSA简单声明</h3><ul>
+<li>对极大整数做因数分解的难度决定了RSA算法的可靠性。</li>
+<li>CA一般采用2048bits长度密钥</li>
+<li>其运算速度大约为相同安全级别的对称算法的1/1000左右</li>
+<li>RSA密钥长度随保密级别提高，增加更快（2的指数倍）</li>
+</ul>
+<h3 id="常用的加密手段"><a href="#常用的加密手段" class="headerlink" title="常用的加密手段"></a>常用的加密手段</h3><ol>
+<li>首先，peer1生成key以及iv，将明文用AES-128-CBC算法加密并用base64序列化密文，随后对key用私钥RSA算法加密，也就是数字签名，随后通过网络将密文、签名后的key以及iv传输至peer2</li>
+<li>peer2拿到密文先用base64反序列化，然后通过公钥（可以通过CA也可通过peer获取）用RSA算法解密拿到key，接着用AES-128-CBC反解得到明文。</li>
+</ol>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><ul>
+<li><p>生成私钥</p>
+<p>openssl genrsa -out rsa_private_key.pem 1024</p>
+</li>
+</ul>
+<ul>
+<li><p>转成pkcs8格式私钥</p>
+<p>openssl pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt &gt;&gt; rsa_private_key_pkcs8.pem</p>
+</li>
+</ul>
+<ul>
+<li><p>生成公钥</p>
+<p>openssl rsa -in rsa_private_key_pkcs8.pem -pubout -out rsa_public_key.pem</p>
+</li>
+</ul>
+<ul>
+<li><p>node（8.0LTS）</p>
+<p>const crypto = require(‘crypto’)<br>const fs = require(‘fs’)<br>// aesKey<br>const aesKey = ‘abcdefghijklmnop’<br>// iv<br>const iv = ‘0000000000000000’<br>// privateKey<br>const privateKey = fs.readFileSync(‘rsa_private_key_pkcs8.pem’).toString()<br>// publicKey<br>const publicKey = fs.readFileSync(‘rsa_public_key.pem’).toString()<br>// 创建加密类实例<br>const cipheriv = crypto.createCipheriv(‘aes-128-cbc’, aesKey, iv)<br>// 结果数据结构<br>let res = {<br>  encryptedData: ‘’,<br>  publicKey,<br>  encryptedKey: ‘’,<br>  iv<br>}</p>
+<p>// aes加密过程<br>let promiseHandler = null<br>let cryptoPromise = new Promise((resolve, reject) =&gt; {<br>  promiseHandler = resolve<br>})<br>cipheriv.on(‘readable’, () =&gt; {<br>  const data = cipheriv.read()<br>  if (data) res.encryptedData += data.toString(‘hex’)<br>})</p>
+<p>cipheriv.on(‘end’, () =&gt; {<br>  res.encryptedData = res.encryptedData<br>  console.log(<code>aes加密后的密文为：${res.encryptedData}</code>)<br>  promiseHandler()<br>})</p>
+<p>cipheriv.write(‘狼牙月，伊人憔悴。忍字诀，几番轮回。’)<br>cipheriv.end()</p>
+<p>// 验证公私钥对是否匹配<br>const sign = crypto.createSign(‘SHA256’)</p>
+<p>sign.write(aesKey)<br>sign.end()<br>let signed = sign.sign(privateKey, ‘base64’)<br>const verify = crypto.createVerify(‘SHA256’)</p>
+<p>verify.write(aesKey)<br>verify.end()</p>
+<p>console.log(<code>aesKey签名结果为：${signed}</code>)<br>console.log(<code>公私钥是否匹配：${verify.verify(res.publicKey, signed, &#39;base64&#39;)}</code>)</p>
+<p>// 数字签名<br>res.encryptedKey = crypto.privateEncrypt(privateKey, Buffer.from(aesKey, ‘utf8’)).toString(‘base64’)<br>console.log(<code>私钥加密为：${res.encryptedKey}</code>)<br>// 公钥解密<br>let decryptedKey = crypto.publicDecrypt(res.publicKey, Buffer.from(res.encryptedKey, ‘base64’))<br>console.log(<code>公钥解密为：${decryptedKey}</code>)</p>
+<p>// 利用key和iv去解密res.encryptedData<br>let deCipheriv = crypto.createDecipheriv(‘aes-128-cbc’, decryptedKey, res.iv)<br>let decrypted = ‘’<br>deCipheriv.on(‘readable’, () =&gt; {<br>  const data = deCipheriv.read()<br>  if (data) decrypted += data.toString(‘utf8’)<br>})<br>deCipheriv.on(‘end’, () =&gt; {<br>  console.log(<code>aes解密后的明文为：${decrypted}</code>)<br>})</p>
+<p>cryptoPromise.then(() =&gt; {<br>  deCipheriv.write(res.encryptedData, ‘hex’)<br>  deCipheriv.end()<br>})</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/CSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/04/13/CSP/" class="post-title-link" itemprop="url">CSP</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-04-13 09:58:57" itemprop="dateCreated datePublished" datetime="2018-04-13T09:58:57+08:00">2018-04-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:21:10" itemprop="dateModified" datetime="2019-08-28T22:21:10+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="what"><a href="#what" class="headerlink" title="what"></a>what</h1><p>什么是CSP。CSP（Content-Security-Policy）是一个附加的安全层，用于避免和缓解某些类型的攻击，包括XSS和注入等。CSP向后兼容，浏览器不支持会ignore，默认对网页执行标准的同源策略。可在网站中增加CSP头部，此外根据CSP的标准特点，可通过标签来配置。</p>
+<h1 id="includes"><a href="#includes" class="headerlink" title="includes"></a>includes</h1><ul>
+<li>源列表（定义源的有效性）</li>
+</ul>
+<p>可通过配置以空格为分隔符的有效的目标主机地址字符串 如 <code>http://*.qingf.me blog.qingf.me https://blog.qingf.me</code></p>
+<ul>
+<li>关键字 （定义资源的可访问性）</li>
+</ul>
+<p><code>&#39;none&#39;</code> 代表空集：即不匹配任何URL <code>&#39;self&#39;</code> 代表文档同源，包括相同的URL协议和端口号。 <code>&#39;unsafe-inline&#39;</code> 允许使用内联资源，如内联的<code>&lt;script&gt;</code>、<code>javascript:URL</code>、内联事件处理函数和内联<code>&lt;style&gt;</code> <code>&#39;unsafe-eval&#39;</code> 允许使用eval()等通过字符串创建代码的方法</p>
+<pre><code>Content-Security-Policy: default-src &apos;self&apos;;img-src &apos;self&apos; data:;</code></pre><h1 id="chrome-only"><a href="#chrome-only" class="headerlink" title="chrome-only"></a>chrome-only</h1><p><code>upgrade-insecure-requests</code> 强制网页内http以https发送请求 最低版本为chrome43</p>
+<pre><code>&lt;meta name=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot;/&gt;</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/01/php上传文件相关小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/02/01/php上传文件相关小记/" class="post-title-link" itemprop="url">php 上传文件相关小记</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-02-01 20:21:36" itemprop="dateCreated datePublished" datetime="2018-02-01T20:21:36+08:00">2018-02-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:23:34" itemprop="dateModified" datetime="2019-08-28T22:23:34+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>htmlspecialchars($imgUrl); 把预定义的字符 “&lt;” （小于）和 “&gt;” （大于）转换为 HTML 实体 return string str_replace(“&amp;”, “&amp;”, $imgUrl); 字符串替换 return string preg_replace(“/\?[\s\S]*/“, “”, $imgUrl); 字符串正则替换 return string $pathRes = parse_url($imgUrl); 解析url。 return array_object 例：<a href="http://www.baidu.com?query=1#/hash/a" target="_blank" rel="noopener">http://www.baidu.com?query=1#/hash/a</a> 结果：$pathRes[‘scheme’]; // http strpos($ImgUrl, “http”) 获取字符串2在字符串1中的位置 return number $heads = get_headers($imgUrl, 1); 获取当前url服务器响应的请求头 return array_object stristr($heads[0], “200”); 查找 “world” 在 “Hello world!” 中的第一次出现 return 字符串的剩余部分 $sites = [“Runoob”, “Google”] in_array(“Runoob”, $sites) return Boolean</p>
+<hr>
+<h4 id="下载网络文件方法"><a href="#下载网络文件方法" class="headerlink" title="下载网络文件方法"></a>下载网络文件方法</h4><p>$context = stream_context_create(); return 资源流上下文 readfile($imgUrl,false,$context) 从$context流中读取文件到缓冲区 $img = ob_get_contents(); 此函数返回输出缓冲区的内容，且_不会_主动清空缓冲区，亦或是如果输出缓冲区无效将返回FALSE ob_end_clean(); 清空缓冲区</p>
+<hr>
+<p>file_exists(); 函数检查文件或目录是否存在。 return Boolean mkdir($path, mode = 0777, recursive = true) 创建目录（此处须确保php有write权限）</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/01/年度总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/02/01/年度总结/" class="post-title-link" itemprop="url">2017年度总结</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-02-01 00:53:10" itemprop="dateCreated datePublished" datetime="2018-02-01T00:53:10+08:00">2018-02-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>时光荏苒，白驹过隙。在微链已有8个多月，非常感谢咖菲猫传授予我知识与经验，以及对我的照顾。 进入主题。</p>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>2017年是slack前端团队雄心勃勃的一年。经过几年的迭代开发，我们有不少的技术债务和进行大规模现代化开发的宏伟计划。</p>
+</blockquote>
+<p>我认为这句话描述了大部分创业型互联网公司的前端技术团队现状，同样包括蒸蒸日上的微链。</p>
+<h4 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h4><p>回顾这8个月，可谓是变化巨大。</p>
+<ul>
+<li><p>自身熟悉或者掌握了以下几项技能：</p>
+<blockquote>
+<p>mac os、git、jumpserver、linux、vue2.0全家桶、zentao、mardown、web工程目录架构能力、webpack打包配置（熟悉）、微服务理念及应用、nginx、docker（了解）、sketch、node、php、koa2、PWA（了解）、wordpress以及Hexo博客框架、云服务器</p>
+</blockquote>
+</li>
+<li><p>2017下半年主要完成的工作有：</p>
+</li>
+</ul>
+<ol>
+<li>配合服务端完成云活动产品业务线的日常前端开发工作</li>
+<li>重构H5工程，且可以保证代码有较高可复用性、可维护性</li>
+<li>协助品牌部举办路演大赛，开发H5活动官网进行渠道推广，提高项目转化率</li>
+</ol>
+<ul>
+<li><strong>目前对自身定位于T4有余，T5不到</strong></li>
+</ul>
+<h4 id="问题（或者是解决方案）"><a href="#问题（或者是解决方案）" class="headerlink" title="问题（或者是解决方案）"></a>问题（或者是解决方案）</h4><ul>
+<li><p><strong>自身：</strong></p>
+<ol>
+<li>工作中有时候过于专注自身的东西而忽略了团队，会给人感觉独立于团队做事，让人感觉team有些松散，凝聚力不高</li>
+<li>对交代下来的工作顺利完成之后，应总结性的表达意见，最好在语言进行提炼过后提出对部门、团队有建设性的建议</li>
+</ol>
+</li>
+<li><p><strong>部门：</strong></p>
+<ol>
+<li>技术部气氛较沉闷（需要一到两个逗比调节气氛^_^）</li>
+<li>技术部门较难推行落地一项新技术，除强制执行外，更有效的是自身主动性的尝试，呼吁大家多逛逛技术社区提升自己，增加交流技术时的谈资</li>
+<li><strong>产品部门应经过慎重考虑，理出逻辑缜密的需求，如果有疏漏，技术部门应立即指出甚至打回不予实现</strong></li>
+<li>早例会每个人都应提前有所准备，虽然会有一点繁琐，但是可以有效提高效率与执行力，保证工作内容不透明，项目组成员相互知悉各自进度，就可以达到相互制约的效果。另外早例会时间建议不要超过10分钟，建议不讲技术细节，建议有问题总结归纳后再提出来。最后墙裂建议强制执行以下三点：<ul>
+<li>各自给出迭代任务整体进度比如30%</li>
+<li>昨天工作内容概述以及内容进度（0 - 100%）</li>
+<li>今天的计划任务，不需要提供进度</li>
+</ul>
+</li>
+<li>有没有一种资源线和业务线有机结合的排座位方式。表示目前两种情况都有些问题</li>
+</ol>
+</li>
+</ul>
+<h4 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h4><ol>
+<li>2018年第二季度达到T5级</li>
+<li>2018年逐渐变洒脱、变外骚:joy:</li>
+<li>2018年全年参加conf和更多人进行技术交流，提升自身</li>
+<li>2018年全年写10篇不限主题的博客</li>
+<li>2018年全年开发1个开源库发布到Github、npm</li>
+<li>2018年全年能够输出给公司或部门5个有建设性的建议</li>
+<li>2018年全年希望自己有一次旅行:stuck_out_tongue_closed_eyes:</li>
+<li>2018年第一季度研究并落地前端SSR，增加H5首屏渲染速度以及SEO优化，后续还会有页面静态化部署CDN整体优化H5加载速度（暂未落地）</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/聊天机器人/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/11/05/聊天机器人/" class="post-title-link" itemprop="url">聊天机器人</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-11-05 17:10:00" itemprop="dateCreated datePublished" datetime="2017-11-05T17:10:00+08:00">2017-11-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/artificial-intelligence/" itemprop="url" rel="index"><span itemprop="name">artificial intelligence</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/artificial-intelligence/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>从学术研究的角度讲，聊天机器人所需技术涉及到<a href="https://blog.qingf.me/?p=496" target="_blank" rel="noopener">自然语言处理(NLP)</a>、<a href="(https://blog.qingf.me/?p=515)">文本挖掘(Data Mining)</a>、<a href="(https://blog.qingf.me/?p=518)">知识图谱(Knowledge Graph)</a>等众多领域</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/阿里巴巴四十大盗/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/10/30/阿里巴巴四十大盗/" class="post-title-link" itemprop="url">阿里巴巴=四十大盗？</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-10-30 23:36:41" itemprop="dateCreated datePublished" datetime="2017-10-30T23:36:41+08:00">2017-10-30</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:20:46" itemprop="dateModified" datetime="2019-08-28T22:20:46+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/share/" itemprop="url" rel="index"><span itemprop="name">share</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/share/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>导火线 2017-10-28日飞猪上线“在线签证中心”，试图实现各国签证刘晨在线话，“一机一本”看世界。本事皆大欢喜的事，结果爆出涉嫌抄袭，报着吃瓜群众看大佬操作的心态去搜索相关文章。 然而 熊猫签证创始人：熊猫签证是首款提供线上办签证全套流程的工具APP。飞猪新上线的“在线签证中心”以及这些一模一样的功能，我们早在2016年就已经完美实现。 我想大家多少已经感觉到其中的不可告人 无论如何，阿里飞猪，你这只飞在风口的猪，吃相真是难看。 <a href="https://mp.weixin.qq.com/s?__biz=MzI2NjIzMDUxOQ==&mid=2247484361&idx=1&sn=aa938703b7028f4eaf664f7bd717d1b4&chksm=ea900c51dde78547175f58c0e18778891b8d7e689e360c8885a820dafe4a98d59ac45450e33c&mpshare=1&scene=1&srcid=1030KUf2eN940t6aFYoBU9Ht&key=6479194e361eee5b3160ed7ad9941ed088b528e790cb027f21fed48d8dc460315bf65b0080e6289a62aedad58386a24a2e2593d3a2e141d22895b6450637ab97685728c098e5a544dacccbc52081da3b&ascene=0&uin=MjQwMDcyODU1" target="_blank" rel="noopener">阿里爸爸，这是你第几次盗窃了？</a> 这不禁让我想起前段时间有所耳闻的丑事 <a href="https://zhuanlan.zhihu.com/p/29732726" target="_blank" rel="noopener">在今天这个故事里，阿里巴巴就是四十大盗</a> <a href="https://zhuanlan.zhihu.com/p/29783732" target="_blank" rel="noopener">今天才知道，我们在阿里的遭遇不是个例，是不是真有四十大盗呢？</a></p>
+<ul>
+<li>小插曲(连挖鼻屎都要抄的猪想飞向南极)</li>
+<li><a href="https://zhuanlan.zhihu.com/p/26058990" target="_blank" rel="noopener">飞猪，我叫你一声：连挖鼻屎都要抄的猪，你敢答应么？</a></li>
+</ul>
+<p>公司企业文化再积极，也难以避免被龌龊无耻小人钻空子。我依然坚信阿里是一家值得信赖的企业，希望不要被几颗老鼠屎坏了一锅粥！</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/语言理解模块(NLP)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/10/25/语言理解模块(NLP)/" class="post-title-link" itemprop="url">语言理解模块(NLP)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-10-25 22:49:31" itemprop="dateCreated datePublished" datetime="2017-10-25T22:49:31+08:00">2017-10-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:55:26" itemprop="dateModified" datetime="2019-08-28T21:55:26+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/artificial-intelligence/" itemprop="url" rel="index"><span itemprop="name">artificial intelligence</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/artificial-intelligence/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>what? Artificial Intelligence。AI聊天机器人核心模块NLP。 why? 携手无人驾驶、VR、AR等等热门词汇并肩引领世界技术潮流 how? 基于规则(rule-based)和基于模型(model-based)</p>
+<ul>
+<li><p>什么是信息熵？</p>
+</li>
+<li><p>是香农为量化信息价值含量的概念。并得出一个计算公式。可简单理解为信息在传输过程中损耗的价值，信息熵越大，信息的价值越低</p>
+</li>
+<li><p>什么是模型？</p>
+</li>
+<li><p>可以理解为一个公式y=f(x)。</p>
+</li>
+<li><p>模型的分类？</p>
+<ol>
+<li>分类模型（意图识别），输入用户的一句话，吐出一个标签，这个标签就是这句话的意图（intent）</li>
+<li>seq2seq判别模型（实体提取），从上面这句话中提取实体(entity)。 ex: 比如，我要一张从北京到上海的机票 分类模型会输出“购买机票”的意图 seq2seq判别模型会抽取“北京”为出发地，“上海”为目的地</li>
+</ol>
+</li>
+<li><p>如何获取模型？</p>
+<ol>
+<li>模型是基于数据，经由训练得到的。</li>
+</ol>
+</li>
+<li><p>什么是数据？怎么获取训练集？如何评估训练集的质量？</p>
+</li>
+<li><p>什么是训练？如何训练？</p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/08/restful-vs-graphql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/10/08/restful-vs-graphql/" class="post-title-link" itemprop="url">RESTful vs GraphQL</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-10-08 15:41:37" itemprop="dateCreated datePublished" datetime="2017-10-08T15:41:37+08:00">2017-10-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:14:28" itemprop="dateModified" datetime="2019-08-28T22:14:28+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="what"><a href="#what" class="headerlink" title="what"></a>what</h2><blockquote>
+<p>接口协议标准或称查询语言</p>
+</blockquote>
+<h2 id="why-is-GraphQL"><a href="#why-is-GraphQL" class="headerlink" title="why is GraphQL"></a>why is GraphQL</h2><blockquote>
+<p>RESTful API利用HTTP原生支持的四种状态(PUT DELETE GET PATCH)配合endpoint即可实现数据增删查改，但是其主要痛点在于数据集合分散，客户端不易查询复杂关系的数据结构，因为RESTful API注重的数据集合的存取，而忽略数据间的网状关系。 客户端大量并发请求和对补充数据的二次请求可能会造成很大的麻烦，尤其是响应时间。一个解决方案是设计足够多的资源来满足单次的请求。但是，这造成服务端扩展及维护困难。 GraphQL在这样的背景下应运而生，由Facebook公司于2012年推出。 GraphQL相较于RESTful最大的特性和优势就在于其精确定义数据的能力，它使你能够以单次调用代替多次RESTful请求拿到你所具体指定的数据。 </p>
+</blockquote>
+<h2 id="how"><a href="#how" class="headerlink" title="how"></a>how</h2><p>query</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  client(id: 1) &#123;</span><br><span class="line">    id</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>response</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;client&quot;: &#123;</span><br><span class="line">      &quot;id&quot;: &quot;1&quot;,</span><br><span class="line">      &quot;name&quot;: &quot;Uncle Charlie&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h2><ul>
+<li><a href="http://blog.jobbole.com/41233/" target="_blank" rel="noopener">RESTful API 设计最佳实践</a></li>
+<li><a href="https://githubengineering.com/the-github-graphql-api/" target="_blank" rel="noopener">The Github GraphQL API</a></li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/07/云集微店/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2017/10/07/云集微店/" class="post-title-link" itemprop="url">云集微店</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2017-10-07 14:04:17" itemprop="dateCreated datePublished" datetime="2017-10-07T14:04:17+08:00">2017-10-07</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 22:16:32" itemprop="dateModified" datetime="2019-08-28T22:16:32+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>销售的核心为依靠商品盈利 传销的本质是上线提供产品发展下线分销，并收取所谓“入门费”，“拉人头”层层分销，“团队计酬”，向下压货，坐享利润。其主要的特点有高层收益高、风险小，底层收益低、风险高，一旦系统崩盘意味着最广大‘下线会员’的投入打水漂 尽管新的传销模式多被套上不同的商业模式，隐蔽性变强，但它的本质是不变的——通过层层分销机制，不依靠商品盈利，而是通过发展下线和向下压货来赚取利润，而“云集微店”就是这么干的。 <a href="http://money.163.com/17/0725/02/CQ5HAQRJ002580S6.html" target="_blank" rel="noopener">---- 《每日经济新闻》记者采访的相关律师</a> 云集微店为三级分销制度，即合伙人-&gt;导师-&gt;店主的商业模式，导师或者合伙人每介绍一位店主，都可从平台服务费中抽取部分提成，这种不依靠商品盈利的行为被疑传销，并且店主售出的商品所获得的利润也被抽提成。但是有一点本质与传销不同，就是店主不被强制购买任何商品囤货，下线风险较低。 有一点考虑： 每个人在权衡利弊之后，认为走介绍下线路线盈利更轻松，收益更高，那么其潜台词就是我明明介绍下线就能更舒服的赚钱，我干嘛还要去为销售一件商品而费尽心神赚微薄的利润。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

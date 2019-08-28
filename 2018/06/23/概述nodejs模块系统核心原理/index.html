@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理模块解析过程（Module Resolve）test.js require(&amp;apos;x&amp;apos;) x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的p">
+<meta name="keywords" content="module,nodejs,循环引用,模块系统,模块缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概述nodejs模块系统核心原理">
+<meta property="og:url" content="http://yoursite.com/2018/06/23/概述nodejs模块系统核心原理/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理模块解析过程（Module Resolve）test.js require(&amp;apos;x&amp;apos;) x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的p">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-28T13:57:09.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="概述nodejs模块系统核心原理">
+<meta name="twitter:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理模块解析过程（Module Resolve）test.js require(&amp;apos;x&amp;apos;) x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的p">
+  <link rel="canonical" href="http://yoursite.com/2018/06/23/概述nodejs模块系统核心原理/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>概述nodejs模块系统核心原理 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/概述nodejs模块系统核心原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">概述nodejs模块系统核心原理
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-06-23 16:25:07" itemprop="dateCreated datePublished" datetime="2018-06-23T16:25:07+08:00">2018-06-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:57:09" itemprop="dateModified" datetime="2019-08-28T21:57:09+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>核心工作原理<ul>
+<li>模块解析过程（Module Resolve）</li>
+<li>模块对象（Module Object）</li>
+<li>模块包装（Module Wrapper）</li>
+<li>缓存（Cache）</li>
+<li>循环引用（Cycle）</li>
+</ul>
+</li>
+</ul>
+<h1 id="核心工作原理"><a href="#核心工作原理" class="headerlink" title="核心工作原理"></a>核心工作原理</h1><h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><p>test.js</p>
+<pre><code>require(&apos;x&apos;)</code></pre><ol>
+<li>x是node核心模块（如http,zlib等）则返回，否则继续</li>
+<li>根据Module对象的paths属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出Error(‘MODULE_NOT_FOUND’)</li>
+<li>x是路径（如/path/to/file）<ul>
+<li>尝试LOAD_AS_FILE（如.js,.json,.node），没有则继续</li>
+<li>尝试LOAD_AS_DIR（如文件夹下package.json），没有则抛出Error(‘MODULE_NOT_FOUND’)</li>
+</ul>
+</li>
+</ol>
+<p>LOAD_AS_FILE:</p>
+<ol>
+<li><code>.js</code></li>
+<li><code>.json</code></li>
+<li><code>.node</code>文件（编译好的二进制node插件）</li>
+</ol>
+<p>LOAD_AS_DIR:</p>
+<ol>
+<li><code>X/package.json</code>中的main字段作为模块入口文件</li>
+<li><code>index.js</code></li>
+<li><code>index.json</code></li>
+<li><code>index.node</code></li>
+</ol>
+<h2 id="模块对象"><a href="#模块对象" class="headerlink" title="模块对象"></a>模块对象</h2><pre><code>Module {
+  id: &apos;.&apos;,
+  exports: {},
+  parent: null,
+  filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/index.js&apos;,
+  loaded: false,
+  children:
+   [
+       Module
+       {
+           id: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,
+           exports: [Object],
+           parent: [Circular],
+           filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,
+           loaded: true,
+           children: [Array],
+           paths: [Array]
+        }
+    ],
+  paths:
+   [
+        &apos;/Users/wl/Sites/myapp/node-learning/src/module/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node-learning/src/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node-learning/node_modules&apos;,
+         &apos;/Users/wl/Sites/myapp/node_modules&apos;,
+         &apos;/Users/wl/Sites/node_modules&apos;,
+         &apos;/Users/wl/node_modules&apos;,
+         &apos;/Users/node_modules&apos;,
+         &apos;/node_modules&apos;
+   ]
+}</code></pre><ul>
+<li><code>id</code> 模块id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
+<li><code>exports</code> 模块导出对象。这里的exports指的是module.exports</li>
+<li><code>parent</code> 父模块。即被依赖模块</li>
+<li><code>filename</code> 模块文件名。通常与<code>id</code>相同</li>
+<li><code>loaded</code> 模块加载状态。是否已执行完成</li>
+<li><code>children</code> 子模块。即依赖模块</li>
+<li><code>paths</code> 模块查找路径数组。</li>
+</ul>
+<h2 id="模块包装（Module-Wrapper）"><a href="#模块包装（Module-Wrapper）" class="headerlink" title="模块包装（Module Wrapper）"></a>模块包装（Module Wrapper）</h2><p>主要由以下两点考虑</p>
+<ul>
+<li>使模块内定义的顶层变量限制在方法（也就是wrapper或者说模块内部）级作用域中，防止污染global环境</li>
+</ul>
+<blockquote>
+<p>注：建议启用’use strict’模式，防止定义全局变量</p>
+</blockquote>
+<ul>
+<li><p>传入<code>module</code>, <code>require</code>有利于实现node模块化机制</p>
+<p>(function(exports, require, module, __filename, __dirname) {</p>
+<pre><code>// Module code</code></pre><p>});</p>
+</li>
+</ul>
+<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个node上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
+<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于node包相互依赖，则较大可能会形成<code>循环引用</code>，node利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
+<pre><code>const prefix = &apos;主模块：&apos;
+const a = require(&apos;./a.js&apos;)
+
+console.log(prefix, a)  // {a:2}
+console.log(prefix, require.main === module)
+console.log(module)</code></pre><p><code>a.js</code></p>
+<pre><code>&apos;use strict&apos;
+const prefix = &apos;A模块：&apos;
+module.exports = {a:1}
+const b = require(&apos;./b.js&apos;)
+console.log(prefix, b)  // {b:1}
+module.exports = {a:2}
+console.log(prefix, require.main === module)</code></pre><p><code>b.js</code></p>
+<pre><code>const prefix = &apos;b模块：&apos;
+module.exports = {b:1}
+const a = require(&apos;./a.js&apos;)
+console.log(prefix, a) // {a:1}
+console.log(prefix, require.main === module)</code></pre><p>如上。当b.js引用a.js时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被b.js引用</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/module/" rel="tag"># module</a>
+            
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+            
+              <a href="/tags/循环引用/" rel="tag"># 循环引用</a>
+            
+              <a href="/tags/模块系统/" rel="tag"># 模块系统</a>
+            
+              <a href="/tags/模块缓存/" rel="tag"># 模块缓存</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/06/16/graphql初试/" rel="next" title="graphql初试">
+                  <i class="fa fa-chevron-left"></i> graphql初试
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/07/01/概述Vue SSR工作原理以及工程实践/" rel="prev" title="概述Vue SSR工作原理以及工程实践">
+                  概述Vue SSR工作原理以及工程实践 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#核心工作原理"><span class="nav-number">1.</span> <span class="nav-text">核心工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块解析过程（Module-Resolve）"><span class="nav-number">1.1.</span> <span class="nav-text">模块解析过程（Module Resolve）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块对象"><span class="nav-number">1.2.</span> <span class="nav-text">模块对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块包装（Module-Wrapper）"><span class="nav-number">1.3.</span> <span class="nav-text">模块包装（Module Wrapper）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存（Cache）"><span class="nav-number">1.4.</span> <span class="nav-text">缓存（Cache）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环引用（Cycle）"><span class="nav-number">1.5.</span> <span class="nav-text">循环引用（Cycle）</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
