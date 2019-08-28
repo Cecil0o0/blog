@@ -891,9 +891,10 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     avatar: 'wavatar',
     meta: guest,
     pageSize: '10' || 10,
-    visitor: false,
+    visitor: true,
     lang: 'en' || 'zh-cn',
-    path: location.pathname
+    path: location.pathname,
+    recordIP: true
   });
 }, window.Valine);
 </script>
