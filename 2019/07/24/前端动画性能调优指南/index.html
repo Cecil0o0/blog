@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查">
+  <meta name="description" content="Common Checks 坚持使用 transform 和 opacity 属性更改来实现动画。 使用 will-change 或 translateZ 提升移动的元素。 避免过度使用提升规则；各层都需要内存和管理开销。  Several Questions 有多少layers？合理的数量是多少？每一个layer的原因。 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端动画性能调优指南">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2019/07/24/前端动画性能调优指南/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查">
+<meta property="og:description" content="Common Checks 坚持使用 transform 和 opacity 属性更改来实现动画。 使用 will-change 或 translateZ 提升移动的元素。 避免过度使用提升规则；各层都需要内存和管理开销。  Several Questions 有多少layers？合理的数量是多少？每一个layer的原因。 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-28T13:11:33.955Z">
+<meta property="og:updated_time" content="2019-09-05T01:21:13.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端动画性能调优指南">
-<meta name="twitter:description" content="Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查">
+<meta name="twitter:description" content="Common Checks 坚持使用 transform 和 opacity 属性更改来实现动画。 使用 will-change 或 translateZ 提升移动的元素。 避免过度使用提升规则；各层都需要内存和管理开销。  Several Questions 有多少layers？合理的数量是多少？每一个layer的原因。 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板">
   <link rel="canonical" href="https://cecil0o0.github.io/blog/2019/07/24/前端动画性能调优指南/">
 
 
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+                <time title="Modified: 2019-09-05 09:21:13" itemprop="dateModified" datetime="2019-09-05T09:21:13+08:00">2019-09-05</time>
               </span>
             
           
@@ -285,23 +285,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板。每个layer渲染一帧耗时？确保所有layer加起来小于15ms。 - 在做动画时，有多少个layer重新绘制？考虑减少不必要的layer重新绘制或者复杂的layer拆解。 Performance Targets - 每个layer力争4 - 5毫秒的时间（尤其针对于可能要做的Admin移动端来说尤为重要）。 - 每个稍大（绘制时间超过1ms）layer都具有必要性，否则销毁。 - 动画过程中，通过观察Layers和Animation面板确定每个layers重绘都是必要的。 - 如果Layers面板中的layer绘制时间求和的结果在15ms以内，上述就都不必check了。 - 在Performance面板中一定一定不要存在forced layout，如果有请消灭它。 Other Actions - 坚持仅合成器的属性和管理层计数，否则使用FLIP原则使得从开销更大的属性重新映射为变形和透明度的更改。 Refs - Layers面板使用方式查漏补缺 - FLIP Principle - Inspect Your Animation - 降低绘制复杂度、减小绘制区域 - 坚持仅合成器的属性和管理层计数 菜单栏收缩动画性能瓶颈分析案例 - 动画属性不符合预期</p>
-<ul>
-<li><p>重绘制layers完全超乎预期</p>
-</li>
-<li><p>Antd Loading提升一个Layer而且占用内存超预期很多</p>
-</li>
-<li><p>没必要的layer开销超预期很多</p>
-</li>
-<li><p>同一个DOM却提升两个layer</p>
-</li>
-<li><p>动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）</p>
-</li>
-<li><p>降低绘制复杂度</p>
-</li>
-<li><p>减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
-</li>
+        <h2 id="Common-Checks"><a href="#Common-Checks" class="headerlink" title="Common Checks"></a>Common Checks</h2><ul>
+<li>坚持使用 transform 和 opacity 属性更改来实现动画。</li>
+<li>使用 will-change 或 translateZ 提升移动的元素。</li>
+<li>避免过度使用提升规则；各层都需要内存和管理开销。</li>
 </ul>
+<h2 id="Several-Questions"><a href="#Several-Questions" class="headerlink" title="Several Questions"></a>Several Questions</h2><ul>
+<li>有多少layers？合理的数量是多少？每一个layer的原因。</li>
+<li>在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板。每个layer渲染一帧耗时？确保所有layer加起来小于15ms。</li>
+<li>在做动画时，有多少个layer重新绘制？考虑减少不必要的layer重新绘制或者复杂的layer拆解。</li>
+</ul>
+<h2 id="Performance-Targets"><a href="#Performance-Targets" class="headerlink" title="Performance Targets"></a>Performance Targets</h2><ul>
+<li>每个layer力争4 - 5毫秒的时间（尤其针对于可能要做的Admin移动端来说尤为重要）。</li>
+<li>每个稍大（绘制时间超过1ms）layer都具有必要性，否则销毁。</li>
+<li>动画过程中，通过观察Layers和Animation面板确定每个layers重绘都是必要的。</li>
+<li>如果Layers面板中的layer绘制时间求和的结果在15ms以内，上述就都不必check了。</li>
+<li>在Performance面板中一定一定不要存在forced layout，如果有请消灭它。</li>
+</ul>
+<h2 id="Other-Actions"><a href="#Other-Actions" class="headerlink" title="Other Actions"></a>Other Actions</h2><ul>
+<li>坚持仅合成器的属性和管理层计数，否则使用FLIP原则使得从开销更大的属性重新映射为变形和透明度的更改。</li>
+</ul>
+<h2 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h2><ul>
+<li>Layers面板使用方式查漏补缺</li>
+<li>FLIP Principle</li>
+<li>Inspect Your Animation</li>
+<li>降低绘制复杂度、减小绘制区域</li>
+<li>坚持仅合成器的属性和管理层计数</li>
+</ul>
+<h3 id="菜单栏收缩动画性能瓶颈分析案例"><a href="#菜单栏收缩动画性能瓶颈分析案例" class="headerlink" title="菜单栏收缩动画性能瓶颈分析案例"></a>菜单栏收缩动画性能瓶颈分析案例</h3><ul>
+<li>动画属性不符合预期</li>
+</ul>
+<p>*重绘制layers完全超乎预期<br>*Antd Loading提升一个Layer而且占用内存超预期很多<br>*没必要的layer开销超预期很多<br>*同一个DOM却提升两个layer<br>*动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）<br>*降低绘制复杂度<br>*减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
 
     </div>
 
@@ -382,6 +396,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Checks"><span class="nav-number">1.</span> <span class="nav-text">Common Checks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Several-Questions"><span class="nav-number">2.</span> <span class="nav-text">Several Questions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-Targets"><span class="nav-number">3.</span> <span class="nav-text">Performance Targets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-Actions"><span class="nav-number">4.</span> <span class="nav-text">Other Actions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Refs"><span class="nav-number">5.</span> <span class="nav-text">Refs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单栏收缩动画性能瓶颈分析案例"><span class="nav-number">5.1.</span> <span class="nav-text">菜单栏收缩动画性能瓶颈分析案例</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -395,7 +411,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -424,11 +440,7 @@
         
           
         
-          
-        
-          
-        
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -619,11 +631,7 @@
         
           
         
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">90</span>
         <span class="site-state-item-name">tags</span>
         
       </div>

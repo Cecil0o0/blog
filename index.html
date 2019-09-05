@@ -219,11 +219,19 @@
                 
               
 
-              <time title="Created: 2019-08-28 21:11:33 / Modified: 22:44:11" itemprop="dateCreated datePublished" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              <time title="Created: 2019-08-28 21:11:33" itemprop="dateCreated datePublished" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-05 09:33:41" itemprop="dateModified" datetime="2019-09-05T09:33:41+08:00">2019-09-05</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -289,15 +297,14 @@
 <p>矩阵每一列表示一个维度的向量从而描述了一组基向量。矩阵是一种基于基向量改变来描述向量空间线性变换的语言。</p>
 </blockquote>
 <h3 id="什么是线性无关？如何说明向量v，向量w，向量u线性无关"><a href="#什么是线性无关？如何说明向量v，向量w，向量u线性无关" class="headerlink" title="什么是线性无关？如何说明向量v，向量w，向量u线性无关"></a>什么是线性无关？如何说明向量v，向量w，向量u线性无关</h3><blockquote>
-<p>科学家推荐的理解是：存在且仅存在一组标量组合[0,0,0]使得三个向量的加和为0向量时，说明三个向量线性无关 适用于教学目的的解释是：不存在任何一组标量组合[a,b]使的两个向量的加和等于第三个向量，说明三个向量线性无关</p>
+<p>科学家推荐的理解是：存在且仅存在一组标量组合[0,0,0]使得三个向量的加和为0向量时，说明三个向量线性无关<br>适用于教学目的的解释是：不存在任何一组标量组合[a,b]使的两个向量的加和等于第三个向量，说明三个向量线性无关</p>
 </blockquote>
 <h3 id="什么是线性变换"><a href="#什么是线性变换" class="headerlink" title="什么是线性变换"></a>什么是线性变换</h3><blockquote>
-<p>总结来说，线性变换应当看作是“保持网格线平行且等距分布”的变换。 线性变换有两个特征，其一是直线仍是直线，其二是原点仍是原点。</p>
+<p>总结来说，线性变换应当看作是“保持网格线平行且等距分布”的变换。线性变换有两个特征，其一是直线仍是直线，其二是原点仍是原点。</p>
 </blockquote>
 <p>变换和函数差不多，两者都是input -&gt; output，不过前者有一种运动的概念。</p>
-<h3 id="线性变换和矩阵的关系"><a href="#线性变换和矩阵的关系" class="headerlink" title="线性变换和矩阵的关系"></a>线性变换和矩阵的关系</h3><p>| a b | | c d |</p>
-<blockquote>
-<p>而矩阵向量乘法就是计算线性变换作用于给定向量的一种途径 矩阵可解读为对向量空间的一种特定变换</p>
+<h3 id="线性变换矩阵的空间几何意义"><a href="#线性变换矩阵的空间几何意义" class="headerlink" title="线性变换矩阵的空间几何意义"></a>线性变换矩阵的空间几何意义</h3><blockquote>
+<p>线性变换实质上变换的是向量空间的基向量，向量空间中的任意一点都可通过变换后的基向量矩阵计算得出。<br>基向量矩阵，也可以理解为变换矩阵，是指线性变换之后基向量(i帽,j帽)的落脚点，即基向量从[[1, 0], [0, 1]]线性变换[[0, -1], [-1, 0]]。</p>
 </blockquote>
 
         
@@ -839,7 +846,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+                <time title="Modified: 2019-09-05 09:21:13" itemprop="dateModified" datetime="2019-09-05T09:21:13+08:00">2019-09-05</time>
               </span>
             
           
@@ -890,23 +897,37 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Common Checks - 坚持使用 transform 和 opacity 属性更改来实现动画。 - 使用 will-change 或 translateZ 提升移动的元素。 - 避免过度使用提升规则；各层都需要内存和管理开销。 Several Questions - 有多少layers？合理的数量是多少？每一个layer的原因。 - 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板。每个layer渲染一帧耗时？确保所有layer加起来小于15ms。 - 在做动画时，有多少个layer重新绘制？考虑减少不必要的layer重新绘制或者复杂的layer拆解。 Performance Targets - 每个layer力争4 - 5毫秒的时间（尤其针对于可能要做的Admin移动端来说尤为重要）。 - 每个稍大（绘制时间超过1ms）layer都具有必要性，否则销毁。 - 动画过程中，通过观察Layers和Animation面板确定每个layers重绘都是必要的。 - 如果Layers面板中的layer绘制时间求和的结果在15ms以内，上述就都不必check了。 - 在Performance面板中一定一定不要存在forced layout，如果有请消灭它。 Other Actions - 坚持仅合成器的属性和管理层计数，否则使用FLIP原则使得从开销更大的属性重新映射为变形和透明度的更改。 Refs - Layers面板使用方式查漏补缺 - FLIP Principle - Inspect Your Animation - 降低绘制复杂度、减小绘制区域 - 坚持仅合成器的属性和管理层计数 菜单栏收缩动画性能瓶颈分析案例 - 动画属性不符合预期</p>
-<ul>
-<li><p>重绘制layers完全超乎预期</p>
-</li>
-<li><p>Antd Loading提升一个Layer而且占用内存超预期很多</p>
-</li>
-<li><p>没必要的layer开销超预期很多</p>
-</li>
-<li><p>同一个DOM却提升两个layer</p>
-</li>
-<li><p>动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）</p>
-</li>
-<li><p>降低绘制复杂度</p>
-</li>
-<li><p>减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
-</li>
+          <h2 id="Common-Checks"><a href="#Common-Checks" class="headerlink" title="Common Checks"></a>Common Checks</h2><ul>
+<li>坚持使用 transform 和 opacity 属性更改来实现动画。</li>
+<li>使用 will-change 或 translateZ 提升移动的元素。</li>
+<li>避免过度使用提升规则；各层都需要内存和管理开销。</li>
 </ul>
+<h2 id="Several-Questions"><a href="#Several-Questions" class="headerlink" title="Several Questions"></a>Several Questions</h2><ul>
+<li>有多少layers？合理的数量是多少？每一个layer的原因。</li>
+<li>在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板。每个layer渲染一帧耗时？确保所有layer加起来小于15ms。</li>
+<li>在做动画时，有多少个layer重新绘制？考虑减少不必要的layer重新绘制或者复杂的layer拆解。</li>
+</ul>
+<h2 id="Performance-Targets"><a href="#Performance-Targets" class="headerlink" title="Performance Targets"></a>Performance Targets</h2><ul>
+<li>每个layer力争4 - 5毫秒的时间（尤其针对于可能要做的Admin移动端来说尤为重要）。</li>
+<li>每个稍大（绘制时间超过1ms）layer都具有必要性，否则销毁。</li>
+<li>动画过程中，通过观察Layers和Animation面板确定每个layers重绘都是必要的。</li>
+<li>如果Layers面板中的layer绘制时间求和的结果在15ms以内，上述就都不必check了。</li>
+<li>在Performance面板中一定一定不要存在forced layout，如果有请消灭它。</li>
+</ul>
+<h2 id="Other-Actions"><a href="#Other-Actions" class="headerlink" title="Other Actions"></a>Other Actions</h2><ul>
+<li>坚持仅合成器的属性和管理层计数，否则使用FLIP原则使得从开销更大的属性重新映射为变形和透明度的更改。</li>
+</ul>
+<h2 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h2><ul>
+<li>Layers面板使用方式查漏补缺</li>
+<li>FLIP Principle</li>
+<li>Inspect Your Animation</li>
+<li>降低绘制复杂度、减小绘制区域</li>
+<li>坚持仅合成器的属性和管理层计数</li>
+</ul>
+<h3 id="菜单栏收缩动画性能瓶颈分析案例"><a href="#菜单栏收缩动画性能瓶颈分析案例" class="headerlink" title="菜单栏收缩动画性能瓶颈分析案例"></a>菜单栏收缩动画性能瓶颈分析案例</h3><ul>
+<li>动画属性不符合预期</li>
+</ul>
+<p>*重绘制layers完全超乎预期<br>*Antd Loading提升一个Layer而且占用内存超预期很多<br>*没必要的layer开销超预期很多<br>*同一个DOM却提升两个layer<br>*动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）<br>*降低绘制复杂度<br>*减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
 
         
       
@@ -1780,7 +1801,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1809,11 +1830,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
         
           
         
-          
-        
-          
-        
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -2004,11 +2021,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
         
           
         
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">90</span>
         <span class="site-state-item-name">tags</span>
         
       </div>
