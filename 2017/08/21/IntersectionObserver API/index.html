@@ -55,7 +55,7 @@
 </script>
 
   <meta name="description" content="previously 还在用监听scroll事件+getBoundingClientRect()+节流函数实现lazyload么，你已经out了 what? 是浏览器原生的构造函数，该API可以自动”观察”元素是否可见，Chrome 51+ 已经支持。由于可见（visible）的本质是，目标元素与视口产生一个交叉区，所以这个 API 叫做”交叉观察器”。 how? var io = new Int">
-<meta name="keywords" content="IntersectionObserver,web APIs">
+<meta name="keywords" content="web APIs,IntersectionObserver">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IntersectionObserver API">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2017/08/21/IntersectionObserver API/index.html">
@@ -339,9 +339,9 @@ io.disconnect()</code></pre><p>callback一般会触发两次，进入/离开视�
           
           <div class="post-tags">
             
-              <a href="/blog/tags/IntersectionObserver/" rel="tag"># IntersectionObserver</a>
-            
               <a href="/blog/tags/web-APIs/" rel="tag"># web APIs</a>
+            
+              <a href="/blog/tags/IntersectionObserver/" rel="tag"># IntersectionObserver</a>
             
           </div>
         
@@ -761,5 +761,14 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
 }, window.Valine);
 </script>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147400026-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-147400026-1');
+  </script>
 </body>
 </html>

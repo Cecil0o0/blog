@@ -721,7 +721,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 22:21:05" itemprop="dateModified" datetime="2019-08-28T22:21:05+08:00">2019-08-28</time>
+                <time title="Modified: 2019-09-06 00:15:35" itemprop="dateModified" datetime="2019-09-06T00:15:35+08:00">2019-09-06</time>
               </span>
             
           
@@ -772,7 +772,7 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="记录学习webgl踩坑"><a href="#记录学习webgl踩坑" class="headerlink" title="记录学习webgl踩坑"></a>记录学习webgl踩坑</h1><h2 id="当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决"><a href="#当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决" class="headerlink" title="当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决"></a>当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决</h2><ul>
+          <h2 id="记录学习webgl踩坑"><a href="#记录学习webgl踩坑" class="headerlink" title="记录学习webgl踩坑"></a>记录学习webgl踩坑</h2><h2 id="当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决"><a href="#当gl-drawElements报警告时，请check未出现以下情况，如出现请先解决" class="headerlink" title="当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决"></a>当gl.drawElements报警告时，请check未出现以下情况，如出现请先解决</h2><ul>
 <li>索引数组中的最大值 * 每个顶点所占浮点数个数（包含图元所需顶点数和Color）&gt; 顶点数组长度</li>
 </ul>
 <h2 id="当gl-drawArrays报警告时，请check未出现以下情况，如出现请先解决"><a href="#当gl-drawArrays报警告时，请check未出现以下情况，如出现请先解决" class="headerlink" title="当gl.drawArrays报警告时，请check未出现以下情况，如出现请先解决"></a>当gl.drawArrays报警告时，请check未出现以下情况，如出现请先解决</h2><ul>
@@ -781,6 +781,10 @@ at index.js:1343</code></pre><p>B @ index.js:1509<br>G @ index.js:1816<br>(anony
 <h2 id="当gl-drawElements和gl-drawArrays都没报错，但仍没有画面时，请check"><a href="#当gl-drawElements和gl-drawArrays都没报错，但仍没有画面时，请check" class="headerlink" title="当gl.drawElements和gl.drawArrays都没报错，但仍没有画面时，请check"></a>当gl.drawElements和gl.drawArrays都没报错，但仍没有画面时，请check</h2><ul>
 <li>Color值从生成直到FragmentShader使用到该Color值前有没有做归一化或？换句话说就是可能被裁剪了。顶点值也是如此。</li>
 <li>如果是用gl.TRIANGLE画几何体，注意是否画的是正面（FRONT_FACE）即逆时针绘制。换句话说可能是gl.CULL_FACE。</li>
+</ul>
+<h2 id="snowy框架注意点"><a href="#snowy框架注意点" class="headerlink" title="snowy框架注意点"></a>snowy框架注意点</h2><ul>
+<li>自定义geometry类中的positions属性必须归一化</li>
+<li>indices一般都要UInt8Array类型并且必须和drawElements的第三个参数对齐</li>
 </ul>
 
         
@@ -2134,5 +2138,14 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
 }, window.Valine);
 </script>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147400026-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-147400026-1');
+  </script>
 </body>
 </html>
