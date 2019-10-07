@@ -219,7 +219,7 @@
                 
               
 
-              <time title="Created: 2019-10-07 07:05:21 / Modified: 19:06:53" itemprop="dateCreated datePublished" datetime="2019-10-07T07:05:21+08:00">2019-10-07</time>
+              <time title="Created: 2019-10-07 07:05:21 / Modified: 19:13:52" itemprop="dateCreated datePublished" datetime="2019-10-07T07:05:21+08:00">2019-10-07</time>
             </span>
           
             
@@ -280,13 +280,19 @@
 <ul>
 <li>在每一次render过程中，<code>setup()</code> function只调用一次，而React Hooks会重复调用，前者减少GC压力</li>
 </ul>
-<h3 id="核心理念或者说动机有三"><a href="#核心理念或者说动机有三" class="headerlink" title="核心理念或者说动机有三"></a>核心理念或者说动机有三</h3><ul>
-<li>更优雅的逻辑复用（使用composite function）<blockquote>
-<p>优雅之余还能解决问题。对于2.x逻辑复用通常使用mixin、HOC、Renderless components(通过作用域插槽)，而使用上述存在三个问题分别是属性来源不清楚、命名空间冲突以及性能（HOC和Scoped slots需要额外有状态的组件实例开销）</p>
+<h3 id="核心理念"><a href="#核心理念" class="headerlink" title="核心理念"></a>核心理念</h3><ul>
+<li>更优雅的逻辑复用（使用<code>setup()</code> function）<blockquote>
+<p>优雅之余还能解决问题。对于2.x逻辑复用通常使用mixin、HOC、Renderless components(通过作用域插槽)，而使用上述存在三个问题分别是属性来源不清楚、命名空间冲突以及性能（HOC和Scoped slots需要额外有状态的组件实例开销）。</p>
 </blockquote>
 </li>
-<li>更好的支持类型接口</li>
-<li>缩小打包体积</li>
+<li>更好的类型推断<blockquote>
+<p>function天生是类型友好的，因为方法的prototype已经实现了完整的类型支持。</p>
+</blockquote>
+</li>
+<li>缩小打包体积<blockquote>
+<p>在标准的压缩规则下，函数与变量名可被缩短然而对象或类方法与属性不行。</p>
+</blockquote>
+</li>
 </ul>
 
         
