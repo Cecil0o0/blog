@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Common Checks 坚持使用 transform 和 opacity 属性更改来实现动画。 使用 will-change 或 translateZ 提升移动的元素。 避免过度使用提升规则；各层都需要内存和管理开销。  Several Questions 有多少layers？合理的数量是多少？每一个layer的原因。 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-05T01:21:13.995Z">
+<meta property="og:updated_time" content="2019-10-07T06:12:54.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端动画性能调优指南">
 <meta name="twitter:description" content="Common Checks 坚持使用 transform 和 opacity 属性更改来实现动画。 使用 will-change 或 translateZ 提升移动的元素。 避免过度使用提升规则；各层都需要内存和管理开销。  Several Questions 有多少layers？合理的数量是多少？每一个layer的原因。 在不通电的多倍屏（如13寸MBP）的匿名模式窗口中打开查看Layers面板">
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-05 09:21:13" itemprop="dateModified" datetime="2019-09-05T09:21:13+08:00">2019-09-05</time>
+                <time title="Modified: 2019-10-07 14:12:54" itemprop="dateModified" datetime="2019-10-07T14:12:54+08:00">2019-10-07</time>
               </span>
             
           
@@ -314,8 +314,14 @@
 </ul>
 <h3 id="菜单栏收缩动画性能瓶颈分析案例"><a href="#菜单栏收缩动画性能瓶颈分析案例" class="headerlink" title="菜单栏收缩动画性能瓶颈分析案例"></a>菜单栏收缩动画性能瓶颈分析案例</h3><ul>
 <li>动画属性不符合预期</li>
+<li>重绘制layers完全超乎预期</li>
+<li>Antd Loading提升一个Layer而且占用内存超预期很多</li>
+<li>没必要的layer开销超预期很多</li>
+<li>同一个DOM却提升两个layer</li>
+<li>动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）</li>
+<li>降低绘制复杂度</li>
+<li>减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</li>
 </ul>
-<p>*重绘制layers完全超乎预期<br>*Antd Loading提升一个Layer而且占用内存超预期很多<br>*没必要的layer开销超预期很多<br>*同一个DOM却提升两个layer<br>*动画过程中，.basic-layout-container未提升新layer，且提升之后Layer出现闪动（似乎是layer销毁却又重新创建）<br>*降低绘制复杂度<br>*减小绘制区域（Antd Loading没必要随父元素展开，用绝对定位或者定高来限制绘制区域，水印亦是如此）</p>
 
     </div>
 
