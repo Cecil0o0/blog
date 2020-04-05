@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="是什么 犹如一把利器，帮助前端攻城狮披荆斩棘拿下一个个需求。 犹如一部电影，总是能带给前端研发惊喜提升工作幸福感。 犹如一盏明灯，在繁杂的前端生态中指引方向。 … 我理解它的本质是一种编程思维  编程思维React 使用基于组件的声明式编程思维。 组件是抽象的概念，它可以表示视图、样式甚至是逻辑，网页通常由许多视图构建而成，任意网页均能分解成多个组件，组件可以分解成子组件。使用 React 简洁清">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈对 React 的理解">
+<meta property="og:url" content="https://cecil0o0.github.io/blog/2020/04/05/重新认识 React/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="是什么 犹如一把利器，帮助前端攻城狮披荆斩棘拿下一个个需求。 犹如一部电影，总是能带给前端研发惊喜提升工作幸福感。 犹如一盏明灯，在繁杂的前端生态中指引方向。 … 我理解它的本质是一种编程思维  编程思维React 使用基于组件的声明式编程思维。 组件是抽象的概念，它可以表示视图、样式甚至是逻辑，网页通常由许多视图构建而成，任意网页均能分解成多个组件，组件可以分解成子组件。使用 React 简洁清">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-04-05T17:12:21.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈对 React 的理解">
+<meta name="twitter:description" content="是什么 犹如一把利器，帮助前端攻城狮披荆斩棘拿下一个个需求。 犹如一部电影，总是能带给前端研发惊喜提升工作幸福感。 犹如一盏明灯，在繁杂的前端生态中指引方向。 … 我理解它的本质是一种编程思维  编程思维React 使用基于组件的声明式编程思维。 组件是抽象的概念，它可以表示视图、样式甚至是逻辑，网页通常由许多视图构建而成，任意网页均能分解成多个组件，组件可以分解成子组件。使用 React 简洁清">
+  <link rel="canonical" href="https://cecil0o0.github.io/blog/2020/04/05/重新认识 React/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>谈谈对 React 的理解 | Hexo</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://cecil0o0.github.io/blog/blog/2020/04/05/重新认识 React/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HaoJie Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">谈谈对 React 的理解
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-04-05 18:35:00" itemprop="dateCreated datePublished" datetime="2020-04-05T18:35:00+08:00">2020-04-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-06 01:12:21" itemprop="dateModified" datetime="2020-04-06T01:12:21+08:00">2020-04-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/blog/2020/04/05/重新认识 React/" class="post-meta-item leancloud_visitors" data-flag-title="谈谈对 React 的理解" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/blog/2020/04/05/重新认识 React/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/2020/04/05/重新认识 React/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><ul>
+<li>犹如一把利器，帮助前端攻城狮披荆斩棘拿下一个个需求。</li>
+<li>犹如一部电影，总是能带给前端研发惊喜提升工作幸福感。</li>
+<li>犹如一盏明灯，在繁杂的前端生态中指引方向。</li>
+<li>…</li>
+<li>我理解它的本质是一种编程思维</li>
+</ul>
+<h2 id="编程思维"><a href="#编程思维" class="headerlink" title="编程思维"></a>编程思维</h2><p>React 使用基于组件的声明式编程思维。</p>
+<p>组件是抽象的概念，它可以表示视图、样式甚至是逻辑，网页通常由许多视图构建而成，任意网页均能分解成多个组件，组件可以分解成子组件。使用 React 简洁清晰得可预测得自顶而下得声明组件的关系、状态、行为逻辑，从而构建出用户界面。</p>
+<h2 id="做了什么"><a href="#做了什么" class="headerlink" title="做了什么"></a>做了什么</h2><h3 id="核心之一-ReactComponent-amp-ReactElement-amp-instances"><a href="#核心之一-ReactComponent-amp-ReactElement-amp-instances" class="headerlink" title="核心之一 ReactComponent &amp; ReactElement &amp; instances"></a>核心之一 ReactComponent &amp; ReactElement &amp; instances</h3><p>React.createElement 高度类似于 document.createElement，输入类型（字符串或ReactComponent）、props、子 Element(s)，输出 ReactElement 作为原子单元构成 Virtual DOM。</p>
+<p>ReactElement 本质上是 Javascript Object, 其实与 HTMLElement 大同小异，它向开发者描述一个 Element 或 Element tree 的基本“面貌”。换句话说 ReactElement 等同于 light HTMLElement。</p>
+<p>React 通过 ReactElement 的描述生成 instances 渲染至屏幕</p>
+<h3 id="核心之二-Virtual-DOM-amp-Reconciliation-amp-Update"><a href="#核心之二-Virtual-DOM-amp-Reconciliation-amp-Update" class="headerlink" title="核心之二 Virtual DOM &amp; Reconciliation &amp; Update"></a>核心之二 Virtual DOM &amp; Reconciliation &amp; Update</h3><p>Virtual DOM 高度类似于 DOM，是一颗有序分层结构的树，描述多个 Elements 的联系，或相邻或嵌套或其他，若把联系当作线， Element 当作点，点和线构成“骨架”，点线越多构成的“骨架”越完整。</p>
+<p>React 应用总是从任一特定状态过渡至另一个，并同时生成一颗新树。为降低开销提高应用性能，React 使用 Reconciliation 对比新/旧树差异从而决定哪些部分需要改变，在浏览器应用中，这些改变被翻译为 DOM 操作的集合，最后有序执行，完成一次 Update。</p>
+<h3 id="核心之三-React-Fiber"><a href="#核心之三-React-Fiber" class="headerlink" title="核心之三 React Fiber"></a>核心之三 React Fiber</h3><p>React 团队花两年时间重新实现核心算法，该实现晦涩难懂。据核心研发人员介绍，React Fiber 的设计目标是增强对动画、布局、手势的适用性，其主要功能是增量渲染：能够将渲染工作分解成多块并分散到多个帧中。</p>
+<p>值得一提的是 Fiber 架构重写了 reconciler，主要差异在于使用 keys 提升列表的渲染性能。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>React 抹平浏览器部分 Web APIs 的差异性并做了一些友好的封装比如监听器的语法，相比 DOM0 级事件 key 从小写改成驼峰，value 从传递字符串变成传递方法，封装禁止默认行为和阻止事件冒泡等等。</p>
+<h2 id="使用-React-的优势"><a href="#使用-React-的优势" class="headerlink" title="使用 React 的优势"></a>使用 React 的优势</h2><blockquote>
+<p>终极目标是提升生产力</p>
+</blockquote>
+<ul>
+<li>可复用的组件，减少冗余代码块提高可维护性</li>
+<li>视图、样式、逻辑、状态都可抽象成组件，形成统一的编程思维，降低理解成本提高协作效率</li>
+<li>跨端能力</li>
+<li>实现 Virtual DOM，减少 DOM 操作的开销从而提高 Web 应用的性能</li>
+<li>相比 html + css + js，纯粹的 js 使开发者能够无所拘束的组织代码，充满想象空间</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>React 构建用户界面，它不是“万金油”，它不处理 router、canvas、audio/video、Web RTC、fetch 等等 Web APIs，对于构建富交互 SPA/MPA 而言是不够的，我理解这是促使 React 社区蓬勃发展的原因之一。React 真香。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/blog/tags/React/" rel="tag"># React</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2019/10/07/读Function-Based APIs RFC有感/" rel="next" title="读Vue3.0 Function-Based API的RFC有感">
+                  <i class="fa fa-chevron-left"></i> 读Vue3.0 Function-Based API的RFC有感
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#是什么"><span class="nav-number">1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程思维"><span class="nav-number">2.</span> <span class="nav-text">编程思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做了什么"><span class="nav-number">3.</span> <span class="nav-text">做了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心之一-ReactComponent-amp-ReactElement-amp-instances"><span class="nav-number">3.1.</span> <span class="nav-text">核心之一 ReactComponent &amp; ReactElement &amp; instances</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心之二-Virtual-DOM-amp-Reconciliation-amp-Update"><span class="nav-number">3.2.</span> <span class="nav-text">核心之二 Virtual DOM &amp; Reconciliation &amp; Update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心之三-React-Fiber"><span class="nav-number">3.3.</span> <span class="nav-text">核心之三 React Fiber</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-React-的优势"><span class="nav-number">4.</span> <span class="nav-text">使用 React 的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">HaoJie Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HaoJie Chen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.3.0"></script><script src="/blog/js/motion.js?v=7.3.0"></script>
+<script src="/blog/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/blog/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'WV4ASjvz1fduH11q9NK6WNei-gzGzoHsz# Your leancloud application appid',
+    appKey: 'HXza8ifqpId7Cb59ipe2oKu0# Your leancloud application appkey',
+    placeholder: 'type to say something',
+    avatar: 'wavatar',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'en' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true
+  });
+}, window.Valine);
+</script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147400026-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-147400026-1');
+  </script>
+</body>
+</html>

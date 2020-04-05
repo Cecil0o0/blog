@@ -190,6 +190,166 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cecil0o0.github.io/blog/blog/2018/10/24/web-components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HaoJie Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/2018/10/24/web-components/" class="post-title-link" itemprop="url">Web Components</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-24 13:38:21" itemprop="dateCreated datePublished" datetime="2018-10-24T13:38:21+08:00">2018-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/blog/2018/10/24/web-components/" class="post-meta-item leancloud_visitors" data-flag-title="Web Components" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/blog/2018/10/24/web-components/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/2018/10/24/web-components/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Compatibility"><a href="#Compatibility" class="headerlink" title="Compatibility"></a>Compatibility</h1><p>Web Components are now implemented natively on Safari and Chrome (~70% of installed browsers), and run well on Firefox, Edge, and IE11 using <a href="https://github.com/webcomponents/webcomponentsjs" target="_blank" rel="noopener">polyfills</a></p>
+<h1 id="Best-Practices"><a href="#Best-Practices" class="headerlink" title="Best Practices"></a>Best Practices</h1><p><a href="https://github.com/Polymer/polymer" target="_blank" rel="noopener">Google Polymer</a></p>
+<h1 id="Concept"><a href="#Concept" class="headerlink" title="Concept"></a>Concept</h1><p>原生级web组件，是一种现代化web开发模式</p>
+<h1 id="Features（vs-React、Vue）"><a href="#Features（vs-React、Vue）" class="headerlink" title="Features（vs React、Vue）"></a>Features（vs React、Vue）</h1><ol>
+<li>提供原生级的作用域隔离（包括js与css），实现真正意义上的组件化</li>
+</ol>
+<h1 id="Short-Boards"><a href="#Short-Boards" class="headerlink" title="Short Boards"></a>Short Boards</h1><ol>
+<li>社区暂不活跃，导致优质组件不多等等</li>
+<li>最低仅支持IE11，而且需要polyfills，兼容差一些</li>
+<li>是否支持reactive components</li>
+<li>API不稳定</li>
+</ol>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><p>Web Components特性主要由四项技术构成Custom Elements、Shadow DOM、HTML Templates、HTML Imports</p>
+<blockquote>
+<p>Custom Elements V0 API、Shadow DOM V0 API、HTML Imports将在2019年4月于M73被移除，并配套迁移至Custom Elements V1、Shadow DOM V1 API、ES Module API</p>
+</blockquote>
+<p>Timer Demo</p>
+<pre><code>window.customElements.define(&apos;c-timer&apos;, class extends HTMLElement {
+  constructor() {
+    super()
+    const shadowRoot = this.attachShadow({
+      mode: &apos;open&apos;
+    })
+
+    console.log(shadowRoot)
+
+    const text = document.createElement(&apos;span&apos;)
+    text.classList.add(&apos;testCls&apos;)
+    text.textContent = this.getAttribute(&apos;start&apos;)
+
+    shadowRoot.appendChild(text)
+
+    const style = document.createElement(&apos;style&apos;)
+    style.textContent = `
+      .test {
+        font-size: 3vw;
+      }
+    `
+    shadowRoot.appendChild(style)
+
+    setInterval(() =&gt; {
+      text.textContent = Number(text.textContent) + 1
+    }, 999)
+  }
+})</code></pre><p>使用</p>
+<pre><code>&lt;c-input start=&quot;111&quot; /&gt;</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://cecil0o0.github.io/blog/blog/2018/08/04/H5单页生成工具平台设计概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2030,151 +2190,6 @@ var bbb = {
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cecil0o0.github.io/blog/blog/2018/05/17/AMP与PWA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HaoJie Chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/blog/2018/05/17/AMP与PWA/" class="post-title-link" itemprop="url">AMP与PWA</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2018-05-17 23:45:19" itemprop="dateCreated datePublished" datetime="2018-05-17T23:45:19+08:00">2018-05-17</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:54:57" itemprop="dateModified" datetime="2019-08-28T21:54:57+08:00">2019-08-28</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span id="/blog/2018/05/17/AMP与PWA/" class="post-meta-item leancloud_visitors" data-flag-title="AMP与PWA" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/blog/2018/05/17/AMP与PWA/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/2018/05/17/AMP与PWA/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h1><p>what?</p>
-<ul>
-<li>Progressive Web App</li>
-<li>匹敌Native APP的沉浸式全屏web应用，支持offline、push、硬件感知等功能</li>
-<li>Chrome团队希望用一个新的buzzword（流行词）来影响、改变用户的期待</li>
-</ul>
-<p>why?</p>
-<ul>
-<li>更方便的安装方式</li>
-<li>更小的应用体积</li>
-<li>更快的开启速度</li>
-</ul>
-<p>problem?</p>
-<ul>
-<li>国内iphone使用者多，不支持PWA</li>
-<li>国内Android被各大手机厂商定制化，支持PWA对收益关系不大</li>
-<li>移动端Chrome使用人数较少</li>
-<li>依赖GCM的通知推送</li>
-<li>须各大移动端浏览器支持</li>
-</ul>
-<p>how?</p>
-<ul>
-<li>Service Workers 配合 Cache API实现离线应用</li>
-<li>PUSH API实现推送通知</li>
-<li>Add to HomeScreen</li>
-<li>Hardware API实现硬件感知</li>
-<li>Web Manifest辅助实现离线应用</li>
-<li>HTTPS是数据安全保证</li>
-</ul>
-<p>不废话了！！来<a href="https://github.com/SangKa/PWA-Book-CN/blob/master/README.md" target="_blank" rel="noopener">干货</a></p>
-<h1 id="AMP"><a href="#AMP" class="headerlink" title="AMP"></a>AMP</h1>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -2224,7 +2239,7 @@ var bbb = {
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2446,7 +2461,9 @@ var bbb = {
         
           
         
-        <span class="site-state-item-count">91</span>
+          
+        
+        <span class="site-state-item-count">92</span>
         <span class="site-state-item-name">tags</span>
         
       </div>
@@ -2467,7 +2484,7 @@ var bbb = {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
