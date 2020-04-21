@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+  <meta name="description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm 模块的风险 Non-Blocking I/O Modelnon-blocking 是指 node.js 进程中不同步等待执行非javascript操作（例如 I/O）完">
 <meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概述nodejs核心机制">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2018/06/10/概述nodejs核心机制/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+<meta property="og:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm 模块的风险 Non-Blocking I/O Modelnon-blocking 是指 node.js 进程中不同步等待执行非javascript操作（例如 I/O）完">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-28T13:58:13.953Z">
+<meta property="og:updated_time" content="2020-04-21T15:57:08.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概述nodejs核心机制">
-<meta name="twitter:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险 Non-Blocking I/O Modelnon-blocking是指node.js进程中不同步等待执行非javascript操作（例如I/O）完成而继续执">
+<meta name="twitter:description" content="nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm 模块的风险 Non-Blocking I/O Modelnon-blocking 是指 node.js 进程中不同步等待执行非javascript操作（例如 I/O）完">
   <link rel="canonical" href="https://cecil0o0.github.io/blog/2018/06/10/概述nodejs核心机制/">
 
 
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:13" itemprop="dateModified" datetime="2019-08-28T21:58:13+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:57:08" itemprop="dateModified" datetime="2020-04-21T23:57:08+08:00">2020-04-21</time>
               </span>
             
           
@@ -286,60 +286,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险</p>
-<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking是指node.js进程中不同步等待执行<code>非javascript操作</code>（例如I/O）完成而继续执行下一块代码的特性。</p>
+        <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm 模块的风险</p>
+<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking 是指 node.js 进程中不同步等待执行<code>非javascript操作</code>（例如 I/O）完成而继续执行下一块代码的特性。</p>
 <blockquote>
-<p>注：CPU密集型属于javascript操作。</p>
+<p>注：CPU 密集型属于 javascript 操作。</p>
 </blockquote>
-<p>I/O通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞I/O模型使得nodejs支持高并发且非常适合于I/O密集型应用</p>
-<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共6个阶段</p>
+<p>I/O 通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞 I/O 模型使得 nodejs 支持高并发且非常适合于 I/O 密集型应用</p>
+<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共 6 个阶段</p>
 <ul>
-<li><code>timers</code> setTimeout与setInterval回调函数队列</li>
-<li><code>pending callbacks</code> 会在下一次loop中执行的系统级回调队列。如TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
-<li><code>poll</code> 接收新的I/O事件。执行I/O相关回调。在这个阶段node进程可能会阻塞</li>
-<li><code>check</code> setImmediate回调会在这个阶段执行</li>
+<li><code>timers</code> setTimeout 与 setInterval 回调函数队列</li>
+<li><code>pending callbacks</code> 会在下一次 loop 中执行的系统级回调队列。如 TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
+<li><code>poll</code> 接收新的 I/O 事件。执行 I/O 相关回调。在这个阶段 node 进程可能会阻塞</li>
+<li><code>check</code> setImmediate 回调会在这个阶段执行</li>
 <li><code>close</code> 一些关闭的回调。比如<code>connect.on(&#39;close&#39;, () =&gt; {....})</code></li>
 </ul>
 <blockquote>
-<p>注：process.nextTick不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行nextTick回调</p>
+<p>注：process.nextTick 不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行 nextTick 回调</p>
 </blockquote>
 <h1 id="Event-Driven"><a href="#Event-Driven" class="headerlink" title="Event-Driven"></a>Event-Driven</h1><h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
-<li>nodejs事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
-<li>Event Loop负责编排客户端请求而后调度Worker Pool处理CPU密集型任务</li>
+<li>nodejs 事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
+<li>Event Loop 负责编排客户端请求而后调度 Worker Pool 处理 CPU 密集型任务</li>
 </ul>
 <blockquote>
-<p>注：因此nodejs并不是纯粹的单线程语言！</p>
+<p>注：因此 nodejs 并不是纯粹的单线程语言！</p>
 </blockquote>
 <h3 id="何为阻塞"><a href="#何为阻塞" class="headerlink" title="何为阻塞"></a>何为阻塞</h3><ul>
-<li>如果Event Loop执行回调或worker执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
-<li>性能：如果某worker线程定期执行heavyweight任务，会影响服务吞吐量（请求/秒）</li>
+<li>如果 Event Loop 执行回调或 worker 执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
+<li>性能：如果某 worker 线程定期执行 heavyweight 任务，会影响服务吞吐量（请求/秒）</li>
 <li>安全性：假设某些输入会引起程序阻塞，则存在被恶意客户端利用并攻击的风险。即拒绝服务攻击。</li>
 </ul>
 </li>
 </ul>
 <h3 id="代码执行时"><a href="#代码执行时" class="headerlink" title="代码执行时"></a>代码执行时</h3><ul>
-<li>在Event Loop中<code>同步</code>执行常规的变量、方法的定义与调用，javascript所有回调以及非阻塞异步I/O如网络I/O</li>
-<li>Worker Pool是libuv（线程池工作调度的c++库）在Worker Pool中<code>异步</code>执行“昂贵”繁重的任务。node提供非阻塞I/O（操作系统不提供）API，以及CPU密集的I/O API<ul>
-<li>I/O密集型API：</li>
+<li>在 Event Loop 中<code>同步</code>执行常规的变量、方法的定义与调用，javascript 所有回调以及非阻塞异步 I/O 如网络 I/O</li>
+<li>Worker Pool 是 libuv（线程池工作调度的 c++库）在 Worker Pool 中<code>异步</code>执行“昂贵”繁重的任务。node 提供非阻塞 I/O（操作系统不提供）API，以及 CPU 密集的 I/O API<ul>
+<li>I/O 密集型 API：</li>
 <li>DNS: dns.lookup()</li>
 <li>fs: fs.readFile()，除了那些显示说明同步的方法</li>
-<li>CPU密集型API：</li>
+<li>CPU 密集型 API：</li>
 <li>crypto: crypto.pbkdf2()</li>
 <li>zlib: 除了那些显示说明同步的方法</li>
 </ul>
 </li>
 </ul>
-<h3 id="Event-Loop实质"><a href="#Event-Loop实质" class="headerlink" title="Event Loop实质"></a>Event Loop实质</h3><p>抽象来说，Event Loop维护挂起事件的队列，Worker Pool维护挂起任务的队列。 实际上，Event Loop并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及node正在监视的文件等等。当某个描述符准备好时，Event Loop会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool维护的是一个真正的队列。Worker会pop出队列的task并执行，完成后会触发Event Loop“至少一个事件已完成”的事件。</p>
+<h3 id="Event-Loop-实质"><a href="#Event-Loop-实质" class="headerlink" title="Event Loop 实质"></a>Event Loop 实质</h3><p>抽象来说，Event Loop 维护挂起事件的队列，Worker Pool 维护挂起任务的队列。 实际上，Event Loop 并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如 epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及 node 正在监视的文件等等。当某个描述符准备好时，Event Loop 会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool 维护的是一个真正的队列。Worker 会 pop 出队列的 task 并执行，完成后会触发 Event Loop“至少一个事件已完成”的事件。</p>
 <h3 id="阻止事件循环的几个维度"><a href="#阻止事件循环的几个维度" class="headerlink" title="阻止事件循环的几个维度"></a>阻止事件循环的几个维度</h3><ol>
-<li>数据处理流程中是否包含计算复杂度高的任务，比如使用CPU密集型Node API比如crypto,fs,zlib,child-process（分区处理与offload to Worker Pool）</li>
-<li>ReDoS攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
-<li>是否在主线程中使用JSON.parse以及JSON.stringify（潜在风险，因此也建议offload给Worker Pool）</li>
+<li>数据处理流程中是否包含计算复杂度高的任务，比如使用 CPU 密集型 Node API 比如 crypto,fs,zlib,child-process（分区处理与 offload to Worker Pool）</li>
+<li>ReDoS 攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
+<li>是否在主线程中使用 JSON.parse 以及 JSON.stringify（潜在风险，因此也建议 offload 给 Worker Pool）</li>
 </ol>
-<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs默认的Worker Pool专门用于处理I/O任务，维护自己的线程池可以使用cluster模块以及child_process模块做自定义线程池。 Node服务器的吞吐量<code>取决于</code>WorkerPool的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
+<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs 默认的 Worker Pool 专门用于处理 I/O 任务，维护自己的线程池可以使用 cluster 模块以及 child_process 模块做自定义线程池。 Node 服务器的吞吐量<code>取决于</code>WorkerPool 的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
 <blockquote>
-<p>注：由于调度Worker Pool会增加额外的通信开销，因为Worker Pool无法获取主线程的命名空间从而无法直接读取Javascript对象，所以需要序列化/反序列化导致增加通信成本。</p>
+<p>注：由于调度 Worker Pool 会增加额外的通信开销，因为 Worker Pool 无法获取主线程的命名空间从而无法直接读取 Javascript 对象，所以需要序列化/反序列化导致增加通信成本。</p>
 </blockquote>
-<h3 id="npm模块的风险"><a href="#npm模块的风险" class="headerlink" title="npm模块的风险"></a>npm模块的风险</h3><p>npm生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中npm包良莠不齐，因为无法较为准确的估计其使用Event Loop或者Worker Pool的成本而导致一些程序隐患。</p>
+<h3 id="npm-模块的风险"><a href="#npm-模块的风险" class="headerlink" title="npm 模块的风险"></a>npm 模块的风险</h3><p>npm 生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中 npm 包良莠不齐，因为无法较为准确的估计其使用 Event Loop 或者 Worker Pool 的成本而导致一些程序隐患。</p>
 
     </div>
 
@@ -429,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-Blocking-I-O-Model"><span class="nav-number">1.</span> <span class="nav-text">Non-Blocking I/O Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs-Event-Loop-and-Worker-Pool"><span class="nav-number">2.</span> <span class="nav-text">Nodejs Event Loop and Worker Pool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-Driven"><span class="nav-number">3.</span> <span class="nav-text">Event-Driven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本架构"><span class="nav-number">3.0.1.</span> <span class="nav-text">基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为阻塞"><span class="nav-number">3.0.2.</span> <span class="nav-text">何为阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码执行时"><span class="nav-number">3.0.3.</span> <span class="nav-text">代码执行时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop实质"><span class="nav-number">3.0.4.</span> <span class="nav-text">Event Loop实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止事件循环的几个维度"><span class="nav-number">3.0.5.</span> <span class="nav-text">阻止事件循环的几个维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker-Pool"><span class="nav-number">3.0.6.</span> <span class="nav-text">Worker Pool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm模块的风险"><span class="nav-number">3.0.7.</span> <span class="nav-text">npm模块的风险</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-Blocking-I-O-Model"><span class="nav-number">1.</span> <span class="nav-text">Non-Blocking I/O Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs-Event-Loop-and-Worker-Pool"><span class="nav-number">2.</span> <span class="nav-text">Nodejs Event Loop and Worker Pool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-Driven"><span class="nav-number">3.</span> <span class="nav-text">Event-Driven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本架构"><span class="nav-number">3.0.1.</span> <span class="nav-text">基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为阻塞"><span class="nav-number">3.0.2.</span> <span class="nav-text">何为阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码执行时"><span class="nav-number">3.0.3.</span> <span class="nav-text">代码执行时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Loop-实质"><span class="nav-number">3.0.4.</span> <span class="nav-text">Event Loop 实质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止事件循环的几个维度"><span class="nav-number">3.0.5.</span> <span class="nav-text">阻止事件循环的几个维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker-Pool"><span class="nav-number">3.0.6.</span> <span class="nav-text">Worker Pool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-模块的风险"><span class="nav-number">3.0.7.</span> <span class="nav-text">npm 模块的风险</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -444,7 +444,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -463,17 +463,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -604,71 +594,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span>
         
       </div>

@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&apos;x&apos;)   x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的paths属性一">
-<meta name="keywords" content="module,nodejs,循环引用,模块系统,模块缓存">
+  <meta name="description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&quot;x&quot;);   x 是 node 核心模块（如 http,zlib 等）则返回，否则继续 根据 Module 对象的">
+<meta name="keywords" content="nodejs,module,循环引用,模块系统,模块缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概述nodejs模块系统核心原理">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2018/06/23/概述nodejs模块系统核心原理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&apos;x&apos;)   x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的paths属性一">
+<meta property="og:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&quot;x&quot;);   x 是 node 核心模块（如 http,zlib 等）则返回，否则继续 根据 Module 对象的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-07T06:01:12.333Z">
+<meta property="og:updated_time" content="2020-04-21T15:57:02.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概述nodejs模块系统核心原理">
-<meta name="twitter:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&apos;x&apos;)   x是node核心模块（如http,zlib等）则返回，否则继续 根据Module对象的paths属性一">
+<meta name="twitter:description" content="核心工作原理 模块解析过程（Module Resolve） 模块对象（Module Object） 模块包装（Module Wrapper） 缓存（Cache） 循环引用（Cycle）    核心工作原理 ====== 模块解析过程（Module Resolve）1require(&quot;x&quot;);   x 是 node 核心模块（如 http,zlib 等）则返回，否则继续 根据 Module 对象的">
   <link rel="canonical" href="https://cecil0o0.github.io/blog/2018/06/23/概述nodejs模块系统核心原理/">
 
 
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-07 14:01:12" itemprop="dateModified" datetime="2019-10-07T14:01:12+08:00">2019-10-07</time>
+                <time title="Modified: 2020-04-21 23:57:02" itemprop="dateModified" datetime="2020-04-21T23:57:02+08:00">2020-04-21</time>
               </span>
             
           
@@ -298,22 +298,22 @@
 </ul>
 <p>核心工作原理</p>
 <p>======</p>
-<h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'x'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">"x"</span>);</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li>x是node核心模块（如http,zlib等）则返回，否则继续</li>
-<li>根据Module对象的paths属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出Error(‘MODULE_NOT_FOUND’)</li>
-<li>x是路径（如/path/to/file）<br>3.1 尝试LOAD_AS_FILE（如.js,.json,.node），没有则继续<br>3.2 尝试LOAD_AS_DIR（如文件夹下package.json），没有则抛出Error(‘MODULE_NOT_FOUND’)</li>
+<li>x 是 node 核心模块（如 http,zlib 等）则返回，否则继续</li>
+<li>根据 Module 对象的 paths 属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出 Error(‘MODULE_NOT_FOUND’)</li>
+<li>x 是路径（如/path/to/file）<br>3.1 尝试 LOAD_AS_FILE（如.js,.json,.node），没有则继续<br>3.2 尝试 LOAD_AS_DIR（如文件夹下 package.json），没有则抛出 Error(‘MODULE_NOT_FOUND’)</li>
 </ol>
 <p>LOAD_AS_FILE:</p>
 <ol>
 <li><code>.js</code></li>
 <li><code>.json</code></li>
-<li><code>.node</code>文件（编译好的二进制node插件）</li>
+<li><code>.node</code>文件（编译好的二进制 node 插件）</li>
 </ol>
 <p>LOAD_AS_DIR:</p>
 <ol>
-<li><code>X/package.json</code>中的main字段作为模块入口文件</li>
+<li><code>X/package.json</code>中的 main 字段作为模块入口文件</li>
 <li><code>index.js</code></li>
 <li><code>index.json</code></li>
 <li><code>index.node</code></li>
@@ -323,8 +323,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Module &#123;</span><br><span class="line">  id: &apos;.&apos;,</span><br><span class="line">  exports: &#123;&#125;,</span><br><span class="line">  parent: null,</span><br><span class="line">  filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/index.js&apos;,</span><br><span class="line">  loaded: false,</span><br><span class="line">  children:</span><br><span class="line">   [</span><br><span class="line">       Module</span><br><span class="line">       &#123;</span><br><span class="line">           id: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,</span><br><span class="line">           exports: [Object],</span><br><span class="line">           parent: [Circular],</span><br><span class="line">           filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,</span><br><span class="line">           loaded: true,</span><br><span class="line">           children: [Array],</span><br><span class="line">           paths: [Array]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">  paths:</span><br><span class="line">   [</span><br><span class="line">        &apos;/Users/wl/Sites/myapp/node-learning/src/module/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node-learning/src/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node-learning/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/node_modules&apos;,</span><br><span class="line">         &apos;/Users/node_modules&apos;,</span><br><span class="line">         &apos;/node_modules&apos;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>id</code> 模块id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
-<li><code>exports</code> 模块导出对象。这里的exports指的是module.exports</li>
+<li><code>id</code> 模块 id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
+<li><code>exports</code> 模块导出对象。这里的 exports 指的是 module.exports</li>
 <li><code>parent</code> 父模块。即被依赖模块</li>
 <li><code>filename</code> 模块文件名。通常与<code>id</code>相同</li>
 <li><code>loaded</code> 模块加载状态。是否已执行完成</li>
@@ -333,27 +333,27 @@
 </ul>
 <h2 id="模块包装（Module-Wrapper）"><a href="#模块包装（Module-Wrapper）" class="headerlink" title="模块包装（Module Wrapper）"></a>模块包装（Module Wrapper）</h2><p>主要由以下两点考虑</p>
 <ul>
-<li>使模块内定义的顶层变量限制在方法（也就是wrapper或者说模块内部）级作用域中，防止污染global环境</li>
+<li>使模块内定义的顶层变量限制在方法（也就是 wrapper 或者说模块内部）级作用域中，防止污染 global 环境</li>
 </ul>
 <blockquote>
 <p>注：建议启用’use strict’模式，防止定义全局变量</p>
 </blockquote>
 <ul>
-<li>传入<code>module</code>, <code>require</code>有利于实现node模块化机制</li>
+<li>传入<code>module</code>, <code>require</code>有利于实现 node 模块化机制</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Module code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Module code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个node上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
-<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于node包相互依赖，则较大可能会形成<code>循环引用</code>，node利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">'主模块：'</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a)  <span class="comment">// &#123;a:2&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个 node 上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
+<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于 node 包相互依赖，则较大可能会形成<code>循环引用</code>，node 利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">"主模块："</span>;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./a.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a); <span class="comment">// &#123;a:2&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>a.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="keyword">const</span> prefix = <span class="string">'A模块：'</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, b)  <span class="comment">// &#123;b:1&#125;</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="keyword">const</span> prefix = <span class="string">"A模块："</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">"./b.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, b); <span class="comment">// &#123;b:1&#125;</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>b.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">'b模块：'</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">b</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a) <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">"b模块："</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">b</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./a.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a); <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
-<p>如上。当b.js引用a.js时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被b.js引用</p>
+<p>如上。当 b.js 引用 a.js 时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是 require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被 b.js 引用</p>
 
     </div>
 
@@ -369,9 +369,9 @@
           
           <div class="post-tags">
             
-              <a href="/blog/tags/module/" rel="tag"># module</a>
-            
               <a href="/blog/tags/nodejs/" rel="tag"># nodejs</a>
+            
+              <a href="/blog/tags/module/" rel="tag"># module</a>
             
               <a href="/blog/tags/循环引用/" rel="tag"># 循环引用</a>
             
@@ -466,7 +466,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -485,17 +485,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -626,71 +616,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span>
         
       </div>

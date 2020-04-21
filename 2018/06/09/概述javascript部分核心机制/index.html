@@ -54,19 +54,19 @@
   };
 </script>
 
-  <meta name="description" content="javascript - scope chain - context（this指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this指向）this === context var name = &amp;apos;亚索&amp;apos; // 1------">
+  <meta name="description" content="javascript - scope chain - context（this 指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this 指向）this === context var name = &amp;apos;亚索&amp;apos; // 1----">
 <meta name="keywords" content="event loop,excution context,scope chain,this">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概述javascript部分核心机制">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2018/06/09/概述javascript部分核心机制/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="javascript - scope chain - context（this指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this指向）this === context var name = &amp;apos;亚索&amp;apos; // 1------">
+<meta property="og:description" content="javascript - scope chain - context（this 指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this 指向）this === context var name = &amp;apos;亚索&amp;apos; // 1----">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://blog.qingf.me/wp-content/uploads/2018/06/scopechain.png">
-<meta property="og:updated_time" content="2019-08-28T13:58:09.239Z">
+<meta property="og:updated_time" content="2020-04-21T15:57:17.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概述javascript部分核心机制">
-<meta name="twitter:description" content="javascript - scope chain - context（this指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this指向）this === context var name = &amp;apos;亚索&amp;apos; // 1------">
+<meta name="twitter:description" content="javascript - scope chain - context（this 指向） - excution context scope chain即执行环境（execution environment） 即一条执行时才会建立的定义时已经决定了（liao）的链。  context（this 指向）this === context var name = &amp;apos;亚索&amp;apos; // 1----">
 <meta name="twitter:image" content="https://blog.qingf.me/wp-content/uploads/2018/06/scopechain.png">
   <link rel="canonical" href="https://cecil0o0.github.io/blog/2018/06/09/概述javascript部分核心机制/">
 
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:09" itemprop="dateModified" datetime="2019-08-28T21:58:09+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:57:17" itemprop="dateModified" datetime="2020-04-21T23:57:17+08:00">2020-04-21</time>
               </span>
             
           
@@ -288,9 +288,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>javascript - scope chain - context（this指向） - excution context</p>
+        <p>javascript - scope chain - context（this 指向） - excution context</p>
 <h1 id="scope-chain"><a href="#scope-chain" class="headerlink" title="scope chain"></a>scope chain</h1><p>即执行环境（execution environment） 即一条<code>执行时</code>才会建立的<code>定义时</code>已经决定了（liao）的链。 <img src="https://blog.qingf.me/wp-content/uploads/2018/06/scopechain.png" alt></p>
-<h1 id="context（this指向）"><a href="#context（this指向）" class="headerlink" title="context（this指向）"></a>context（this指向）</h1><p>this === context</p>
+<h1 id="context（this-指向）"><a href="#context（this-指向）" class="headerlink" title="context（this 指向）"></a>context（this 指向）</h1><p>this === context</p>
 <pre><code>var name = &apos;亚索&apos;
 // 1-------------------------------------------------------
 var obj = {
@@ -330,7 +330,7 @@ var obj2 = {
 obj2.readName()
 obj2.readName.call(this)</code></pre><p>结果请复制到控制台执行后查看结果</p>
 <blockquote>
-<p>注：箭头函数其实没有自己的this指针，它只是一个语法糖</p>
+<p>注：箭头函数其实没有自己的 this 指针，它只是一个语法糖</p>
 </blockquote>
 <pre><code>箭头函数
 var bbb = {
@@ -346,16 +346,16 @@ var bbb = {
             console.log(_this.name)
         }
     }
-}</code></pre><h1 id="excution-context"><a href="#excution-context" class="headerlink" title="excution context"></a>excution context</h1><p>我们理解JS引擎时所了解的栈即为执行环境栈。比如我们用语言模拟一段脚本执行到function后发生的一系列动作。 <code>创建阶段（creation phase）</code></p>
+}</code></pre><h1 id="excution-context"><a href="#excution-context" class="headerlink" title="excution context"></a>excution context</h1><p>我们理解 JS 引擎时所了解的栈即为执行环境栈。比如我们用语言模拟一段脚本执行到 function 后发生的一系列动作。 <code>创建阶段（creation phase）</code></p>
 <ol>
-<li>创建一个变量对象（也称活动对象）常常由定义在当前执行环境中的内部变量、内部function以及参数组成，且仅能被解析器访问</li>
+<li>创建一个变量对象（也称活动对象）常常由定义在当前执行环境中的内部变量、内部 function 以及参数组成，且仅能被解析器访问</li>
 <li>初始化作用域链</li>
-<li>this指针被最终确定</li>
+<li>this 指针被最终确定</li>
 <li>推入堆栈并获取控制权</li>
 </ol>
 <p><code>执行阶段（execution phase）</code></p>
 <ol>
-<li>代码在当前执行环境中执行，执行完成后pop出当前执行环境，并将控制权移交给上一级执行环境</li>
+<li>代码在当前执行环境中执行，执行完成后 pop 出当前执行环境，并将控制权移交给上一级执行环境</li>
 </ol>
 
     </div>
@@ -452,7 +452,7 @@ var bbb = {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#scope-chain"><span class="nav-number">1.</span> <span class="nav-text">scope chain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#context（this指向）"><span class="nav-number">2.</span> <span class="nav-text">context（this指向）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#excution-context"><span class="nav-number">3.</span> <span class="nav-text">excution context</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#scope-chain"><span class="nav-number">1.</span> <span class="nav-text">scope chain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#context（this-指向）"><span class="nav-number">2.</span> <span class="nav-text">context（this 指向）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#excution-context"><span class="nav-number">3.</span> <span class="nav-text">excution context</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -467,7 +467,7 @@ var bbb = {
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -486,17 +486,7 @@ var bbb = {
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -627,71 +617,7 @@ var bbb = {
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span>
         
       </div>

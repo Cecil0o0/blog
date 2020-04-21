@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+  <meta name="description" content="工作原理 SSR 优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR 优劣势 优势 首屏渲染加快（相当于省去 client 端 fetch + load bundle 并且初始化 vue 的时间） 支持 SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建 vue、vue-router、vuex 实例（注意不">
 <meta name="keywords" content="Isomorphic,seo,ssr,vue,可扩展性,工程化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概述Vue SSR工作原理以及工程实践">
 <meta property="og:url" content="https://cecil0o0.github.io/blog/2018/07/01/概述Vue SSR工作原理以及工程实践/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+<meta property="og:description" content="工作原理 SSR 优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR 优劣势 优势 首屏渲染加快（相当于省去 client 端 fetch + load bundle 并且初始化 vue 的时间） 支持 SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建 vue、vue-router、vuex 实例（注意不">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-28T13:58:04.705Z">
+<meta property="og:updated_time" content="2020-04-21T15:56:57.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概述Vue SSR工作原理以及工程实践">
-<meta name="twitter:description" content="工作原理 SSR优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR优劣势 优势 首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间） 支持SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建vue、vue-router、vuex实例（注意不能复用实例） app挂">
+<meta name="twitter:description" content="工作原理 SSR 优劣势 详细构建过程 运行流程概述   实践 工程目录结构 同构中的差异 踩坑    工作原理SSR 优劣势 优势 首屏渲染加快（相当于省去 client 端 fetch + load bundle 并且初始化 vue 的时间） 支持 SEO    构建过程 入口文件二：entry-server。需要依次作如下逻辑处理 新建 vue、vue-router、vuex 实例（注意不">
   <link rel="canonical" href="https://cecil0o0.github.io/blog/2018/07/01/概述Vue SSR工作原理以及工程实践/">
 
 
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:04" itemprop="dateModified" datetime="2019-08-28T21:58:04+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:56:57" itemprop="dateModified" datetime="2020-04-21T23:56:57+08:00">2020-04-21</time>
               </span>
             
           
@@ -288,7 +288,7 @@
       
         <ul>
 <li>工作原理<ul>
-<li>SSR优劣势</li>
+<li>SSR 优劣势</li>
 <li>详细构建过程</li>
 <li>运行流程概述</li>
 </ul>
@@ -300,42 +300,42 @@
 </ul>
 </li>
 </ul>
-<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR优劣势"><a href="#SSR优劣势" class="headerlink" title="SSR优劣势"></a>SSR优劣势</h2><ul>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR-优劣势"><a href="#SSR-优劣势" class="headerlink" title="SSR 优劣势"></a>SSR 优劣势</h2><ul>
 <li>优势<ul>
-<li>首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间）</li>
-<li>支持SEO</li>
+<li>首屏渲染加快（相当于省去 client 端 fetch + load bundle 并且初始化 vue 的时间）</li>
+<li>支持 SEO</li>
 </ul>
 </li>
 </ul>
 <h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><ul>
 <li>入口文件二：entry-server。需要依次作如下逻辑处理<ul>
-<li>新建vue、vue-router、vuex实例（注意不能复用实例）</li>
-<li>app挂载router和store插件</li>
-<li>router根据当前请求即req.url，根据路由匹配到Components，如果存在asyncData则<code>异步获取所有数据</code>后resolve app实例</li>
-<li>registerModule并存在state时，将state挂载到context.state下，并由renderer将其<code>序列化</code></li>
-<li>renderer可以在HTML中收集并内联组件css，并自动注入首屏关键css（critical css）</li>
-<li>renderer通过app实例render为HTML string，并返回给client端</li>
+<li>新建 vue、vue-router、vuex 实例（注意不能复用实例）</li>
+<li>app 挂载 router 和 store 插件</li>
+<li>router 根据当前请求即 req.url，根据路由匹配到 Components，如果存在 asyncData 则<code>异步获取所有数据</code>后 resolve app 实例</li>
+<li>registerModule 并存在 state 时，将 state 挂载到 context.state 下，并由 renderer 将其<code>序列化</code></li>
+<li>renderer 可以在 HTML 中收集并内联组件 css，并自动注入首屏关键 css（critical css）</li>
+<li>renderer 通过 app 实例 render 为 HTML string，并返回给 client 端</li>
 </ul>
 </li>
 <li>入口文件一：entry-client。需要依次作如下逻辑处理<ul>
-<li>同样的，初始化app实例并挂载router,store插件</li>
-<li>当路由onReady后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
-<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过mixin混入beforeMount生命周期去预取数据。为了防止double-fetch数据，这里需要作出调整即在挂载app之后再混入。</li>
+<li>同样的，初始化 app 实例并挂载 router,store 插件</li>
+<li>当路由 onReady 后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实 DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
+<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过 mixin 混入 beforeMount 生命周期去预取数据。为了防止 double-fetch 数据，这里需要作出调整即在挂载 app 之后再混入。</li>
 </ul>
 </li>
-<li>然后webpack通过不同入口分别打包client-manifest.json以及server-bundle.json，应用于renderer</li>
-<li>其中client-manifest主要用于标记程序依赖chunk，server-bundle中则存储并映射打包后所有的bundle用于渲染。renderer具有程序的所有构建信息，因此它可以自动推断和注入资源prefetch与preload指令，以及css、javascript标签到HTML中。与此同时，为避免client瀑布式请求（waterfull request）以及达到最快的TTI（Time-To Interactive），只有应用程序首屏依赖的chunk会以preload形式注入，暂未使用的异步chunk通过prefetch形式注入。</li>
+<li>然后 webpack 通过不同入口分别打包 client-manifest.json 以及 server-bundle.json，应用于 renderer</li>
+<li>其中 client-manifest 主要用于标记程序依赖 chunk，server-bundle 中则存储并映射打包后所有的 bundle 用于渲染。renderer 具有程序的所有构建信息，因此它可以自动推断和注入资源 prefetch 与 preload 指令，以及 css、javascript 标签到 HTML 中。与此同时，为避免 client 瀑布式请求（waterfull request）以及达到最快的 TTI（Time-To Interactive），只有应用程序首屏依赖的 chunk 会以 preload 形式注入，暂未使用的异步 chunk 通过 prefetch 形式注入。</li>
 </ul>
 <h2 id="运行流程概述"><a href="#运行流程概述" class="headerlink" title="运行流程概述"></a>运行流程概述</h2><ul>
-<li>server端负责渲染首屏的工作比如预取数据，全局state初始化（不包括actions,mutations以及getters），直出首屏完整DOM</li>
-<li>client端负责hydrate（激活）SPA，比如store replaceState，注册store模块</li>
+<li>server 端负责渲染首屏的工作比如预取数据，全局 state 初始化（不包括 actions,mutations 以及 getters），直出首屏完整 DOM</li>
+<li>client 端负责 hydrate（激活）SPA，比如 store replaceState，注册 store 模块</li>
 </ul>
 <h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="工程依赖的核心库版本概览"><a href="#工程依赖的核心库版本概览" class="headerlink" title="工程依赖的核心库版本概览"></a>工程依赖的核心库版本概览</h2><pre><code>&quot;vue&quot;: &quot;^2.5.16&quot;,
 &quot;vue-router&quot;: &quot;^3.0.1&quot;,
 &quot;vue-server-renderer&quot;: &quot;^2.5.16&quot;,
 &quot;vuex&quot;: &quot;^3.0.1&quot;
 &quot;vue-loader&quot;: &quot;^15.2.4&quot;,
-&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的github</a>查看（欢迎star）</p>
+&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的 github</a>查看（欢迎 star）</p>
 <h2 id="可执行命令"><a href="#可执行命令" class="headerlink" title="可执行命令"></a>可执行命令</h2><ul>
 <li>npm run dev</li>
 <li>npm run serve</li>
@@ -344,28 +344,28 @@
 <li>npm run build:client-analyze</li>
 </ul>
 <h2 id="同构中的差异"><a href="#同构中的差异" class="headerlink" title="同构中的差异"></a>同构中的差异</h2><ul>
-<li>server端和client端渲染不同页面时在各自的生命周期中（server是beforeCreated and created，client更关注mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页title和通用头部管理等</li>
+<li>server 端和 client 端渲染不同页面时在各自的生命周期中（server 是 beforeCreated and created，client 更关注 mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页 title 和通用头部管理等</li>
 </ul>
-<p>用全局Mixin或者Class继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
+<p>用全局 Mixin 或者 Class 继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
 <h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
 <li>TypeError: Cannot read property ‘render’ of undefined</li>
 </ul>
-<p>最终发现在webpack.base.conf.js中output.filename后面<code>带了hash</code>导致可能在生成server-bundle.json的时候匹配不到该chunk导致<code>json文件构建失败</code>，从而导致vm为undefined，最终抛出以上错误信息。解决方案是把该配置项放在webpack.client.conf.js与webpack.server.conf.js中<code>分别</code>配置</p>
+<p>最终发现在 webpack.base.conf.js 中 output.filename 后面<code>带了hash</code>导致可能在生成 server-bundle.json 的时候匹配不到该 chunk 导致<code>json文件构建失败</code>，从而导致 vm 为 undefined，最终抛出以上错误信息。解决方案是把该配置项放在 webpack.client.conf.js 与 webpack.server.conf.js 中<code>分别</code>配置</p>
 <ul>
-<li>loader执行顺序从后到前</li>
+<li>loader 执行顺序从后到前</li>
 </ul>
-<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从stylus-loader -&gt; css-loader -&gt; style-loader</p>
+<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从 stylus-loader -&gt; css-loader -&gt; style-loader</p>
 <ul>
-<li>style-loader中依赖window，导致ssr失败</li>
+<li>style-loader 中依赖 window，导致 ssr 失败</li>
 </ul>
-<p>用vue-style-loader代替</p>
+<p>用 vue-style-loader 代替</p>
 <ul>
-<li><p>服务端渲染开发时做hmr有坑</p>
+<li><p>服务端渲染开发时做 hmr 有坑</p>
 </li>
-<li><p>当在ssr工程中引入standalone时需要做一些处理比如</p>
+<li><p>当在 ssr 工程中引入 standalone 时需要做一些处理比如</p>
 </li>
 </ul>
-<p>如果是standalone模式则<code>挂载前</code>mixin预取数据的生命周期钩子用于client fetch asyncData，如果是ssr-client模式则采用<code>挂载后</code>再mixin此钩子的策略，为防止client hydrating出现double-fetch的情况</p>
+<p>如果是 standalone 模式则<code>挂载前</code>mixin 预取数据的生命周期钩子用于 client fetch asyncData，如果是 ssr-client 模式则采用<code>挂载后</code>再 mixin 此钩子的策略，为防止 client hydrating 出现 double-fetch 的情况</p>
 
     </div>
 
@@ -465,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">1.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSR优劣势"><span class="nav-number">1.1.</span> <span class="nav-text">SSR优劣势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建过程"><span class="nav-number">1.2.</span> <span class="nav-text">构建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行流程概述"><span class="nav-number">1.3.</span> <span class="nav-text">运行流程概述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工程依赖的核心库版本概览"><span class="nav-number">2.1.</span> <span class="nav-text">工程依赖的核心库版本概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">工程目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可执行命令"><span class="nav-number">2.3.</span> <span class="nav-text">可执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同构中的差异"><span class="nav-number">2.4.</span> <span class="nav-text">同构中的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">2.5.</span> <span class="nav-text">踩坑</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">1.</span> <span class="nav-text">工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSR-优劣势"><span class="nav-number">1.1.</span> <span class="nav-text">SSR 优劣势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建过程"><span class="nav-number">1.2.</span> <span class="nav-text">构建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行流程概述"><span class="nav-number">1.3.</span> <span class="nav-text">运行流程概述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工程依赖的核心库版本概览"><span class="nav-number">2.1.</span> <span class="nav-text">工程依赖的核心库版本概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">工程目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可执行命令"><span class="nav-number">2.3.</span> <span class="nav-text">可执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同构中的差异"><span class="nav-number">2.4.</span> <span class="nav-text">同构中的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">2.5.</span> <span class="nav-text">踩坑</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -480,7 +480,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -499,17 +499,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -640,71 +630,7 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span>
         
       </div>

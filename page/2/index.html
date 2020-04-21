@@ -767,7 +767,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:04" itemprop="dateModified" datetime="2019-08-28T21:58:04+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:56:57" itemprop="dateModified" datetime="2020-04-21T23:56:57+08:00">2020-04-21</time>
               </span>
             
           
@@ -820,7 +820,7 @@
       
           <ul>
 <li>工作原理<ul>
-<li>SSR优劣势</li>
+<li>SSR 优劣势</li>
 <li>详细构建过程</li>
 <li>运行流程概述</li>
 </ul>
@@ -832,42 +832,42 @@
 </ul>
 </li>
 </ul>
-<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR优劣势"><a href="#SSR优劣势" class="headerlink" title="SSR优劣势"></a>SSR优劣势</h2><ul>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><h2 id="SSR-优劣势"><a href="#SSR-优劣势" class="headerlink" title="SSR 优劣势"></a>SSR 优劣势</h2><ul>
 <li>优势<ul>
-<li>首屏渲染加快（相当于省去client端fetch + load bundle并且初始化vue的时间）</li>
-<li>支持SEO</li>
+<li>首屏渲染加快（相当于省去 client 端 fetch + load bundle 并且初始化 vue 的时间）</li>
+<li>支持 SEO</li>
 </ul>
 </li>
 </ul>
 <h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><ul>
 <li>入口文件二：entry-server。需要依次作如下逻辑处理<ul>
-<li>新建vue、vue-router、vuex实例（注意不能复用实例）</li>
-<li>app挂载router和store插件</li>
-<li>router根据当前请求即req.url，根据路由匹配到Components，如果存在asyncData则<code>异步获取所有数据</code>后resolve app实例</li>
-<li>registerModule并存在state时，将state挂载到context.state下，并由renderer将其<code>序列化</code></li>
-<li>renderer可以在HTML中收集并内联组件css，并自动注入首屏关键css（critical css）</li>
-<li>renderer通过app实例render为HTML string，并返回给client端</li>
+<li>新建 vue、vue-router、vuex 实例（注意不能复用实例）</li>
+<li>app 挂载 router 和 store 插件</li>
+<li>router 根据当前请求即 req.url，根据路由匹配到 Components，如果存在 asyncData 则<code>异步获取所有数据</code>后 resolve app 实例</li>
+<li>registerModule 并存在 state 时，将 state 挂载到 context.state 下，并由 renderer 将其<code>序列化</code></li>
+<li>renderer 可以在 HTML 中收集并内联组件 css，并自动注入首屏关键 css（critical css）</li>
+<li>renderer 通过 app 实例 render 为 HTML string，并返回给 client 端</li>
 </ul>
 </li>
 <li>入口文件一：entry-client。需要依次作如下逻辑处理<ul>
-<li>同样的，初始化app实例并挂载router,store插件</li>
-<li>当路由onReady后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
-<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过mixin混入beforeMount生命周期去预取数据。为了防止double-fetch数据，这里需要作出调整即在挂载app之后再混入。</li>
+<li>同样的，初始化 app 实例并挂载 router,store 插件</li>
+<li>当路由 onReady 后，挂载<code>&lt;div id=&quot;app&quot; data-server-rendered=&quot;true&quot;&gt;...&lt;/div&gt;</code>真实 DOM，由于此时通过<code>data-server-rendered</code>已知晓由服务端渲染完毕，因此客户端走激活（hydrate）流程而不是重新渲染替换节点<code>#app</code></li>
+<li>另外数据预取逻辑和服务端略有不同，我用的是<code>按需加载</code>策略也就是通过 mixin 混入 beforeMount 生命周期去预取数据。为了防止 double-fetch 数据，这里需要作出调整即在挂载 app 之后再混入。</li>
 </ul>
 </li>
-<li>然后webpack通过不同入口分别打包client-manifest.json以及server-bundle.json，应用于renderer</li>
-<li>其中client-manifest主要用于标记程序依赖chunk，server-bundle中则存储并映射打包后所有的bundle用于渲染。renderer具有程序的所有构建信息，因此它可以自动推断和注入资源prefetch与preload指令，以及css、javascript标签到HTML中。与此同时，为避免client瀑布式请求（waterfull request）以及达到最快的TTI（Time-To Interactive），只有应用程序首屏依赖的chunk会以preload形式注入，暂未使用的异步chunk通过prefetch形式注入。</li>
+<li>然后 webpack 通过不同入口分别打包 client-manifest.json 以及 server-bundle.json，应用于 renderer</li>
+<li>其中 client-manifest 主要用于标记程序依赖 chunk，server-bundle 中则存储并映射打包后所有的 bundle 用于渲染。renderer 具有程序的所有构建信息，因此它可以自动推断和注入资源 prefetch 与 preload 指令，以及 css、javascript 标签到 HTML 中。与此同时，为避免 client 瀑布式请求（waterfull request）以及达到最快的 TTI（Time-To Interactive），只有应用程序首屏依赖的 chunk 会以 preload 形式注入，暂未使用的异步 chunk 通过 prefetch 形式注入。</li>
 </ul>
 <h2 id="运行流程概述"><a href="#运行流程概述" class="headerlink" title="运行流程概述"></a>运行流程概述</h2><ul>
-<li>server端负责渲染首屏的工作比如预取数据，全局state初始化（不包括actions,mutations以及getters），直出首屏完整DOM</li>
-<li>client端负责hydrate（激活）SPA，比如store replaceState，注册store模块</li>
+<li>server 端负责渲染首屏的工作比如预取数据，全局 state 初始化（不包括 actions,mutations 以及 getters），直出首屏完整 DOM</li>
+<li>client 端负责 hydrate（激活）SPA，比如 store replaceState，注册 store 模块</li>
 </ul>
 <h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="工程依赖的核心库版本概览"><a href="#工程依赖的核心库版本概览" class="headerlink" title="工程依赖的核心库版本概览"></a>工程依赖的核心库版本概览</h2><pre><code>&quot;vue&quot;: &quot;^2.5.16&quot;,
 &quot;vue-router&quot;: &quot;^3.0.1&quot;,
 &quot;vue-server-renderer&quot;: &quot;^2.5.16&quot;,
 &quot;vuex&quot;: &quot;^3.0.1&quot;
 &quot;vue-loader&quot;: &quot;^15.2.4&quot;,
-&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的github</a>查看（欢迎star）</p>
+&quot;vue-style-loader&quot;: &quot;^4.1.0&quot;,</code></pre><h2 id="工程目录结构"><a href="#工程目录结构" class="headerlink" title="工程目录结构"></a>工程目录结构</h2><p>请移步<a href="https://github.com/Cecil0o0/ssr-demo" target="_blank" rel="noopener">我的 github</a>查看（欢迎 star）</p>
 <h2 id="可执行命令"><a href="#可执行命令" class="headerlink" title="可执行命令"></a>可执行命令</h2><ul>
 <li>npm run dev</li>
 <li>npm run serve</li>
@@ -876,28 +876,28 @@
 <li>npm run build:client-analyze</li>
 </ul>
 <h2 id="同构中的差异"><a href="#同构中的差异" class="headerlink" title="同构中的差异"></a>同构中的差异</h2><ul>
-<li>server端和client端渲染不同页面时在各自的生命周期中（server是beforeCreated and created，client更关注mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页title和通用头部管理等</li>
+<li>server 端和 client 端渲染不同页面时在各自的生命周期中（server 是 beforeCreated and created，client 更关注 mounted and more life cycles）可能需要处理<code>相同</code>的事情，比如网页 title 和通用头部管理等</li>
 </ul>
-<p>用全局Mixin或者Class继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
+<p>用全局 Mixin 或者 Class 继承来做。个人更倾向于<code>全局Mixin</code>，因为开发时<code>少写冗余代码</code>，但因此损失一点运行时性能比如内存和计算力</p>
 <h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ul>
 <li>TypeError: Cannot read property ‘render’ of undefined</li>
 </ul>
-<p>最终发现在webpack.base.conf.js中output.filename后面<code>带了hash</code>导致可能在生成server-bundle.json的时候匹配不到该chunk导致<code>json文件构建失败</code>，从而导致vm为undefined，最终抛出以上错误信息。解决方案是把该配置项放在webpack.client.conf.js与webpack.server.conf.js中<code>分别</code>配置</p>
+<p>最终发现在 webpack.base.conf.js 中 output.filename 后面<code>带了hash</code>导致可能在生成 server-bundle.json 的时候匹配不到该 chunk 导致<code>json文件构建失败</code>，从而导致 vm 为 undefined，最终抛出以上错误信息。解决方案是把该配置项放在 webpack.client.conf.js 与 webpack.server.conf.js 中<code>分别</code>配置</p>
 <ul>
-<li>loader执行顺序从后到前</li>
+<li>loader 执行顺序从后到前</li>
 </ul>
-<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从stylus-loader -&gt; css-loader -&gt; style-loader</p>
+<p>也就是说不管是字符串<code>style-loader!css-loader!stylus-loader</code>还是数组形式<code>[&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;stylus-loader&#39;]</code>，执行顺序都是从 stylus-loader -&gt; css-loader -&gt; style-loader</p>
 <ul>
-<li>style-loader中依赖window，导致ssr失败</li>
+<li>style-loader 中依赖 window，导致 ssr 失败</li>
 </ul>
-<p>用vue-style-loader代替</p>
+<p>用 vue-style-loader 代替</p>
 <ul>
-<li><p>服务端渲染开发时做hmr有坑</p>
+<li><p>服务端渲染开发时做 hmr 有坑</p>
 </li>
-<li><p>当在ssr工程中引入standalone时需要做一些处理比如</p>
+<li><p>当在 ssr 工程中引入 standalone 时需要做一些处理比如</p>
 </li>
 </ul>
-<p>如果是standalone模式则<code>挂载前</code>mixin预取数据的生命周期钩子用于client fetch asyncData，如果是ssr-client模式则采用<code>挂载后</code>再mixin此钩子的策略，为防止client hydrating出现double-fetch的情况</p>
+<p>如果是 standalone 模式则<code>挂载前</code>mixin 预取数据的生命周期钩子用于 client fetch asyncData，如果是 ssr-client 模式则采用<code>挂载后</code>再 mixin 此钩子的策略，为防止 client hydrating 出现 double-fetch 的情况</p>
 
         
       
@@ -962,7 +962,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-07 14:01:12" itemprop="dateModified" datetime="2019-10-07T14:01:12+08:00">2019-10-07</time>
+                <time title="Modified: 2020-04-21 23:57:02" itemprop="dateModified" datetime="2020-04-21T23:57:02+08:00">2020-04-21</time>
               </span>
             
           
@@ -1025,22 +1025,22 @@
 </ul>
 <p>核心工作原理</p>
 <p>======</p>
-<h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'x'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="模块解析过程（Module-Resolve）"><a href="#模块解析过程（Module-Resolve）" class="headerlink" title="模块解析过程（Module Resolve）"></a>模块解析过程（Module Resolve）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">"x"</span>);</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li>x是node核心模块（如http,zlib等）则返回，否则继续</li>
-<li>根据Module对象的paths属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出Error(‘MODULE_NOT_FOUND’)</li>
-<li>x是路径（如/path/to/file）<br>3.1 尝试LOAD_AS_FILE（如.js,.json,.node），没有则继续<br>3.2 尝试LOAD_AS_DIR（如文件夹下package.json），没有则抛出Error(‘MODULE_NOT_FOUND’)</li>
+<li>x 是 node 核心模块（如 http,zlib 等）则返回，否则继续</li>
+<li>根据 Module 对象的 paths 属性一直递归找<code>node_modules</code>文件夹下是否存在该模块，直到根目录，否则抛出 Error(‘MODULE_NOT_FOUND’)</li>
+<li>x 是路径（如/path/to/file）<br>3.1 尝试 LOAD_AS_FILE（如.js,.json,.node），没有则继续<br>3.2 尝试 LOAD_AS_DIR（如文件夹下 package.json），没有则抛出 Error(‘MODULE_NOT_FOUND’)</li>
 </ol>
 <p>LOAD_AS_FILE:</p>
 <ol>
 <li><code>.js</code></li>
 <li><code>.json</code></li>
-<li><code>.node</code>文件（编译好的二进制node插件）</li>
+<li><code>.node</code>文件（编译好的二进制 node 插件）</li>
 </ol>
 <p>LOAD_AS_DIR:</p>
 <ol>
-<li><code>X/package.json</code>中的main字段作为模块入口文件</li>
+<li><code>X/package.json</code>中的 main 字段作为模块入口文件</li>
 <li><code>index.js</code></li>
 <li><code>index.json</code></li>
 <li><code>index.node</code></li>
@@ -1050,8 +1050,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Module &#123;</span><br><span class="line">  id: &apos;.&apos;,</span><br><span class="line">  exports: &#123;&#125;,</span><br><span class="line">  parent: null,</span><br><span class="line">  filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/index.js&apos;,</span><br><span class="line">  loaded: false,</span><br><span class="line">  children:</span><br><span class="line">   [</span><br><span class="line">       Module</span><br><span class="line">       &#123;</span><br><span class="line">           id: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,</span><br><span class="line">           exports: [Object],</span><br><span class="line">           parent: [Circular],</span><br><span class="line">           filename: &apos;/Users/wl/Sites/myapp/node-learning/src/module/a.js&apos;,</span><br><span class="line">           loaded: true,</span><br><span class="line">           children: [Array],</span><br><span class="line">           paths: [Array]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">  paths:</span><br><span class="line">   [</span><br><span class="line">        &apos;/Users/wl/Sites/myapp/node-learning/src/module/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node-learning/src/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node-learning/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/myapp/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/Sites/node_modules&apos;,</span><br><span class="line">         &apos;/Users/wl/node_modules&apos;,</span><br><span class="line">         &apos;/Users/node_modules&apos;,</span><br><span class="line">         &apos;/node_modules&apos;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>id</code> 模块id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
-<li><code>exports</code> 模块导出对象。这里的exports指的是module.exports</li>
+<li><code>id</code> 模块 id。通常为模块文件<code>绝对</code>路径，主模块通常为<code>.</code></li>
+<li><code>exports</code> 模块导出对象。这里的 exports 指的是 module.exports</li>
 <li><code>parent</code> 父模块。即被依赖模块</li>
 <li><code>filename</code> 模块文件名。通常与<code>id</code>相同</li>
 <li><code>loaded</code> 模块加载状态。是否已执行完成</li>
@@ -1060,27 +1060,27 @@
 </ul>
 <h2 id="模块包装（Module-Wrapper）"><a href="#模块包装（Module-Wrapper）" class="headerlink" title="模块包装（Module Wrapper）"></a>模块包装（Module Wrapper）</h2><p>主要由以下两点考虑</p>
 <ul>
-<li>使模块内定义的顶层变量限制在方法（也就是wrapper或者说模块内部）级作用域中，防止污染global环境</li>
+<li>使模块内定义的顶层变量限制在方法（也就是 wrapper 或者说模块内部）级作用域中，防止污染 global 环境</li>
 </ul>
 <blockquote>
 <p>注：建议启用’use strict’模式，防止定义全局变量</p>
 </blockquote>
 <ul>
-<li>传入<code>module</code>, <code>require</code>有利于实现node模块化机制</li>
+<li>传入<code>module</code>, <code>require</code>有利于实现 node 模块化机制</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Module code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports, require, module, __filename, __dirname</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Module code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个node上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
-<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于node包相互依赖，则较大可能会形成<code>循环引用</code>，node利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">'主模块：'</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a)  <span class="comment">// &#123;a:2&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="缓存（Cache）"><a href="#缓存（Cache）" class="headerlink" title="缓存（Cache）"></a>缓存（Cache）</h2><p>在一个 node 上下文环境中，两次<code>require</code>同一个文件，<code>通常</code>情况下返回完全相同的两个对象引用。除非用高阶函数返回工厂函数。</p>
+<h2 id="循环引用（Cycle）"><a href="#循环引用（Cycle）" class="headerlink" title="循环引用（Cycle）"></a>循环引用（Cycle）</h2><p>由于 node 包相互依赖，则较大可能会形成<code>循环引用</code>，node 利用其<code>缓存</code>机制避免无限循环。比如 <code>index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">"主模块："</span>;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./a.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a); <span class="comment">// &#123;a:2&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>a.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="keyword">const</span> prefix = <span class="string">'A模块：'</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">a</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, b)  <span class="comment">// &#123;b:1&#125;</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"><span class="keyword">const</span> prefix = <span class="string">"A模块："</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> b = <span class="built_in">require</span>(<span class="string">"./b.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, b); <span class="comment">// &#123;b:1&#125;</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">a</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>b.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">'b模块：'</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;<span class="attr">b</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a) <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prefix = <span class="string">"b模块："</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123; <span class="attr">b</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./a.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(prefix, a); <span class="comment">// &#123;a:1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(prefix, <span class="built_in">require</span>.main === <span class="built_in">module</span>);</span><br></pre></td></tr></table></figure>
 
-<p>如上。当b.js引用a.js时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被b.js引用</p>
+<p>如上。当 b.js 引用 a.js 时，为避免无限循环，a.js<code>未完成的副本</code>（我认为是 require(‘./b.js’)之前的所有代码，但是在官方文档中未得到特别确切的表述）导出的对象被 b.js 引用</p>
 
         
       
@@ -1567,7 +1567,7 @@ export default {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:13" itemprop="dateModified" datetime="2019-08-28T21:58:13+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:57:08" itemprop="dateModified" datetime="2020-04-21T23:57:08+08:00">2020-04-21</time>
               </span>
             
           
@@ -1618,60 +1618,60 @@ export default {
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm模块的风险</p>
-<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking是指node.js进程中不同步等待执行<code>非javascript操作</code>（例如I/O）完成而继续执行下一块代码的特性。</p>
+          <p>nodejs - Non-Blocking I/O Model - Event Loop - Event-Driven - 基本架构 - 何为阻塞 - 代码执行时 - 阻止事件循环的几个维度 - Worker Pool - npm 模块的风险</p>
+<h1 id="Non-Blocking-I-O-Model"><a href="#Non-Blocking-I-O-Model" class="headerlink" title="Non-Blocking I/O Model"></a>Non-Blocking I/O Model</h1><p>non-blocking 是指 node.js 进程中不同步等待执行<code>非javascript操作</code>（例如 I/O）完成而继续执行下一块代码的特性。</p>
 <blockquote>
-<p>注：CPU密集型属于javascript操作。</p>
+<p>注：CPU 密集型属于 javascript 操作。</p>
 </blockquote>
-<p>I/O通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞I/O模型使得nodejs支持高并发且非常适合于I/O密集型应用</p>
-<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共6个阶段</p>
+<p>I/O 通常指与<code>磁盘</code>与<code>网络</code>的交互 非阻塞 I/O 模型使得 nodejs 支持高并发且非常适合于 I/O 密集型应用</p>
+<h1 id="Nodejs-Event-Loop-and-Worker-Pool"><a href="#Nodejs-Event-Loop-and-Worker-Pool" class="headerlink" title="Nodejs Event Loop and Worker Pool"></a>Nodejs Event Loop and Worker Pool</h1><p>共 6 个阶段</p>
 <ul>
-<li><code>timers</code> setTimeout与setInterval回调函数队列</li>
-<li><code>pending callbacks</code> 会在下一次loop中执行的系统级回调队列。如TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
-<li><code>poll</code> 接收新的I/O事件。执行I/O相关回调。在这个阶段node进程可能会阻塞</li>
-<li><code>check</code> setImmediate回调会在这个阶段执行</li>
+<li><code>timers</code> setTimeout 与 setInterval 回调函数队列</li>
+<li><code>pending callbacks</code> 会在下一次 loop 中执行的系统级回调队列。如 TCP ECONNREFUSED -<code>idle,prepare</code> 内部使用</li>
+<li><code>poll</code> 接收新的 I/O 事件。执行 I/O 相关回调。在这个阶段 node 进程可能会阻塞</li>
+<li><code>check</code> setImmediate 回调会在这个阶段执行</li>
 <li><code>close</code> 一些关闭的回调。比如<code>connect.on(&#39;close&#39;, () =&gt; {....})</code></li>
 </ul>
 <blockquote>
-<p>注：process.nextTick不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行nextTick回调</p>
+<p>注：process.nextTick 不属于任何一个阶段，它是介于任意两个阶段之间，并且在阶段切换时执行 nextTick 回调</p>
 </blockquote>
 <h1 id="Event-Driven"><a href="#Event-Driven" class="headerlink" title="Event-Driven"></a>Event-Driven</h1><h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><ul>
-<li>nodejs事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
-<li>Event Loop负责编排客户端请求而后调度Worker Pool处理CPU密集型任务</li>
+<li>nodejs 事件驱动架构中有两种线程：事件循环线程（Event Loop）以及工作线程池（worker pool）</li>
+<li>Event Loop 负责编排客户端请求而后调度 Worker Pool 处理 CPU 密集型任务</li>
 </ul>
 <blockquote>
-<p>注：因此nodejs并不是纯粹的单线程语言！</p>
+<p>注：因此 nodejs 并不是纯粹的单线程语言！</p>
 </blockquote>
 <h3 id="何为阻塞"><a href="#何为阻塞" class="headerlink" title="何为阻塞"></a>何为阻塞</h3><ul>
-<li>如果Event Loop执行回调或worker执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
-<li>性能：如果某worker线程定期执行heavyweight任务，会影响服务吞吐量（请求/秒）</li>
+<li>如果 Event Loop 执行回调或 worker 执行任务需要很长时间，即为阻塞。当发生阻塞时，主要会有两点需要考虑：<ul>
+<li>性能：如果某 worker 线程定期执行 heavyweight 任务，会影响服务吞吐量（请求/秒）</li>
 <li>安全性：假设某些输入会引起程序阻塞，则存在被恶意客户端利用并攻击的风险。即拒绝服务攻击。</li>
 </ul>
 </li>
 </ul>
 <h3 id="代码执行时"><a href="#代码执行时" class="headerlink" title="代码执行时"></a>代码执行时</h3><ul>
-<li>在Event Loop中<code>同步</code>执行常规的变量、方法的定义与调用，javascript所有回调以及非阻塞异步I/O如网络I/O</li>
-<li>Worker Pool是libuv（线程池工作调度的c++库）在Worker Pool中<code>异步</code>执行“昂贵”繁重的任务。node提供非阻塞I/O（操作系统不提供）API，以及CPU密集的I/O API<ul>
-<li>I/O密集型API：</li>
+<li>在 Event Loop 中<code>同步</code>执行常规的变量、方法的定义与调用，javascript 所有回调以及非阻塞异步 I/O 如网络 I/O</li>
+<li>Worker Pool 是 libuv（线程池工作调度的 c++库）在 Worker Pool 中<code>异步</code>执行“昂贵”繁重的任务。node 提供非阻塞 I/O（操作系统不提供）API，以及 CPU 密集的 I/O API<ul>
+<li>I/O 密集型 API：</li>
 <li>DNS: dns.lookup()</li>
 <li>fs: fs.readFile()，除了那些显示说明同步的方法</li>
-<li>CPU密集型API：</li>
+<li>CPU 密集型 API：</li>
 <li>crypto: crypto.pbkdf2()</li>
 <li>zlib: 除了那些显示说明同步的方法</li>
 </ul>
 </li>
 </ul>
-<h3 id="Event-Loop实质"><a href="#Event-Loop实质" class="headerlink" title="Event Loop实质"></a>Event Loop实质</h3><p>抽象来说，Event Loop维护挂起事件的队列，Worker Pool维护挂起任务的队列。 实际上，Event Loop并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及node正在监视的文件等等。当某个描述符准备好时，Event Loop会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool维护的是一个真正的队列。Worker会pop出队列的task并执行，完成后会触发Event Loop“至少一个事件已完成”的事件。</p>
+<h3 id="Event-Loop-实质"><a href="#Event-Loop-实质" class="headerlink" title="Event Loop 实质"></a>Event Loop 实质</h3><p>抽象来说，Event Loop 维护挂起事件的队列，Worker Pool 维护挂起任务的队列。 实际上，Event Loop 并不是维护一个队列。而是一个<code>文件描述符的集合</code>，这些文件描述符从系统级事件通知机制获取比如 epoll(linux),kqueue(OSX),IOCP(Windows)。这些文件描述符对应于某些网络套接字以及 node 正在监视的文件等等。当某个描述符准备好时，Event Loop 会将其转换为合适的事件并执行对应的回调。 另外，Worker Pool 维护的是一个真正的队列。Worker 会 pop 出队列的 task 并执行，完成后会触发 Event Loop“至少一个事件已完成”的事件。</p>
 <h3 id="阻止事件循环的几个维度"><a href="#阻止事件循环的几个维度" class="headerlink" title="阻止事件循环的几个维度"></a>阻止事件循环的几个维度</h3><ol>
-<li>数据处理流程中是否包含计算复杂度高的任务，比如使用CPU密集型Node API比如crypto,fs,zlib,child-process（分区处理与offload to Worker Pool）</li>
-<li>ReDoS攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
-<li>是否在主线程中使用JSON.parse以及JSON.stringify（潜在风险，因此也建议offload给Worker Pool）</li>
+<li>数据处理流程中是否包含计算复杂度高的任务，比如使用 CPU 密集型 Node API 比如 crypto,fs,zlib,child-process（分区处理与 offload to Worker Pool）</li>
+<li>ReDoS 攻击，检查是否存在易受攻击的正则表达式（使用<a href="https://github.com/substack/safe-regex" target="_blank" rel="noopener">安全正则表达式库做安全校验</a>）</li>
+<li>是否在主线程中使用 JSON.parse 以及 JSON.stringify（潜在风险，因此也建议 offload 给 Worker Pool）</li>
 </ol>
-<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs默认的Worker Pool专门用于处理I/O任务，维护自己的线程池可以使用cluster模块以及child_process模块做自定义线程池。 Node服务器的吞吐量<code>取决于</code>WorkerPool的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
+<h3 id="Worker-Pool"><a href="#Worker-Pool" class="headerlink" title="Worker Pool"></a>Worker Pool</h3><p>nodejs 默认的 Worker Pool 专门用于处理 I/O 任务，维护自己的线程池可以使用 cluster 模块以及 child_process 模块做自定义线程池。 Node 服务器的吞吐量<code>取决于</code>WorkerPool 的吞吐量。有效<code>降低逐个任务时间开销</code>以及<code>稳定任务时间开销的变化</code>将最大程度提升服务器的吞吐量。最常见的方法就是复杂重复型任务（比如数组迭代）做分区处理。</p>
 <blockquote>
-<p>注：由于调度Worker Pool会增加额外的通信开销，因为Worker Pool无法获取主线程的命名空间从而无法直接读取Javascript对象，所以需要序列化/反序列化导致增加通信成本。</p>
+<p>注：由于调度 Worker Pool 会增加额外的通信开销，因为 Worker Pool 无法获取主线程的命名空间从而无法直接读取 Javascript 对象，所以需要序列化/反序列化导致增加通信成本。</p>
 </blockquote>
-<h3 id="npm模块的风险"><a href="#npm模块的风险" class="headerlink" title="npm模块的风险"></a>npm模块的风险</h3><p>npm生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中npm包良莠不齐，因为无法较为准确的估计其使用Event Loop或者Worker Pool的成本而导致一些程序隐患。</p>
+<h3 id="npm-模块的风险"><a href="#npm-模块的风险" class="headerlink" title="npm 模块的风险"></a>npm 模块的风险</h3><p>npm 生态系统中存在数十万个模块为开发者提供了极大的便利，然而社区中 npm 包良莠不齐，因为无法较为准确的估计其使用 Event Loop 或者 Worker Pool 的成本而导致一些程序隐患。</p>
 
         
       
@@ -1736,7 +1736,7 @@ export default {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-05 09:18:24" itemprop="dateModified" datetime="2019-09-05T09:18:24+08:00">2019-09-05</time>
+                <time title="Modified: 2020-04-21 23:56:24" itemprop="dateModified" datetime="2020-04-21T23:56:24+08:00">2020-04-21</time>
               </span>
             
           
@@ -1792,32 +1792,32 @@ export default {
 <li>系统级(尽可能提高网站的可访问性以及可用性)<ul>
 <li>服务器</li>
 <li>域名申请、备案以及解析</li>
-<li>全站HTTPS支持</li>
+<li>全站 HTTPS 支持</li>
 <li>流量预估</li>
-<li>静态资源CDN加速</li>
-<li>web server选型（nginx,apache,node）</li>
+<li>静态资源 CDN 加速</li>
+<li>web server 选型（nginx,apache,node）</li>
 <li>BFF Or GraphQL</li>
 </ul>
 </li>
 <li>工程级(提高工程框架易用性以及可伸缩性)<ul>
 <li>前端框架选型(vue,react)</li>
-<li>工程中三方依赖库分析(包含UI库)</li>
+<li>工程中三方依赖库分析(包含 UI 库)</li>
 <li>工程化构建工具选型(webpack,parcel,rollup)</li>
-<li>工程复杂度分析，一般以页面数量来定义。如果足够复杂建议使用ts增强系统稳定性</li>
+<li>工程复杂度分析，一般以页面数量来定义。如果足够复杂建议使用 ts 增强系统稳定性</li>
 <li>国际化支持</li>
 <li>图标库引入</li>
 </ul>
 </li>
 <li>业务级(通过业务梳理、系统划分、共性抽象，提高系统完整性以及可拆分性)<ul>
-<li>系统分析。根据业务拆分系统对应不同endpoint。</li>
+<li>系统分析。根据业务拆分系统对应不同 endpoint。</li>
 <li>页面分析。根据业务需求划分页面。</li>
-<li>前端路由管理，根级路由做redirect，一级路由做UI壳，二级路由做具体业务，三级路由做子业务。不超过三级。</li>
-<li>数据源管理。分析工程中依赖数据及操作，xhr工具类定义，以及数据获取方法定义。</li>
-<li>全局状态管理。先梳理业务逻辑所需数据结构，而后分析可能触发状态更改的action，然后分析可能同步到页面的getter。</li>
+<li>前端路由管理，根级路由做 redirect，一级路由做 UI 壳，二级路由做具体业务，三级路由做子业务。不超过三级。</li>
+<li>数据源管理。分析工程中依赖数据及操作，xhr 工具类定义，以及数据获取方法定义。</li>
+<li>全局状态管理。先梳理业务逻辑所需数据结构，而后分析可能触发状态更改的 action，然后分析可能同步到页面的 getter。</li>
 <li>公共组件封装。分析工程中可重用结构，抽象后定义组件。</li>
-<li>公共样式提取。分析工程中可重用样式，抽象后定义公共样式（如mixin、原子类、基本变量）。</li>
+<li>公共样式提取。分析工程中可重用样式，抽象后定义公共样式（如 mixin、原子类、基本变量）。</li>
 <li>公共行为混入。分析工程中可重用行为，抽象后定义行为。</li>
-<li>帮助类定义。分析工程中工具方法的使用场景，比如merge等等。</li>
+<li>帮助类定义。分析工程中工具方法的使用场景，比如 merge 等等。</li>
 <li>过滤器定义。分析工程中过滤器的使用场景，比如状态、类型、时间戳等等的格式化。</li>
 </ul>
 </li>
@@ -1894,7 +1894,7 @@ export default {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:58:09" itemprop="dateModified" datetime="2019-08-28T21:58:09+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:57:17" itemprop="dateModified" datetime="2020-04-21T23:57:17+08:00">2020-04-21</time>
               </span>
             
           
@@ -1945,9 +1945,9 @@ export default {
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>javascript - scope chain - context（this指向） - excution context</p>
+          <p>javascript - scope chain - context（this 指向） - excution context</p>
 <h1 id="scope-chain"><a href="#scope-chain" class="headerlink" title="scope chain"></a>scope chain</h1><p>即执行环境（execution environment） 即一条<code>执行时</code>才会建立的<code>定义时</code>已经决定了（liao）的链。 <img src="https://blog.qingf.me/wp-content/uploads/2018/06/scopechain.png" alt></p>
-<h1 id="context（this指向）"><a href="#context（this指向）" class="headerlink" title="context（this指向）"></a>context（this指向）</h1><p>this === context</p>
+<h1 id="context（this-指向）"><a href="#context（this-指向）" class="headerlink" title="context（this 指向）"></a>context（this 指向）</h1><p>this === context</p>
 <pre><code>var name = &apos;亚索&apos;
 // 1-------------------------------------------------------
 var obj = {
@@ -1987,7 +1987,7 @@ var obj2 = {
 obj2.readName()
 obj2.readName.call(this)</code></pre><p>结果请复制到控制台执行后查看结果</p>
 <blockquote>
-<p>注：箭头函数其实没有自己的this指针，它只是一个语法糖</p>
+<p>注：箭头函数其实没有自己的 this 指针，它只是一个语法糖</p>
 </blockquote>
 <pre><code>箭头函数
 var bbb = {
@@ -2003,16 +2003,16 @@ var bbb = {
             console.log(_this.name)
         }
     }
-}</code></pre><h1 id="excution-context"><a href="#excution-context" class="headerlink" title="excution context"></a>excution context</h1><p>我们理解JS引擎时所了解的栈即为执行环境栈。比如我们用语言模拟一段脚本执行到function后发生的一系列动作。 <code>创建阶段（creation phase）</code></p>
+}</code></pre><h1 id="excution-context"><a href="#excution-context" class="headerlink" title="excution context"></a>excution context</h1><p>我们理解 JS 引擎时所了解的栈即为执行环境栈。比如我们用语言模拟一段脚本执行到 function 后发生的一系列动作。 <code>创建阶段（creation phase）</code></p>
 <ol>
-<li>创建一个变量对象（也称活动对象）常常由定义在当前执行环境中的内部变量、内部function以及参数组成，且仅能被解析器访问</li>
+<li>创建一个变量对象（也称活动对象）常常由定义在当前执行环境中的内部变量、内部 function 以及参数组成，且仅能被解析器访问</li>
 <li>初始化作用域链</li>
-<li>this指针被最终确定</li>
+<li>this 指针被最终确定</li>
 <li>推入堆栈并获取控制权</li>
 </ol>
 <p><code>执行阶段（execution phase）</code></p>
 <ol>
-<li>代码在当前执行环境中执行，执行完成后pop出当前执行环境，并将控制权移交给上一级执行环境</li>
+<li>代码在当前执行环境中执行，执行完成后 pop 出当前执行环境，并将控制权移交给上一级执行环境</li>
 </ol>
 
         
@@ -2078,7 +2078,7 @@ var bbb = {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-28 21:11:33" itemprop="dateModified" datetime="2019-08-28T21:11:33+08:00">2019-08-28</time>
+                <time title="Modified: 2020-04-21 23:56:34" itemprop="dateModified" datetime="2020-04-21T23:56:34+08:00">2020-04-21</time>
               </span>
             
           
@@ -2134,14 +2134,14 @@ var bbb = {
 <li>从请求头与响应头理解浏览器网络相关机制</li>
 <li>从渲染流程理解浏览器渲染相关机制</li>
 </ul>
-<h1 id="请求头与响应头"><a href="#请求头与响应头" class="headerlink" title="请求头与响应头"></a>请求头与响应头</h1><h3 id="connection与proxy-connection（即将被http2机制取缔）"><a href="#connection与proxy-connection（即将被http2机制取缔）" class="headerlink" title="connection与proxy-connection（即将被http2机制取缔）"></a>connection与proxy-connection（即将被http2机制取缔）</h3><p>常用于双端。该指令指定tcp连接行为，关闭或建立长链接。<code>connection: keep-alive</code>（由于其他值如close, upgrade场景受限，不考虑），表示此http(tcp)链接需要keep，另外也说明该客户端支持长链接。服务端接收到该http请求之后，如果支持则会建立长链接，并设置超时时间，在响应头中会增加connection: keep-alive以及keep-alive: true两个键值对。</p>
+<h1 id="请求头与响应头"><a href="#请求头与响应头" class="headerlink" title="请求头与响应头"></a>请求头与响应头</h1><h3 id="connection-与-proxy-connection（即将被-http2-机制取缔）"><a href="#connection-与-proxy-connection（即将被-http2-机制取缔）" class="headerlink" title="connection 与 proxy-connection（即将被 http2 机制取缔）"></a>connection 与 proxy-connection（即将被 http2 机制取缔）</h3><p>常用于双端。该指令指定 tcp 连接行为，关闭或建立长链接。<code>connection: keep-alive</code>（由于其他值如 close, upgrade 场景受限，不考虑），表示此 http(tcp)链接需要 keep，另外也说明该客户端支持长链接。服务端接收到该 http 请求之后，如果支持则会建立长链接，并设置超时时间，在响应头中会增加 connection: keep-alive 以及 keep-alive: true 两个键值对。</p>
 <blockquote>
-<p>注：此超时关闭行为类似前端常用名词中的debounce行为，即仅当请求间隔超过timeout时才会close connection</p>
+<p>注：此超时关闭行为类似前端常用名词中的 debounce 行为，即仅当请求间隔超过 timeout 时才会 close connection</p>
 </blockquote>
-<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>常用于双端。该指令指定浏览器的存取缓存行为。cache-control指令有很多用法，这里介绍几种常用的，比如no-store, no-cache, must-revalidate, public, max-age= 常用于ajax请求（响应头）</p>
+<h3 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h3><p>常用于双端。该指令指定浏览器的存取缓存行为。cache-control 指令有很多用法，这里介绍几种常用的，比如 no-store, no-cache, must-revalidate, public, max-age= 常用于 ajax 请求（响应头）</p>
 <ul>
-<li><code>no-cache</code> 禁止get缓存，并携带验证器向原始服务器发起请求</li>
-<li><code>no-store</code>禁止set缓存</li>
+<li><code>no-cache</code> 禁止 get 缓存，并携带验证器向原始服务器发起请求</li>
+<li><code>no-store</code>禁止 set 缓存</li>
 <li><code>must-revalidate</code> 强制用户在使用缓存之前验证旧资源的状态，并且不可使用过期资源</li>
 </ul>
 <p>常用于静态文件（响应头）</p>
@@ -2149,27 +2149,27 @@ var bbb = {
 <li><code>public</code> 表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存。</li>
 <li><code>max-age=&lt;seconds&gt;</code> 设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)</li>
 </ul>
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>仅用于客户端。该指令指定客户端部分身份信息。可通过withCredentials控制浏览器是否携带cookie字段。</p>
-<h3 id="content-encoding与accept-encoding"><a href="#content-encoding与accept-encoding" class="headerlink" title="content-encoding与accept-encoding"></a>content-encoding与accept-encoding</h3><p>仅用于服务端。content-encoding应用于响应头，与请求头accept-encoding配套使用。该指令指定传输内容编码方式。 常用于所有类型请求</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>仅用于客户端。该指令指定客户端部分身份信息。可通过 withCredentials 控制浏览器是否携带 cookie 字段。</p>
+<h3 id="content-encoding-与-accept-encoding"><a href="#content-encoding-与-accept-encoding" class="headerlink" title="content-encoding 与 accept-encoding"></a>content-encoding 与 accept-encoding</h3><p>仅用于服务端。content-encoding 应用于响应头，与请求头 accept-encoding 配套使用。该指令指定传输内容编码方式。 常用于所有类型请求</p>
 <ul>
-<li><code>gzip</code> 使用（服务端）或支持（客户端）gzip压缩</li>
-<li><code>deflate</code> 使用（服务端）或支持（客户端）zlib压缩与deflate压缩</li>
+<li><code>gzip</code> 使用（服务端）或支持（客户端）gzip 压缩</li>
+<li><code>deflate</code> 使用（服务端）或支持（客户端）zlib 压缩与 deflate 压缩</li>
 </ul>
 <p>用于特殊请求</p>
 <ul>
 <li><code>identity</code> 未经修改或压缩</li>
 </ul>
-<h3 id="content-length"><a href="#content-length" class="headerlink" title="content-length"></a>content-length</h3><p>常用于双端。该指令指定传输内容body长度。</p>
-<h3 id="content-type"><a href="#content-type" class="headerlink" title="content-type"></a>content-type</h3><p>常用于双端。该指令指定body <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a>。</p>
-<h3 id="accept"><a href="#accept" class="headerlink" title="accept"></a>accept</h3><p>仅用于客户端。该指令指定客户端支持的<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME类型</a>。</p>
+<h3 id="content-length"><a href="#content-length" class="headerlink" title="content-length"></a>content-length</h3><p>常用于双端。该指令指定传输内容 body 长度。</p>
+<h3 id="content-type"><a href="#content-type" class="headerlink" title="content-type"></a>content-type</h3><p>常用于双端。该指令指定 body <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME 类型</a>。</p>
+<h3 id="accept"><a href="#accept" class="headerlink" title="accept"></a>accept</h3><p>仅用于客户端。该指令指定客户端支持的<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">MIME 类型</a>。</p>
 <h3 id="accept-language"><a href="#accept-language" class="headerlink" title="accept-language"></a>accept-language</h3><p>仅用于客户端。该指令指定客户端支持的语言。</p>
 <ul>
 <li><code>zh-CN,zh;q=0.9,en;q=0.8</code></li>
 </ul>
-<p>q表明接受语言的权重，不写默认为q=1。</p>
+<p>q 表明接受语言的权重，不写默认为 q=1。</p>
 <h3 id="host"><a href="#host" class="headerlink" title="host"></a>host</h3><p>仅用于客户端。该指令指定客户端主机。如：<code>www.google.com</code></p>
 <h3 id="origin"><a href="#origin" class="headerlink" title="origin"></a>origin</h3><p>仅用于客户端。该指令指定客户端源。如：<code>http://www.google.com</code></p>
-<h3 id="referer"><a href="#referer" class="headerlink" title="referer"></a>referer</h3><p>仅用于客户端。该指令指定客户端origin + path。常用于防盗链，因为浏览器不允许js修改（排除某些低级浏览器）。如：<code>http://www.google.com/document</code></p>
+<h3 id="referer"><a href="#referer" class="headerlink" title="referer"></a>referer</h3><p>仅用于客户端。该指令指定客户端 origin + path。常用于防盗链，因为浏览器不允许 js 修改（排除某些低级浏览器）。如：<code>http://www.google.com/document</code></p>
 <h3 id="user-agent"><a href="#user-agent" class="headerlink" title="user-agent"></a>user-agent</h3><p>仅用于客户端。该指令指定客户端代理描述符。</p>
 
         
@@ -2194,7 +2194,7 @@ var bbb = {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/blog/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2239,7 +2239,7 @@ var bbb = {
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2258,17 +2258,7 @@ var bbb = {
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -2399,71 +2389,7 @@ var bbb = {
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span>
         
       </div>
